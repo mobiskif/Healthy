@@ -9,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.zip.Inflater;
-
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private String[] mDataset;
 
     // Provide a reference to the views for each data item
@@ -28,13 +26,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(String[] myDataset) {
+    public CardAdapter(String[] myDataset) {
         mDataset = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card, parent, false);
         v.findViewById(R.id.action_button).setOnClickListener(new View.OnClickListener() {

@@ -1,10 +1,8 @@
 package ru.healthy;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -75,7 +72,7 @@ public class ActivityDetail extends AppCompatActivity implements AdapterView.OnI
 
         RecyclerView mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new MyAdapter(getResources().getStringArray(recycl_arr)));
+        mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr)));
 
         ListView listView = findViewById(R.id.list);
         listView.setOnItemClickListener(this);
