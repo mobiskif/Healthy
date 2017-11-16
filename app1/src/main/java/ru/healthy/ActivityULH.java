@@ -78,9 +78,7 @@ public class ActivityULH extends ActivityDetail {
                                 startActivity(new Intent(getApplicationContext(), ActivityDRT.class));
                                 break;
                             case "Dialog":
-                                //startActivityForResult(new Intent(getApplicationContext(), ActivityYesNo.class), 1);
-                                //shortcutAdd("Kuku", 12);
-                                //shortcutDel();
+                                startActivityForResult(new Intent(getApplicationContext(), ActivityYesNo.class), 1);
                                 break;
                         }
                         //startActivity(new Intent(getApplicationContext(), ActivityULH.class));
@@ -144,70 +142,5 @@ public class ActivityULH extends ActivityDetail {
         else if (v.getId() == R.id.button)
             startActivity(new Intent(getApplicationContext(), ActivityLSD.class));
     }
-
-    private void shortcutAdd(String name, int number) { // Intent to be send, when shortcut is pressed by user ("launched")
-        Intent shortcutIntent1 = new Intent();
-        shortcutIntent1.setClassName("ru.healthy", "ActivityULH.class");
-        Intent addIntent1 = new Intent();
-        addIntent1.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent1);
-        addIntent1.putExtra(Intent.EXTRA_SHORTCUT_NAME, "shortcut_name");
-        addIntent1.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(this, R.drawable.redcross_small));
-        addIntent1.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-        sendBroadcast(addIntent1);
-
-        Intent shortcutIntent = new Intent(getApplicationContext(), ActivityULH.class);
-        shortcutIntent.setAction(Intent.ACTION_CREATE_SHORTCUT);
-        // Create bitmap with number in it -> very default. You probably want to give it a more stylish look
-        Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
-        Paint paint = new Paint();
-        paint.setColor(0xFF808080);
-        // gray
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTextSize(50);
-        new Canvas(bitmap).drawText("" + number, 50, 50, paint);
-        ((ImageView) findViewById(R.id.img)).setImageBitmap(bitmap);
-        // Decorate the shortcut
-        Intent addIntent = new Intent();
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, bitmap);
-        // Inform launcher to create shortcut
-        addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-        getApplicationContext().sendBroadcast(addIntent);
-    }
-
-    private void shortcutDel() {
-        /*
-        Intent shortcutIntent = new Intent(getApplicationContext(), ActivityULH.class);
-        shortcutIntent.setAction(Intent.ACTION_DELETE);
-        // Decorate the shortcut
-        Intent delIntent = new Intent();
-        delIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-        delIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
-        // Inform launcher to remove shortcut
-        delIntent.setAction("com.android.launcher.action.UNINSTALL_SHORTCUT");
-        getApplicationContext().sendBroadcast(delIntent);
-        */
-
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        int imageResourceId;
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-        int hours = new Time(System.currentTimeMillis()).getHours();
-        Log.d("DATE", "onCreate: " + hours);
-        getPackageManager().setComponentEnabledSetting(getComponentName(), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
-        if (hours == 13) {
-            imageResourceId = this.getResources().getIdentifier("redcross_small", "drawable", this.getPackageName());
-            getPackageManager().setComponentEnabledSetting(new ComponentName("ru.healthy", "ActivityULH"), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-        } else if (hours == 14) {
-            imageResourceId = this.getResources().getIdentifier("redcross_small", "drawable", this.getPackageName());
-            getPackageManager().setComponentEnabledSetting(new ComponentName("ru.healthy", "ActivityULH"), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-        } else {
-            imageResourceId = this.getResources().getIdentifier("redcross_small", "drawable", this.getPackageName());
-            getPackageManager().setComponentEnabledSetting(new ComponentName("ru.healthy", "ActivityULH"), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-        }
-        imageView.setImageResource(imageResourceId);
-
-    }
-
 
 }

@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.healthy">
 
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/redcross_small"
@@ -12,7 +9,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
 
-        <activity android:name="ru.healthy.ActivityULH">
+        <activity android:name=".ActivityULH">
             <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyBE7wWzmLxesRGYdhPd98iaSDuSS5LbWWU" />
