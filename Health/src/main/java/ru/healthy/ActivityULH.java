@@ -49,15 +49,18 @@ public class ActivityULH extends ActivityDetail {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
-                        switch (menuItem.getItemId()){
-                            case 0: startActivity(new Intent(getApplicationContext(), ActivityUAL.class));
+                        String s = menuItem.getTitle().toString();
+                        switch (s){
+                            case "Главная": startActivity(new Intent(getApplicationContext(), ActivityULH.class));
                             break;
-                            case 1: startActivity(new Intent(getApplicationContext(), ActivityLSD.class));
+                            case "Пациент": startActivity(new Intent(getApplicationContext(), ActivityUAL.class));
                             break;
-                            case 2: startActivity(new Intent(getApplicationContext(), ActivityDRT.class));
+                            case "Поликлиника": startActivity(new Intent(getApplicationContext(), ActivityLSD.class));
+                            break;
+                            case "Доктор": startActivity(new Intent(getApplicationContext(), ActivityDRT.class));
                             break;
                         }
-                        startActivity(new Intent(getApplicationContext(), ActivityDetail.class));
+                        //startActivity(new Intent(getApplicationContext(), ActivityULH.class));
                         mDrawerLayout.closeDrawers();
                         return true;
                     }

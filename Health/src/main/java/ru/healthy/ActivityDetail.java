@@ -22,12 +22,16 @@ public class ActivityDetail extends AppCompatActivity implements AdapterView.OnI
     private FirebaseAnalytics mFirebaseAnalytics;
     //ActionBar supportActionBar;
     int id_contentView;
+    String txt;
+    String tag;
     int spinner_arr;
     int recycl_arr;
     int list_arr;
 
     public ActivityDetail() {
         super();
+        txt = "Txt Txt Txt";
+        tag = "Отменить";
         id_contentView = R.layout.activity_detail;
         spinner_arr = R.array.places;
         recycl_arr = R.array.place_details;
@@ -72,7 +76,7 @@ public class ActivityDetail extends AppCompatActivity implements AdapterView.OnI
 
         RecyclerView mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr)));
+        mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), tag));
 
         ListView listView = findViewById(R.id.list);
         listView.setOnItemClickListener(this);

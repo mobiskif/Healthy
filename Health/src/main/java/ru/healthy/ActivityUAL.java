@@ -9,7 +9,7 @@ public class ActivityUAL extends ActivityDetail {
 
     public ActivityUAL() {
         super();
-        this.id_contentView = R.layout.activity_detail;
+        txt = "Шишкин Владимир Петрович \n1947-09-20";
         spinner_arr = R.array.district;
         recycl_arr = R.array.lpu;
     }
@@ -24,7 +24,7 @@ public class ActivityUAL extends ActivityDetail {
         findViewById(R.id.list).setVisibility(View.GONE);
         findViewById(R.id.text).setVisibility(View.VISIBLE);
         findViewById(R.id.textview).setVisibility(View.GONE);
-        ((TextView)findViewById(R.id.text)).setText("Шишкин Владимир Петрович \n1947-09-20");
+        ((TextView)findViewById(R.id.text)).setText(txt);
         ((Button) findViewById(R.id.button)).setText(R.string.save);
     }
 

@@ -39,44 +39,57 @@
             android:text="@string/user" />
     </android.support.design.widget.TextInputLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/activity_vertical_margin"
-        android:visibility="gone" />
-
     <TextView
         android:id="@+id/label2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/label2"
         android:visibility="visible" />
+
     <LinearLayout
+        android:id="@+id/spiner_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/article_titles"
-        android:orientation="horizontal">
+        android:minHeight="2dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginRight="16dp"
             android:layout_weight="1"
-            android:spinnerMode="dialog" />
+            android:spinnerMode="dialog"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center_vertical"
             android:layout_weight="2"
-            android:text="Талоны" />
+            android:text="Талоны"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+            android:padding="8dp"
+            android:text="Талоны"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:visibility="gone" />
+
     </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         android:minHeight="@dimen/activity_vertical_margin" />
 
     <TextView
@@ -86,17 +99,18 @@
         android:text="@string/label3"
         android:visibility="visible" />
 
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
-        android:visibility="visible" />
-
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:tag="Жопа"
         android:visibility="visible" />
 
 </LinearLayout>

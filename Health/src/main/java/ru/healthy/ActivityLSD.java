@@ -11,7 +11,7 @@ public class ActivityLSD extends ActivityDetail {
 
     public ActivityLSD() {
         super();
-        this.id_contentView = R.layout.activity_detail;
+        txt = "Пб ГБУЗ \"Городская поликлиника №23\" Детское отделение №21";
         spinner_arr = R.array.spec;
         recycl_arr = R.array.doctors;
         list_arr = R.array.doctors;
@@ -28,8 +28,8 @@ public class ActivityLSD extends ActivityDetail {
         findViewById(R.id.list).setVisibility(View.VISIBLE);
         findViewById(R.id.text).setVisibility(View.GONE);
         findViewById(R.id.textview).setVisibility(View.VISIBLE);
-        ((TextView)findViewById(R.id.text)).setText("Пб ГБУЗ \"Городская поликлиника №23\" Детское поликлиническое отделение №21");
-        findViewById(R.id.button).setVisibility(View.INVISIBLE);
+        ((TextView)findViewById(R.id.textview)).setText(txt);
+        findViewById(R.id.button).setVisibility(View.GONE);
     }
 
 

@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private String[] mDataset;
+    private  String tag;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -26,8 +28,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CardAdapter(String[] myDataset) {
+    public CardAdapter(String[] myDataset, String t) {
         mDataset = myDataset;
+        tag = t;
     }
 
     // Create new views (invoked by the layout manager)
@@ -35,6 +38,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public CardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card, parent, false);
+        Button btn = v.findViewById(R.id.action_button);
+        btn.setText(tag);
         v.findViewById(R.id.action_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
