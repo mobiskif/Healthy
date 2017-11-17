@@ -21,21 +21,37 @@
     <string-array name="spec">
         <item>Терапевт</item>
         <item>Эндокринолог</item>
+        <item>Фтизиатр</item>
+        <item>Онколог</item>
         <item>Хирург-травматолг</item>
         <item>Гастроентеролог</item>
     </string-array>
 
     <string-array name="dates">
-        <item>Пн</item>
-        <item>Вт</item>
-        <item>Ср</item>
-        <item>Чт</item>
+        <item>2017-11-20</item>
+        <item>2017-11-21</item>
+        <item>2017-11-22</item>
+        <item>2017-11-23</item>
+        <item>2017-11-24</item>
+        <item>Сб</item>
+        <item>Вс</item>
+        <item>2017-11-27</item>
+        <item>2017-11-28</item>
+        <item>2017-11-29</item>
+        <item>2017-11-30</item>
+        <item>2017-12-01</item>
+        <item>Сб</item>
+        <item>Вс</item>
     </string-array>
     <string-array name="talons">
         <item>16:00</item>
+        <item>16:30</item>
         <item>17:00</item>
+        <item>17:30</item>
         <item>18:00</item>
+        <item>18:30</item>
         <item>19:00</item>
+        <item>19:30</item>
     </string-array>
 
     <string-array name="district">

@@ -44,6 +44,7 @@ public class ActivityULH extends ActivityBase {
 
         mDrawerLayout = findViewById(R.id.drawer);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        prepareDrawerMenu(navigationView.getMenu());
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -67,7 +68,6 @@ public class ActivityULH extends ActivityBase {
                                 startActivityForResult(new Intent(getApplicationContext(), ActivityYesNo.class), 1);
                                 break;
                         }
-                        //startActivity(new Intent(getApplicationContext(), ActivityULH.class));
                         mDrawerLayout.closeDrawers();
                         return true;
                     }
@@ -88,6 +88,12 @@ public class ActivityULH extends ActivityBase {
         findViewById(R.id.textview).setVisibility(View.VISIBLE);
         findViewById(R.id.button).setVisibility(View.VISIBLE);
         findViewById(R.id.tv).setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.textview) startActivity(new Intent(getApplicationContext(), ActivityUAL.class));
+        else if (v.getId() == R.id.button) startActivity(new Intent(getApplicationContext(), ActivityLSD.class));
     }
 
     @Override
@@ -115,18 +121,23 @@ public class ActivityULH extends ActivityBase {
                         }
                     });
             return true;
-        } else if (id == android.R.id.home) {
-            mDrawerLayout.openDrawer(GravityCompat.START);
         }
+        else if (id == android.R.id.home) mDrawerLayout.openDrawer(GravityCompat.START);
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.textview)
-            startActivity(new Intent(getApplicationContext(), ActivityUAL.class));
-        else if (v.getId() == R.id.button)
-            startActivity(new Intent(getApplicationContext(), ActivityLSD.class));
+    //@Override
+    public boolean prepareDrawerMenu(Menu menu) {
+        /*
+        menu.clear();
+        menu.add ("Ивнов Иван Иванович");
+        menu.add ("Кузнецов Сергей Петрович");
+        menu.add ("Арбенина Диана Владимировна");
+        //return super.onPrepareOptionsMenu(menu);
+*/
+        MenuItem item = menu.getItem(0);
+        item.setIcon(R.drawable.redcross_small);
+        item.setTitle("Арбенина Диана Владимировна");
+        return true;
     }
-
 }

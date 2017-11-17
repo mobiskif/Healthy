@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/gr1"
+        android:checkableBehavior="single">
         <item
+            android:id="@+id/m1"
             android:icon="@drawable/ic_home_black_24dp"
             android:tint="@color/button_grey"
             android:title="Главная" />
         <item
+            android:id="@+id/m2"
             android:icon="@drawable/ic_home_black_24dp"
             android:tint="@color/button_grey"
             android:title="Пациент" />
         <item
+            android:id="@+id/m3"
             android:icon="@drawable/ic_home_black_24dp"
             android:tint="@color/button_grey"
             android:title="Поликлиника" />
         <item
+            android:id="@+id/m4"
             android:icon="@drawable/ic_home_black_24dp"
             android:tint="@color/button_grey"
             android:title="Доктор" />
         <item
+            android:id="@+id/m5"
             android:icon="@drawable/redcross_small"
             android:tint="@color/button_grey"
             android:title="Dialog" />

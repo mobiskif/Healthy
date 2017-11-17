@@ -60,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="16dp"
+            style="@style/spinnerItemStyle"
             android:layout_weight="1"
             android:visibility="visible" />
 
@@ -118,7 +119,7 @@
         android:id="@+id/img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:srcCompat="@drawable/redcross_small_" />
 
 </LinearLayout>

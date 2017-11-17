@@ -21,7 +21,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class ActivityBase extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
     private FirebaseAnalytics mFirebaseAnalytics;
-    //ActionBar supportActionBar;
     int id_contentView;
     String txt;
     String tag;
@@ -37,6 +36,10 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         spinner_arr = R.array.places;
         recycl_arr = R.array.place_details;
         list_arr = R.array.place_desc;
+    }
+
+    void init() {
+
     }
 
     @Override
@@ -72,7 +75,7 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<>(this, R.layout.item_spinner, getResources().getStringArray(spinner_arr));
-        spinner_adapter.setDropDownViewResource(R.layout.item_spinner_down);
+        spinner_adapter.setDropDownViewResource(R.layout.item_spinner);
         spinner.setAdapter(spinner_adapter);
 
         RecyclerView mRecyclerView = findViewById(R.id.my_recycler_view);
@@ -89,8 +92,9 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         init();
     }
 
-    void init() {
-
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(getApplicationContext(), "onClick", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -109,13 +113,7 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public void onClick(View v) {
-        Toast.makeText(getApplicationContext(), "onClick", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
         if (resultCode==RESULT_OK) Toast.makeText(this, data.getStringExtra("result"), Toast.LENGTH_SHORT).show();
     }
 

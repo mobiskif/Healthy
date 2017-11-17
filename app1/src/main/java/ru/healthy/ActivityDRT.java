@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityDRT extends ActivityBase {
+
     public ActivityDRT() {
         super();
         txt = "Терапевт \nМамедова Ислам Акбаровна";
