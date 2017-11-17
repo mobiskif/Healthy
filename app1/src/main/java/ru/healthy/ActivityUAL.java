@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ActivityUAL extends ActivityDetail {
+public class ActivityUAL extends ActivityBase {
 
     public ActivityUAL() {
         super();

@@ -32,7 +32,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     // Provide a suitable constructor (depends on the kind of dataset)
     public CardAdapter(String[] myDataset, Activity a) {
         mDataset = myDataset;
-        tag = ((ActivityDetail)a).tag;
+        tag = ((ActivityBase)a).tag;
         activity = a;
     }
 
@@ -48,7 +48,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, ActivityYesNo.class);
-                //intent.putExtra(ActivityDetail.EXTRA_POSITION, getAdapterPosition());
+                //intent.putExtra(ActivityBase.EXTRA_POSITION, getAdapterPosition());
                 activity.startActivityForResult(intent, 1);
 
             }

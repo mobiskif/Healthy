@@ -3,11 +3,9 @@ package ru.healthy;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class ActivityLSD extends ActivityDetail {
+public class ActivityLSD extends ActivityBase {
 
     public ActivityLSD() {
         super();

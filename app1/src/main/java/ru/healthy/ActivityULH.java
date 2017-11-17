@@ -1,24 +1,16 @@
 package ru.healthy;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.net.Uri;
-import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -26,13 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.util.Date;
-
-import static ru.healthy.R.drawable.redcross_small_;
-
-public class ActivityULH extends ActivityDetail {
+public class ActivityULH extends ActivityBase {
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     private DrawerLayout mDrawerLayout;
 

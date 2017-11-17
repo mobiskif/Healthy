@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-public class ActivityDetail extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class ActivityBase extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
     private FirebaseAnalytics mFirebaseAnalytics;
     //ActionBar supportActionBar;
     int id_contentView;
@@ -29,11 +29,11 @@ public class ActivityDetail extends AppCompatActivity implements AdapterView.OnI
     int recycl_arr;
     int list_arr;
 
-    public ActivityDetail() {
+    public ActivityBase() {
         super();
         txt = "Txt Txt Txt";
         tag = "Отменить";
-        id_contentView = R.layout.activity_detail;
+        id_contentView = R.layout.activity_base;
         spinner_arr = R.array.places;
         recycl_arr = R.array.place_details;
         list_arr = R.array.place_desc;
