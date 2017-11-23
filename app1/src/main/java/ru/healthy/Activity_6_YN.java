@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
-public class ActivityYesNo extends AppCompatActivity implements View.OnClickListener {
+public class Activity_6_YN extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

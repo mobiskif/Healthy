@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Запись к врачу</string>
-    <string name="action_settings">Настройки</string>
+    <string name="menu0">ФИО и район</string>
+    <string name="menu1">Пациент</string>
+    <string name="menu2">Поликлиника</string>
+    <string name="menu3">Специальность</string>
+    <string name="menu4">Доктор</string>
+    <string name="menu5">Карта</string>
+    <string name="menu6">Подтверждение</string>
+    <string name="menu7">Base</string>
 
     <string name="save">Сохранить</string>
     <string name="label1">Метка1</string>
@@ -100,4 +107,6 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="title_activity__map">Map</string>
+    <string name="menu00">111</string>
 </resources>

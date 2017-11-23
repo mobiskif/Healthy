@@ -6,15 +6,15 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActivityDRT extends ActivityBase {
+public class Activity_4_DRT extends ActivityBase {
 
-    public ActivityDRT() {
+    public Activity_4_DRT() {
         super();
         txt = "Терапевт \nМамедова Ислам Акбаровна";
         spinner_arr = R.array.dates;
         recycl_arr = R.array.talons;
         list_arr = R.array.dates;
-        tag = "Взять";
+        //tag = "Взять";
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ActivityDRT extends ActivityBase {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getApplicationContext(), ActivityDRT.class));
+        startActivity(new Intent(getApplicationContext(), Activity_4_DRT.class));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ActivityDRT extends ActivityBase {
 
         if (resultCode==RESULT_OK) {
             Toast.makeText(this, data.getStringExtra("result"), Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getApplicationContext(), ActivityULH.class));
+            startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
             finish();
         }
     }

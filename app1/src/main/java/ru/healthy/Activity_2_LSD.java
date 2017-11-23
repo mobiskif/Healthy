@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
-public class ActivityLSD extends ActivityBase {
+public class Activity_2_LSD extends ActivityBase {
 
-    public ActivityLSD() {
+    public Activity_2_LSD() {
         super();
         txt = "Пб ГБУЗ \"Городская поликлиника №23\" Детское отделение №21";
         spinner_arr = R.array.spec;
@@ -33,6 +33,6 @@ public class ActivityLSD extends ActivityBase {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getApplicationContext(), ActivityDRT.class));
+        startActivity(new Intent(getApplicationContext(), Activity_4_DRT.class));
     }
 }

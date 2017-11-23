@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ActivityUAL extends ActivityBase {
+public class Activity_0_UAL extends ActivityBase {
 
-    public ActivityUAL() {
+    public Activity_0_UAL() {
         super();
         txt = "Шишкин Владимир Петрович 1947-09-20";
         spinner_arr = R.array.district;
@@ -33,7 +33,7 @@ public class ActivityUAL extends ActivityBase {
 
     @Override
     public void onClick(View v) {
-       if (v.getId()==R.id.button) startActivity(new Intent(getApplicationContext(), ActivityULH.class));
+       if (v.getId()==R.id.button) startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
     }
 
 }

@@ -1,13 +1,18 @@
 package ru.healthy;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.ConditionVariable;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,16 +22,23 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 public class ActivityBase extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
     private FirebaseAnalytics mFirebaseAnalytics;
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
     int id_contentView;
     String txt;
     String tag;
     int spinner_arr;
     int recycl_arr;
     int list_arr;
+    Context context;
+    RecyclerView mRecyclerView;
+    AppCompatActivity activity;
 
     public ActivityBase() {
         super();
@@ -36,15 +48,39 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         spinner_arr = R.array.places;
         recycl_arr = R.array.place_details;
         list_arr = R.array.place_desc;
+        //init();
     }
 
     void init() {
+        Log.d("jop","init()");
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        mFirebaseRemoteConfig.setDefaults(R.xml.config);
+        Log.d("jop","start fetch");
+        mFirebaseRemoteConfig.fetch(60)
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            mFirebaseRemoteConfig.activateFetched();
+                            //tag = mFirebaseRemoteConfig.getString("welcome_message");
+                            Log.d("jop","Fetched tag= " + tag);
+                            mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), activity));
 
+                        } else {
+                            //tag = mFirebaseRemoteConfig.getString("welcome_message");
+                            Log.d("jop","Fetched error tag= " + tag);
+                            mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), activity));
+                        }
+                    }
+                });
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("jop","onCreate()");
+        activity=this;
+
         setContentView(id_contentView);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
@@ -57,12 +93,6 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 Snackbar.make(v, "Нажата кнопка Help! (snackbar)", Snackbar.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(), "Нажата кнопка Help! (toast)", Toast.LENGTH_LONG).show();
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "это ActivityULH");
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Нажата кнопка Help! (toast)");
-                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "Событие");
-                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
             }
         });
 
@@ -78,7 +108,7 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         spinner_adapter.setDropDownViewResource(R.layout.item_spinner);
         spinner.setAdapter(spinner_adapter);
 
-        RecyclerView mRecyclerView = findViewById(R.id.my_recycler_view);
+        mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), this));
 
@@ -89,11 +119,17 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
         listView.setAdapter(adapter);
 
-        init();
+        this.init();
     }
 
     @Override
     public void onClick(View v) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "это ActivityBase");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, v.toString());
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "Событие");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
         Toast.makeText(getApplicationContext(), "onClick", Toast.LENGTH_LONG).show();
     }
 

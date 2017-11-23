@@ -115,12 +115,5 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/redcross_small_" />
-
 </LinearLayout>
 
