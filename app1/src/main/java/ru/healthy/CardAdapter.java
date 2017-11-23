@@ -30,10 +30,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CardAdapter(String[] myDataset, Activity a) {
+    public CardAdapter(String[] myDataset, Activity a, String t) {
         mDataset = myDataset;
-        tag = ((ActivityBase)a).tag;
         activity = a;
+        //tag = ((ActivityBase)a).tag;
+        tag = t;
     }
 
     // Create new views (invoked by the layout manager)

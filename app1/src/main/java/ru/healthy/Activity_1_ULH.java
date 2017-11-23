@@ -7,6 +7,7 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,8 @@ public class Activity_1_ULH extends ActivityBase {
     @Override
     void init() {
         super.init();
+        Log.d("jop*1",getClass().getName()+".init()");
+
 
         if (getSupportActionBar() != null) {
             VectorDrawableCompat indicator = VectorDrawableCompat.create(getResources(), R.drawable.ic_menu, getTheme());

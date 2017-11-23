@@ -1,6 +1,7 @@
 package ru.healthy;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -10,16 +11,18 @@ public class Activity_3_SDR extends ActivityBase {
 
     public Activity_3_SDR() {
         super();
-        txt = "Терапевт \nМамедова Ислам Акбаровна";
+        txt = "Терапевт \nМMамедова Ислам Акбаровна";
         spinner_arr = R.array.dates;
         recycl_arr = R.array.talons;
         list_arr = R.array.dates;
-        //tag = "Взять";
+        tag = "Взять";
     }
 
     @Override
     void init() {
         super.init();
+        Log.d("jop*3",getClass().getName()+".init()");
+
         findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);

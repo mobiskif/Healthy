@@ -52,33 +52,35 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     }
 
     void init() {
-        Log.d("jop","init()");
+        Log.d("jop",getClass().getName()+".init()");
+        /*
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         mFirebaseRemoteConfig.setDefaults(R.xml.config);
-        Log.d("jop","start fetch");
+        Log.d("jop=","start fetch");
         mFirebaseRemoteConfig.fetch(60)
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            mFirebaseRemoteConfig.activateFetched();
+                            //mFirebaseRemoteConfig.activateFetched();
                             //tag = mFirebaseRemoteConfig.getString("welcome_message");
-                            Log.d("jop","Fetched tag= " + tag);
-                            mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), activity));
+                            Log.d("jop=","Fetched tag= " + tag);
+                            mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), activity, tag));
 
                         } else {
                             //tag = mFirebaseRemoteConfig.getString("welcome_message");
-                            Log.d("jop","Fetched error tag= " + tag);
-                            mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), activity));
+                            Log.d("jop=","Fetched error tag= " + tag);
+                            mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), activity, tag));
                         }
                     }
                 });
+                */
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("jop","onCreate()");
+        Log.d("jop",getClass().getName()+".onCreate()");
         activity=this;
 
         setContentView(id_contentView);
@@ -110,7 +112,7 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
 
         mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), this));
+        mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), this, tag));
 
         ListView listView = findViewById(R.id.list);
         listView.setOnItemClickListener(this);
@@ -119,7 +121,7 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
         listView.setAdapter(adapter);
 
-        this.init();
+        init();
     }
 
     @Override

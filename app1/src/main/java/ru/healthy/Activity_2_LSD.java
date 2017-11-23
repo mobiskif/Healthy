@@ -28,11 +28,12 @@ public class Activity_2_LSD extends ActivityBase {
         findViewById(R.id.textview).setVisibility(View.VISIBLE);
         ((TextView)findViewById(R.id.textview)).setText(txt);
         findViewById(R.id.button).setVisibility(View.GONE);
+        ((TextView)findViewById(R.id.tv)).setText(getString(R.string.menu4));
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getApplicationContext(), Activity_4_DRT.class));
+        startActivity(new Intent(getApplicationContext(), Activity_3_SDR.class));
     }
 }
