@@ -1,42 +1,46 @@
 package ru.healthy;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Activity_4_DRT extends ActivityBase {
+public class Activity_3_DRT extends ActivityBase {
 
-    public Activity_4_DRT() {
+    public Activity_3_DRT() {
         super();
-        txt = "Терапевт \nМамедова Ислам Акбаровна";
+        //txt = "Терапевт \nМMамедова Ислам Акбаровна";
         spinner_arr = R.array.dates;
         recycl_arr = R.array.talons;
         list_arr = R.array.dates;
-        //tag = "Взять";
+        tag = "Взять";
     }
 
     @Override
     void init() {
         super.init();
+        txt = getString(R.string.spec) + "\n" + getString(R.string.doctor);
+        Log.d("jop*3",getClass().getName()+".init()");
+
         findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
 
-        findViewById(R.id.textview).setVisibility(View.VISIBLE);
+        ((TextView)findViewById(R.id.text)).setText(txt);
         ((TextView)findViewById(R.id.textview)).setText(txt);
-        findViewById(R.id.text).setVisibility(View.GONE);
-        findViewById(R.id.list).setVisibility(View.GONE);
+        ((Button) findViewById(R.id.button)).setText(R.string.button);
+        ((TextView)findViewById(R.id.tv)).setText(getString(R.string.menu4));
+
         findViewById(R.id.my_recycler_view).setVisibility(View.VISIBLE);
+        findViewById(R.id.list).setVisibility(View.GONE);
+        findViewById(R.id.text).setVisibility(View.GONE);
+        findViewById(R.id.textview).setVisibility(View.VISIBLE);
         findViewById(R.id.button).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
-    }
 
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getApplicationContext(), Activity_4_DRT.class));
     }
 
     @Override

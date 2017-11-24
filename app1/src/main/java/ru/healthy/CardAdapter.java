@@ -48,7 +48,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, Activity_6_YN.class);
+                Intent intent = new Intent(context, Activity_5_YN.class);
                 //intent.putExtra(ActivityBase.EXTRA_POSITION, getAdapterPosition());
                 activity.startActivityForResult(intent, 1);
 

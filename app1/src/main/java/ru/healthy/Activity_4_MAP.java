@@ -10,7 +10,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Activity_5_MAP extends FragmentActivity implements OnMapReadyCallback {
+public class Activity_4_MAP extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 

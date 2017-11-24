@@ -42,13 +42,12 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
 
     public ActivityBase() {
         super();
-        txt = "Txt Txt Txt";
-        tag = "Отменить";
+        txt = "bla-bla-bla";
+        tag = "bla-bla";
         id_contentView = R.layout.activity_base;
         spinner_arr = R.array.places;
         recycl_arr = R.array.place_details;
         list_arr = R.array.place_desc;
-        //init();
     }
 
     void init() {

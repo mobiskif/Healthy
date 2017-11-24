@@ -38,10 +38,5 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:tint="@color/button_grey"
             android:title="@string/menu6" />
-        <item
-            android:id="@+id/m7"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:tint="@color/button_grey"
-            android:title="@string/menu7" />
     </group>
 </menu>

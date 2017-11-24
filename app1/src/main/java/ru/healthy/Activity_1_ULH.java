@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class Activity_1_ULH extends ActivityBase {
     private DrawerLayout mDrawerLayout;
@@ -26,7 +28,7 @@ public class Activity_1_ULH extends ActivityBase {
     @Override
     void init() {
         super.init();
-        Log.d("jop*1",getClass().getName()+".init()");
+        //Log.d("jop*1",getClass().getName()+".init()" + txt);
 
 
         if (getSupportActionBar() != null) {
@@ -34,7 +36,6 @@ public class Activity_1_ULH extends ActivityBase {
             indicator.setTint(ResourcesCompat.getColor(getResources(), R.color.white, getTheme()));
             getSupportActionBar().setHomeAsUpIndicator(indicator);
         }
-
 
         mDrawerLayout = findViewById(R.id.drawer);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -53,9 +54,15 @@ public class Activity_1_ULH extends ActivityBase {
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
 
+
         findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
+
+        txt = getString(R.string.user) + "\n" + getString(R.string.date);
+        ((TextView)findViewById(R.id.text)).setText(txt);
+        ((TextView)findViewById(R.id.textview)).setText(txt);
+        ((Button) findViewById(R.id.button)).setText(R.string.button);
 
         findViewById(R.id.my_recycler_view).setVisibility(View.VISIBLE);
         findViewById(R.id.list).setVisibility(View.GONE);
@@ -69,7 +76,7 @@ public class Activity_1_ULH extends ActivityBase {
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        if (v.getId() == R.id.textview) startActivity(new Intent(getApplicationContext(), Activity_0_UAL.class));
+        if (v.getId() == R.id.textview) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
         else if (v.getId() == R.id.button) startActivity(new Intent(getApplicationContext(), Activity_2_LSD.class));
     }
 
@@ -97,14 +104,13 @@ public class Activity_1_ULH extends ActivityBase {
     public void doItem(MenuItem menuItem) {
         menuItem.setChecked(true);
         String s = menuItem.getTitle().toString();
-        if      (s.equals(getString(R.string.menu0))) startActivity(new Intent(getApplicationContext(), Activity_0_UAL.class));
+        if      (s.equals(getString(R.string.menu0))) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
         else if (s.equals(getString(R.string.menu1))) startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
         else if (s.equals(getString(R.string.menu2))) startActivity(new Intent(getApplicationContext(), Activity_2_LSD.class));
-        else if (s.equals(getString(R.string.menu3))) startActivity(new Intent(getApplicationContext(), Activity_3_SDR.class));
-        else if (s.equals(getString(R.string.menu4))) startActivity(new Intent(getApplicationContext(), Activity_4_DRT.class));
-        else if (s.equals(getString(R.string.menu5))) startActivity(new Intent(getApplicationContext(), Activity_5_MAP.class));
-        else if (s.equals(getString(R.string.menu6))) startActivity(new Intent(getApplicationContext(), Activity_6_YN.class));
-        else if (s.equals(getString(R.string.menu7))) startActivity(new Intent(getApplicationContext(), ActivityBase.class));
+        else if (s.equals(getString(R.string.menu3))) startActivity(new Intent(getApplicationContext(), Activity_3_DRT.class));
+        else if (s.equals(getString(R.string.menu4))) startActivity(new Intent(getApplicationContext(), Activity_4_MAP.class));
+        else if (s.equals(getString(R.string.menu5))) startActivity(new Intent(getApplicationContext(), Activity_5_YN.class));
+        else if (s.equals(getString(R.string.menu6))) startActivity(new Intent(getApplicationContext(), ActivityBase.class));
         mDrawerLayout.closeDrawers();
     }
 
