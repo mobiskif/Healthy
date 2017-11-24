@@ -28,18 +28,22 @@ public class Activity_0_UA extends ActivityBase {
         ((TextView)findViewById(R.id.text)).setText(txt);
         ((TextView)findViewById(R.id.textview)).setText(txt);
         ((Button) findViewById(R.id.button)).setText(R.string.save);
+        ((TextView) findViewById(R.id.tv)).setText(R.string.menu4);
 
         findViewById(R.id.my_recycler_view).setVisibility(View.GONE);
         findViewById(R.id.list).setVisibility(View.GONE);
         findViewById(R.id.text).setVisibility(View.VISIBLE);
         findViewById(R.id.textview).setVisibility(View.GONE);
         findViewById(R.id.button).setVisibility(View.VISIBLE);
-        findViewById(R.id.tv).setVisibility(View.GONE);
+        findViewById(R.id.tv).setVisibility(View.VISIBLE);
+
+        findViewById(R.id.tv).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
        if (v.getId()==R.id.button) startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
+       else if (v.getId()==R.id.tv) startActivity(new Intent(getApplicationContext(), Activity_4_MAP.class));
     }
 
 }

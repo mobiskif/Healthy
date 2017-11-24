@@ -150,6 +150,8 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onClick(View v) {
+        if (v.getId()==R.id.textview) finish();//startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
+
         //Toast.makeText(getApplicationContext(), "onClick", Toast.LENGTH_LONG).show();
         mFirebaseAnalytics.setUserProperty("current_area", "Кирровский");
 

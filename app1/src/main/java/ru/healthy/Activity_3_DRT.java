@@ -32,7 +32,7 @@ public class Activity_3_DRT extends ActivityBase {
         ((TextView)findViewById(R.id.text)).setText(txt);
         ((TextView)findViewById(R.id.textview)).setText(txt);
         ((Button) findViewById(R.id.button)).setText(R.string.button);
-        ((TextView)findViewById(R.id.tv)).setText(getString(R.string.menu4));
+        ((TextView)findViewById(R.id.tv)).setText(getString(R.string.button));
 
         findViewById(R.id.my_recycler_view).setVisibility(View.VISIBLE);
         findViewById(R.id.list).setVisibility(View.GONE);

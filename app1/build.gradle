@@ -18,8 +18,8 @@ android {
         applicationId "ru.healthy"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 37
-        versionName '37'
+        versionCode 38
+        versionName '38'
         vectorDrawables.useSupportLibrary = true
     }
 
