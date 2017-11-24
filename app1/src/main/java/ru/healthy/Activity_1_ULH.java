@@ -23,11 +23,14 @@ public class Activity_1_ULH extends ActivityBase {
         spinner_arr = R.array.lpu;
         recycl_arr = R.array.history;
         list_arr = R.array.history;
+        tag = "Отменить";
+
     }
 
     @Override
     void init() {
         super.init();
+        txt = getString(R.string.user) + "\n" + getString(R.string.date);
         //Log.d("jop*1",getClass().getName()+".init()" + txt);
 
 
@@ -55,11 +58,10 @@ public class Activity_1_ULH extends ActivityBase {
         Uri appLinkData = appLinkIntent.getData();
 
 
-        findViewById(R.id.label1).setVisibility(View.GONE);
+        //findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
 
-        txt = getString(R.string.user) + "\n" + getString(R.string.date);
         ((TextView)findViewById(R.id.text)).setText(txt);
         ((TextView)findViewById(R.id.textview)).setText(txt);
         ((Button) findViewById(R.id.button)).setText(R.string.button);

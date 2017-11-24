@@ -5,6 +5,7 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="confirm_text">Вы подтверждаете действие?</string>
+    <string name="success">Успешно</string>
 
     <string name="user">Кузьмин Владимир Сергеевич</string>
     <string name="date">1997-09-24</string>

@@ -21,7 +21,7 @@ public class Activity_2_LSD extends ActivityBase {
     void init() {
         super.init();
         txt = getString(R.string.clinic);
-        Log.d("jop*2",getClass().getName()+".init()");
+        //Log.d("jop*2",getClass().getName()+".init()");
 
         findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);

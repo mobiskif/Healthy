@@ -18,13 +18,13 @@ public class Activity_0_UA extends ActivityBase {
     @Override
     void init() {
         super.init();
+        txt = getString(R.string.user) + "\n" + getString(R.string.date);
         //Log.d("jop*1",getClass().getName()+".init()");
 
         findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
 
-        txt = getString(R.string.user) + "\n" + getString(R.string.date);
         ((TextView)findViewById(R.id.text)).setText(txt);
         ((TextView)findViewById(R.id.textview)).setText(txt);
         ((Button) findViewById(R.id.button)).setText(R.string.save);

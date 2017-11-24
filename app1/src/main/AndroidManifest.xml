@@ -10,11 +10,11 @@
     -->
 
     <application
-        android:allowBackup="true"
-        android:icon="@drawable/redcross_small"
         android:label="@string/app_name"
-        android:supportsRtl="false"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.Base"
+        android:icon="@drawable/redcross_small"
+        android:allowBackup="true"
+        android:supportsRtl="false">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBE7wWzmLxesRGYdhPd98iaSDuSS5LbWWU" />
@@ -49,6 +49,7 @@
             android:parentActivityName=".Activity_1_ULH" />
         <activity
             android:name=".Activity_3_DRT"
+            android:theme="@style/AppTheme.Base"
             android:label="@string/menu3"
             android:parentActivityName=".Activity_2_LSD" />
         <activity
@@ -57,8 +58,8 @@
             android:parentActivityName=".Activity_1_ULH" />
         <activity
             android:name=".Activity_5_YN"
-            android:label="@string/menu5"
-            android:theme="@style/Theme.AppCompat.Dialog" />
+            android:theme="@style/Theme.AppCompat.Dialog"
+            android:label="@string/menu5" />
         <activity
             android:name=".ActivityBase"
             android:label="@string/menu6"

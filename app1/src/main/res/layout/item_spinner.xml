@@ -7,4 +7,5 @@
     android:singleLine="false"
     android:elegantTextHeight="true"
     android:ellipsize="start"
+    android:padding="16dp"
     android:textAlignment="inherit"/>

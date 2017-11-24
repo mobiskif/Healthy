@@ -11,7 +11,7 @@
     </entry>
     <entry>
         <key>welcome_message</key>
-        <value>Welcome to my awesome app!</value>
+        <value>Welcome to app!</value>
     </entry>
 </defaultsMap>
     <!-- END xml_defaults -->

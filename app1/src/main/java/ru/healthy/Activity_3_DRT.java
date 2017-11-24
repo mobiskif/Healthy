@@ -23,7 +23,7 @@ public class Activity_3_DRT extends ActivityBase {
     void init() {
         super.init();
         txt = getString(R.string.spec) + "\n" + getString(R.string.doctor);
-        Log.d("jop*3",getClass().getName()+".init()");
+        //Log.d("jop*3",getClass().getName()+".init()");
 
         findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);
@@ -45,10 +45,10 @@ public class Activity_3_DRT extends ActivityBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode==RESULT_OK) {
-            Toast.makeText(this, data.getStringExtra("result"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.success) + " " + data.getStringExtra("result"), Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
             finish();
         }

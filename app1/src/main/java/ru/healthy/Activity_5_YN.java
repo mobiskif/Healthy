@@ -22,11 +22,11 @@ public class Activity_5_YN extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent();
         if (v.getId()==R.id.Yes) {
             setResult(RESULT_OK, intent);
-            intent.putExtra("result", "Ok");
+            intent.putExtra("result", getString(R.string.yes));
         }
         else {
             setResult(RESULT_CANCELED, intent);
-            intent.putExtra("result", "Отмена");
+            intent.putExtra("result", getString(R.string.no));
         }
         finish();
     }

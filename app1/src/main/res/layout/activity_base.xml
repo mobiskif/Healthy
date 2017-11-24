@@ -23,9 +23,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-<!--
-            app:title="@string/app_name"
--->
+
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
