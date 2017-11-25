@@ -10,7 +10,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Activity_1_ULH extends ActivityBase {
@@ -18,9 +20,9 @@ public class Activity_1_ULH extends ActivityBase {
 
     public Activity_1_ULH() {
         super();
-        this.id_contentView = R.layout.activity_1_ulh;
+        id_content = R.layout.activity_1_ulh;
         spinner_arr = R.array.lpu;
-        recycl_arr = R.array.history;
+        card_arr = R.array.history;
         list_arr = R.array.history;
         btn_text = "Отменить";
 
@@ -29,9 +31,7 @@ public class Activity_1_ULH extends ActivityBase {
     @Override
     void init() {
         super.init();
-        txt = getString(R.string.user) + "\n" + getString(R.string.date);
-        //Log.d("jop*1",getClass().getName()+".init()" + txt);
-
+        fetchWelcome();
 
         if (getSupportActionBar() != null) {
             VectorDrawableCompat indicator = VectorDrawableCompat.create(getResources(), R.drawable.ic_menu, getTheme());
@@ -61,8 +61,9 @@ public class Activity_1_ULH extends ActivityBase {
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
 
-        ((TextView)findViewById(R.id.text)).setText(txt);
-        ((TextView)findViewById(R.id.textview)).setText(txt);
+        top_text = Storage.restore(this, "FIO");
+        ((TextView)findViewById(R.id.text)).setText(top_text);
+        ((TextView)findViewById(R.id.textview)).setText(top_text);
         ((Button) findViewById(R.id.button)).setText(R.string.button);
 
         findViewById(R.id.my_recycler_view).setVisibility(View.VISIBLE);
@@ -71,6 +72,14 @@ public class Activity_1_ULH extends ActivityBase {
         findViewById(R.id.textview).setVisibility(View.VISIBLE);
         findViewById(R.id.button).setVisibility(View.VISIBLE);
         findViewById(R.id.tv).setVisibility(View.GONE);
+
+        spinner_id = Integer.valueOf(Storage.restore(this, "currentLPU"));
+        try {
+            ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        }
+        catch (Exception e) {
+            //((Spinner) findViewById(R.id.spinner)).setSelection(0);
+        }
 
     }
 
@@ -83,6 +92,7 @@ public class Activity_1_ULH extends ActivityBase {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
         getMenuInflater().inflate(R.menu.menu_drawer, menu);
         return true;
     }
@@ -94,16 +104,17 @@ public class Activity_1_ULH extends ActivityBase {
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean prepareDrawerMenu(Menu menu) {
-        //menu.clear(); menu.add ("Ивнов Иван Иванович");
-        MenuItem item = menu.getItem(1);
+    public void prepareDrawerMenu(Menu menu) {
+        onCreateOptionsMenu(menu);
+
+        String currentUser = Storage.getCurrentUser(this);
+        int id = Integer.valueOf(currentUser);
+        MenuItem item = menu.getItem(id);
         item.setIcon(R.drawable.redcross_small);
-        item.setTitle("Главная страница");
-        return true;
     }
 
     public void doItem(MenuItem menuItem) {
-        menuItem.setChecked(true);
+        //menuItem.setChecked(true);
         String s = menuItem.getTitle().toString();
         if      (s.equals(getString(R.string.menu0))) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
         else if (s.equals(getString(R.string.menu1))) startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
@@ -112,7 +123,20 @@ public class Activity_1_ULH extends ActivityBase {
         else if (s.equals(getString(R.string.menu4))) startActivity(new Intent(getApplicationContext(), Activity_4_MAP.class));
         else if (s.equals(getString(R.string.menu5))) startActivity(new Intent(getApplicationContext(), Activity_5_YN.class));
         else if (s.equals(getString(R.string.menu6))) startActivity(new Intent(getApplicationContext(), ActivityBase.class));
+        else if (s.equals(getString(R.string.umenu0))) Storage.setCurrentUser(this, "0");
+        else if (s.equals(getString(R.string.umenu1))) Storage.setCurrentUser(this, "1");
+        else if (s.equals(getString(R.string.umenu2))) Storage.setCurrentUser(this, "2");
         mDrawerLayout.closeDrawers();
+        init();
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemSelected(parent,view,position,id);
+        String value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
+        Storage.store(this, "currentLPU", value);
+
+        value = (String) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
+        Storage.store(this, "currentLPU_str", value);
+    }
 }

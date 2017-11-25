@@ -22,7 +22,8 @@
         <activity
             android:name=".Activity_0_UA"
             android:label="@string/menu0"
-            android:parentActivityName=".Activity_1_ULH" />
+            android:parentActivityName=".Activity_1_ULH"
+            />
         <activity
             android:name=".Activity_1_ULH"
             android:label="@string/app_name">
@@ -46,16 +47,17 @@
         <activity
             android:name=".Activity_2_LSD"
             android:label="@string/menu2"
-            android:parentActivityName=".Activity_1_ULH" />
+            android:parentActivityName=".Activity_1_ULH"
+            />
         <activity
             android:name=".Activity_3_DRT"
-            android:theme="@style/AppTheme.Base"
             android:label="@string/menu3"
-            android:parentActivityName=".Activity_2_LSD" />
+            android:parentActivityName=".Activity_2_LSD"
+            />
         <activity
             android:name=".Activity_4_MAP"
             android:label="@string/menu4"
-            android:parentActivityName=".Activity_1_ULH" />
+            />
         <activity
             android:name=".Activity_5_YN"
             android:theme="@style/Theme.AppCompat.Dialog"
@@ -63,7 +65,7 @@
         <activity
             android:name=".ActivityBase"
             android:label="@string/menu6"
-            android:parentActivityName=".Activity_1_ULH" />
+            />
 
     </application>
 

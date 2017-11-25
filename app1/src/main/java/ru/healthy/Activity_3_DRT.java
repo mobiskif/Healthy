@@ -2,7 +2,9 @@ package ru.healthy;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,9 +14,9 @@ public class Activity_3_DRT extends ActivityBase {
 
     public Activity_3_DRT() {
         super();
-        //txt = "Терапевт \nМMамедова Ислам Акбаровна";
+        //top_text = "Терапевт \nМMамедова Ислам Акбаровна";
         spinner_arr = R.array.dates;
-        recycl_arr = R.array.talons;
+        card_arr = R.array.talons;
         list_arr = R.array.dates;
         btn_text = "Взять";
     }
@@ -22,15 +24,14 @@ public class Activity_3_DRT extends ActivityBase {
     @Override
     void init() {
         super.init();
-        txt = getString(R.string.spec) + "\n" + getString(R.string.doctor);
-        //Log.d("jop*3",getClass().getName()+".init()");
 
         findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
 
-        ((TextView)findViewById(R.id.text)).setText(txt);
-        ((TextView)findViewById(R.id.textview)).setText(txt);
+        top_text = Storage.restore(this, "currentSpec_str") + "\n"+ Storage.restore(this, "currentDoctor_str");
+        ((TextView)findViewById(R.id.text)).setText(top_text);
+        ((TextView)findViewById(R.id.textview)).setText(top_text);
         ((Button) findViewById(R.id.button)).setText(R.string.button);
         ((TextView)findViewById(R.id.tv)).setText(getString(R.string.button));
 
@@ -40,6 +41,9 @@ public class Activity_3_DRT extends ActivityBase {
         findViewById(R.id.textview).setVisibility(View.VISIBLE);
         findViewById(R.id.button).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
+
+        spinner_id = Integer.valueOf(Storage.restore(this, "currentDate"));
+        ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
 
     }
 
@@ -56,6 +60,13 @@ public class Activity_3_DRT extends ActivityBase {
             startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
             finish();
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemSelected(parent,view,position,id);
+        String value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
+        Storage.store(this, "currentDate", value);
     }
 
 }

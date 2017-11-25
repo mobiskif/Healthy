@@ -27,40 +27,38 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 public class ActivityBase extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
     private FirebaseAnalytics mFirebaseAnalytics;
-    int id_contentView;
-    String txt;
+    int id_content;
+    String top_text;
     String btn_text;
+    int spinner_id;
     int spinner_arr;
-    int recycl_arr;
+    int card_arr;
     int list_arr;
-    RecyclerView mRecyclerView;
     String TAG = "jop";
+    API api;
 
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     private TextView mWelcomeTextView;
-    private static final String LOADING_PHRASE_CONFIG_KEY = "loading_phrase";
-    private static final String WELCOME_MESSAGE_KEY = "welcome_message";
-    private static final String WELCOME_MESSAGE_CAPS_KEY = "welcome_message_caps";
 
     public ActivityBase() {
         super();
-        id_contentView = R.layout.activity_base;
+        api = new API(this);
+        id_content = R.layout.activity_base;
         spinner_arr = R.array.lpu;
-        recycl_arr = R.array.lpu;
+        card_arr = R.array.lpu;
         list_arr = R.array.lpu;
     }
 
     void init() {
-        //Log.d("jop", getClass().getName() + ".init()");
-        txt = "bla-bla";
+        top_text = "bla-bla";
         btn_text = "bla";
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(id_contentView);
-        //Log.d("jop", getClass().getName() + ".onCreate()");
+        setContentView(id_content);
+
 
         mWelcomeTextView = findViewById(R.id.label1);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -91,27 +89,35 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
 
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
-        ArrayAdapter<String> spinner_adapter = new ArrayAdapter<>(this, R.layout.item_spinner, getResources().getStringArray(spinner_arr));
+        /*** Request to Base BEGIN ***/
+        //String[] spins = getResources().getStringArray(spinner_arr);
+        String[] spins = api.getStringArray("doc");
+        /*** Request to Base END ***/
+        ArrayAdapter<String> spinner_adapter = new ArrayAdapter<>(this, R.layout.item_spinner, spins);
         spinner_adapter.setDropDownViewResource(R.layout.item_spinner);
         spinner.setAdapter(spinner_adapter);
 
-        mRecyclerView = findViewById(R.id.my_recycler_view);
+        RecyclerView mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), this, btn_text));
+        /*** Request to Base BEGIN ***/
+        String[] cards = getResources().getStringArray(card_arr);
+        /*** Request to Base END ***/
+        mRecyclerView.setAdapter(new CardAdapter(cards, this, btn_text));
 
         ListView listView = findViewById(R.id.list);
         listView.setOnItemClickListener(this);
-        //String[] names = { "Иван", "Марья", "Петр", "Антон", "Даша", "Борис", "Костя", "Игорь", "Анна", "Денис", "Андрей" };
-        String[] names = getResources().getStringArray(list_arr);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
+        /*** Request to Base BEGIN ***/
+        String[] lists = getResources().getStringArray(list_arr);
+        /*** Request to Base END ***/
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lists);
         listView.setAdapter(adapter);
 
-        fetchWelcome();
+        //fetchWelcome();
         init();
     }
 
-    private void fetchWelcome() {
-        mWelcomeTextView.setText(mFirebaseRemoteConfig.getString(LOADING_PHRASE_CONFIG_KEY));
+    public void fetchWelcome() {
+        mWelcomeTextView.setText(mFirebaseRemoteConfig.getString("loading_phrase"));
 
         // If your app is using developer mode, cacheExpiration is set to 0, so each fetch will retrieve values from the service.
         long cacheExpiration = 3600; // 1 hour in seconds.
@@ -142,21 +148,15 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void displayWelcome() {
-        String welcomeMessage = mFirebaseRemoteConfig.getString(WELCOME_MESSAGE_KEY);
-        if (mFirebaseRemoteConfig.getBoolean(WELCOME_MESSAGE_CAPS_KEY))
-            mWelcomeTextView.setAllCaps(true);
-        else mWelcomeTextView.setAllCaps(false);
+        String welcomeMessage = mFirebaseRemoteConfig.getString("welcome_message");
         mWelcomeTextView.setText(welcomeMessage);
     }
 
 
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.textview) finish();//startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
-
         //Toast.makeText(getApplicationContext(), "onClick", Toast.LENGTH_LONG).show();
         mFirebaseAnalytics.setUserProperty("current_area", "Кирровский");
-
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "onClick");
         bundle.putString(FirebaseAnalytics.Param.VALUE, v.toString());

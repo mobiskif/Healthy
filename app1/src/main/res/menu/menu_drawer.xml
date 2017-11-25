@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group
+        android:id="@+id/gr2"
+        android:visible="true"
+        android:checkableBehavior="single">
+    <item
+        android:id="@+id/u0"
+        android:title="@string/umenu0" />
+    <item
+        android:id="@+id/u1"
+        android:title="@string/umenu1" />
+    <item
+        android:id="@+id/u2"
+        android:title="@string/umenu2" />
+    </group>
+
+    <group
         android:id="@+id/gr1"
+        android:visible="false"
         android:checkableBehavior="none">
         <item
             android:id="@+id/m0"
