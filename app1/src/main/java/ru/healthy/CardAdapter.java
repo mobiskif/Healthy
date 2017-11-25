@@ -33,7 +33,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public CardAdapter(String[] myDataset, Activity a, String t) {
         mDataset = myDataset;
         activity = a;
-        //tag = ((ActivityBase)a).tag;
+        //btn_text = ((ActivityBase)a).btn_text;
         tag = t;
     }
 

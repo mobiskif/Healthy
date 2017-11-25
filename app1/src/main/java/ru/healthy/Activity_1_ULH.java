@@ -7,7 +7,6 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +22,7 @@ public class Activity_1_ULH extends ActivityBase {
         spinner_arr = R.array.lpu;
         recycl_arr = R.array.history;
         list_arr = R.array.history;
-        tag = "Отменить";
+        btn_text = "Отменить";
 
     }
 

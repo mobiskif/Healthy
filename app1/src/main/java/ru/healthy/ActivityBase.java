@@ -17,11 +17,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
@@ -29,11 +29,12 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     private FirebaseAnalytics mFirebaseAnalytics;
     int id_contentView;
     String txt;
-    String tag;
+    String btn_text;
     int spinner_arr;
     int recycl_arr;
     int list_arr;
     RecyclerView mRecyclerView;
+    String TAG = "jop";
 
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     private TextView mWelcomeTextView;
@@ -44,16 +45,15 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     public ActivityBase() {
         super();
         id_contentView = R.layout.activity_base;
-        spinner_arr = R.array.places;
-        recycl_arr = R.array.place_details;
-        list_arr = R.array.place_desc;
-        //activity = this;
+        spinner_arr = R.array.lpu;
+        recycl_arr = R.array.lpu;
+        list_arr = R.array.lpu;
     }
 
     void init() {
         //Log.d("jop", getClass().getName() + ".init()");
         txt = "bla-bla";
-        tag = "bla";
+        btn_text = "bla";
     }
 
     @Override
@@ -97,7 +97,7 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
 
         mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), this, tag));
+        mRecyclerView.setAdapter(new CardAdapter(getResources().getStringArray(recycl_arr), this, btn_text));
 
         ListView listView = findViewById(R.id.list);
         listView.setOnItemClickListener(this);
@@ -128,6 +128,8 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
                         if (task.isSuccessful()) {
                             //Toast.makeText(activity, "Fetch Succeeded", Toast.LENGTH_SHORT).show();
                             Log.d("jop", getClass().getName() + " fetch успешный");
+                            FirebaseCrash.logcat(Log.DEBUG, TAG, getClass().getName() + " fetch успешный");
+
                             // After config data is successfully fetched, it must be activated before newly fetched values are returned.
                             mFirebaseRemoteConfig.activateFetched();
                         } else {

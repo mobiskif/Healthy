@@ -1,12 +1,12 @@
 package ru.healthy;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.crash.FirebaseCrash;
 
 public class Activity_3_DRT extends ActivityBase {
 
@@ -16,7 +16,7 @@ public class Activity_3_DRT extends ActivityBase {
         spinner_arr = R.array.dates;
         recycl_arr = R.array.talons;
         list_arr = R.array.dates;
-        tag = "Взять";
+        btn_text = "Взять";
     }
 
     @Override
@@ -49,6 +49,10 @@ public class Activity_3_DRT extends ActivityBase {
 
         if (resultCode==RESULT_OK) {
             Toast.makeText(this, getString(R.string.success) + " " + data.getStringExtra("result"), Toast.LENGTH_SHORT).show();
+
+            FirebaseCrash.log("onActivityResult="+data.getDataString());
+            //FirebaseCrash.report(data.getDataString());
+
             startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
             finish();
         }
