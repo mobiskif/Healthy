@@ -4,17 +4,17 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 public class Activity_2_LSD extends ActivityBase {
 
     public Activity_2_LSD() {
         super();
-        spinner_arr = R.array.spec;
-        card_arr = R.array.doctors;
-        list_arr = R.array.doctors;
+        spinner_arr = "spec";
+        card_arr = "doc";
+        list_arr = "doc";
     }
 
     @Override
@@ -40,29 +40,29 @@ public class Activity_2_LSD extends ActivityBase {
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
 
         spinner_id = Integer.valueOf(Storage.restore(this, "currentSpec"));
-        ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
-
-    }
+        if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
 
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        String value = ((TextView) view).getText().toString();
-        Storage.store(this, "currentDoctor_str", value);
-
-        startActivity(new Intent(getApplicationContext(), Activity_3_DRT.class));
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         super.onItemSelected(parent,view,position,id);
+        Storage.store(this, "currentSpec", String.valueOf(position));
+        Storage.store(this, "currentSpec_str", ((TextView) view).getText().toString());
 
-        String value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
-        Storage.store(this, "currentSpec", value);
-
-        value = (String) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
-        Storage.store(this, "currentSpec_str", value);
+        String spec_id;
+        Spinner sp = findViewById(R.id.spinner);
+        SpinnerAdapter adapter = sp.getAdapter();
+        Object item = adapter.getItem(position);
+        spec_id = "1";
 
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Storage.store(this, "currentDoctor_str", ((TextView) view).getText().toString());
+        startActivity(new Intent(getApplicationContext(), Activity_3_DRT.class));
+    }
+
 }

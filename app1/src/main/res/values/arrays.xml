@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <array name="place_avator">
+        <item>@drawable/a_avator</item>
+        <item>@drawable/b_avator</item>
+        <item>@drawable/c_avator</item>
+        <item>@drawable/d_avator</item>
+        <item>@drawable/e_avator</item>
+        <item>@drawable/f_avator</item>
+    </array>
     <string-array name="lpu">
         <item>СПб ГБУЗ "Врачебно-физкультурный диспансер №3"</item>
         <item>СПб ГБУЗ "Городская больница №14"</item>
@@ -12,12 +20,10 @@
         <item>СПб ГБУЗ "Городская поликлиника №23" Детское поликлиническое отделение №21</item>
         <item>СПб ГБУЗ "Городская поликлиника №23" Женская консультация №36</item>
     </string-array>
-
-    <string-array name="history">
-        <item>Эндокринолог \n2017-11-01 \n14:45</item>
-        <item>Хирург-травматолг \n2018-01-02 \n14:45</item>
+    <string-array name="hist">
+        <item>Эндокринолог 2017-11-01 14:45</item>
+        <item>Хирург-травматолг 2018-01-02 14:45</item>
     </string-array>
-
     <string-array name="spec">
         <item>Терапевт</item>
         <item>Эндокринолог</item>
@@ -26,7 +32,40 @@
         <item>Хирург-травматолг</item>
         <item>Гастроентеролог</item>
     </string-array>
-
+    <string-array name="talons">
+        <item>16:00</item>
+        <item>16:30</item>
+        <item>17:00</item>
+        <item>17:30</item>
+        <item>18:00</item>
+        <item>18:30</item>
+        <item>19:00</item>
+        <item>19:30</item>
+    </string-array>
+    <string-array name="area">
+        <item>Кировский район</item>
+        <item>Московский район</item>
+        <item>Калиниский район</item>
+        <item>Невский район</item>
+        <item>Петродворцовый район</item>
+        <item>Красносельский район</item>
+        <item>Кировский район</item>
+        <item>Московский район</item>
+        <item>Калиниский район</item>
+        <item>Невский район</item>
+        <item>Петродворцовый район</item>
+        <item>Красносельский район</item>
+    </string-array>
+    <string-array name="doc">
+        <item>Мамедов</item>
+        <item>Иванова</item>
+        <item>Петров</item>
+        <item>Маргулис</item>
+        <item>Мамедов</item>
+        <item>Иванова</item>
+        <item>Петров</item>
+        <item>Маргулис</item>
+    </string-array>
     <string-array name="dates">
         <item>2017-11-20</item>
         <item>2017-11-21</item>
@@ -43,50 +82,4 @@
         <item>Сб</item>
         <item>Вс</item>
     </string-array>
-
-    <string-array name="talons">
-        <item>16:00</item>
-        <item>16:30</item>
-        <item>17:00</item>
-        <item>17:30</item>
-        <item>18:00</item>
-        <item>18:30</item>
-        <item>19:00</item>
-        <item>19:30</item>
-    </string-array>
-
-    <string-array name="district">
-        <item>Кировский район</item>
-        <item>Московский район</item>
-        <item>Калиниский район</item>
-        <item>Невский район</item>
-        <item>Петродворцовый район</item>
-        <item>Красносельский район</item>
-        <item>Кировский район</item>
-        <item>Московский район</item>
-        <item>Калиниский район</item>
-        <item>Невский район</item>
-        <item>Петродворцовый район</item>
-        <item>Красносельский район</item>
-    </string-array>
-
-    <string-array name="doctors">
-        <item>Мамедов</item>
-        <item>Иванова</item>
-        <item>Петров</item>
-        <item>Маргулис</item>
-        <item>Мамедов</item>
-        <item>Иванова</item>
-        <item>Петров</item>
-        <item>Маргулис</item>
-    </string-array>
-
-    <array name="place_avator">
-        <item>@drawable/a_avator</item>
-        <item>@drawable/b_avator</item>
-        <item>@drawable/c_avator</item>
-        <item>@drawable/d_avator</item>
-        <item>@drawable/e_avator</item>
-        <item>@drawable/f_avator</item>
-    </array>
 </resources>

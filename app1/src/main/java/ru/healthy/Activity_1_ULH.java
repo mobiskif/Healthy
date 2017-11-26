@@ -21,11 +21,10 @@ public class Activity_1_ULH extends ActivityBase {
     public Activity_1_ULH() {
         super();
         id_content = R.layout.activity_1_ulh;
-        spinner_arr = R.array.lpu;
-        card_arr = R.array.history;
-        list_arr = R.array.history;
+        spinner_arr = "lpu";
+        card_arr = "hist";
+        list_arr = "hist";
         btn_text = "Отменить";
-
     }
 
     @Override
@@ -73,13 +72,10 @@ public class Activity_1_ULH extends ActivityBase {
         findViewById(R.id.button).setVisibility(View.VISIBLE);
         findViewById(R.id.tv).setVisibility(View.GONE);
 
+
         spinner_id = Integer.valueOf(Storage.restore(this, "currentLPU"));
-        try {
-            ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
-        }
-        catch (Exception e) {
-            //((Spinner) findViewById(R.id.spinner)).setSelection(0);
-        }
+        if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+
 
     }
 

@@ -14,10 +14,9 @@ public class Activity_3_DRT extends ActivityBase {
 
     public Activity_3_DRT() {
         super();
-        //top_text = "Терапевт \nМMамедова Ислам Акбаровна";
-        spinner_arr = R.array.dates;
-        card_arr = R.array.talons;
-        list_arr = R.array.dates;
+        spinner_arr = "dates";
+        card_arr = "talons";
+        list_arr = "talons";
         btn_text = "Взять";
     }
 
@@ -43,7 +42,7 @@ public class Activity_3_DRT extends ActivityBase {
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
 
         spinner_id = Integer.valueOf(Storage.restore(this, "currentDate"));
-        ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
 
     }
 

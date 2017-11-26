@@ -31,22 +31,23 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     String top_text;
     String btn_text;
     int spinner_id;
-    int spinner_arr;
-    int card_arr;
-    int list_arr;
+    String spinner_arr;
+    String card_arr;
+    String list_arr;
     String TAG = "jop";
-    API api;
+    //API api;
+    Storage storage;
 
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     private TextView mWelcomeTextView;
 
     public ActivityBase() {
         super();
-        api = new API(this);
+        storage = new Storage(this);
         id_content = R.layout.activity_base;
-        spinner_arr = R.array.lpu;
-        card_arr = R.array.lpu;
-        list_arr = R.array.lpu;
+        spinner_arr = "lpu";
+        card_arr = "lpu";
+        list_arr = "lpu";
     }
 
     void init() {
@@ -89,30 +90,23 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
 
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
-        /*** Request to Base BEGIN ***/
         //String[] spins = getResources().getStringArray(spinner_arr);
-        String[] spins = api.getStringArray("doc");
-        /*** Request to Base END ***/
+        String[] spins = storage.getStringArray(spinner_arr);
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<>(this, R.layout.item_spinner, spins);
         spinner_adapter.setDropDownViewResource(R.layout.item_spinner);
         spinner.setAdapter(spinner_adapter);
 
         RecyclerView mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        /*** Request to Base BEGIN ***/
-        String[] cards = getResources().getStringArray(card_arr);
-        /*** Request to Base END ***/
+        String[] cards = storage.getStringArray(card_arr);
         mRecyclerView.setAdapter(new CardAdapter(cards, this, btn_text));
 
         ListView listView = findViewById(R.id.list);
         listView.setOnItemClickListener(this);
-        /*** Request to Base BEGIN ***/
-        String[] lists = getResources().getStringArray(list_arr);
-        /*** Request to Base END ***/
+        String[] lists = storage.getStringArray(list_arr);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lists);
         listView.setAdapter(adapter);
 
-        //fetchWelcome();
         init();
     }
 

@@ -10,9 +10,9 @@ public class Activity_0_UA extends ActivityBase {
 
     public Activity_0_UA() {
         super();
-        spinner_arr = R.array.district;
-        card_arr = R.array.lpu;
-        list_arr = R.array.lpu;
+        spinner_arr = "area";
+        card_arr = "lpu";
+        list_arr = "lpu";
     }
 
     @Override
@@ -40,7 +40,8 @@ public class Activity_0_UA extends ActivityBase {
         findViewById(R.id.tv).setOnClickListener(this);
 
         spinner_id = Integer.valueOf(Storage.restore(this, "currentArea"));
-        ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+
     }
 
     @Override
