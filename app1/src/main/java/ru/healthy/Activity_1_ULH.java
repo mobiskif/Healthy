@@ -1,5 +1,6 @@
 package ru.healthy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
@@ -10,10 +11,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CursorAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class Activity_1_ULH extends ActivityBase {
     private DrawerLayout mDrawerLayout;
@@ -128,11 +137,21 @@ public class Activity_1_ULH extends ActivityBase {
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        super.onItemSelected(parent,view,position,id);
         String value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
         Storage.store(this, "currentLPU", value);
 
         value = (String) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
         Storage.store(this, "currentLPU_str", value);
+
+        super.onItemSelected(parent,view,position,id);
     }
-}
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this, Activity_5_YN.class);
+        intent.putExtra("message", getString(R.string.cancel_talon));
+        startActivityForResult(intent, 1);
+    }
+
+
+    }

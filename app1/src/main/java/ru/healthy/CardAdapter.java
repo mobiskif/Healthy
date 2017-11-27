@@ -5,16 +5,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
+public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> implements IDataAdapter{
     private String[] mDataset;
     private  String tag;
     Activity activity;
+
+    public CardAdapter(String card_arr, Activity context, String t) {
+        mDataset = new Storage(context).getStringArray(card_arr);
+        activity = context;
+        //btn_text = ((ActivityBase)a).btn_text;
+        tag = t;
+    }
+
+    @Override
+    public void update() {
+        //((BaseAdapter) ((ListView) findViewById(R.id.list)).getAdapter()).notifyDataSetChanged();
+        //Log.e("jop", "==========");
+        notifyDataSetChanged();
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -50,6 +65,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, Activity_5_YN.class);
                 //intent.putExtra(ActivityBase.EXTRA_POSITION, getAdapterPosition());
+                intent.putExtra("message", context.getString(R.string.confirm_text));
                 activity.startActivityForResult(intent, 1);
 
             }

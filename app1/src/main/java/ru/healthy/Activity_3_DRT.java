@@ -63,9 +63,10 @@ public class Activity_3_DRT extends ActivityBase {
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        super.onItemSelected(parent,view,position,id);
         String value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
         Storage.store(this, "currentDate", value);
+
+        super.onItemSelected(parent,view,position,id);
     }
 
 }

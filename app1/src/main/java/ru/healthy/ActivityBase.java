@@ -1,11 +1,13 @@
 package ru.healthy;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -91,21 +93,39 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         //String[] spins = getResources().getStringArray(spinner_arr);
-        String[] spins = storage.getStringArray(spinner_arr);
-        ArrayAdapter<String> spinner_adapter = new ArrayAdapter<>(this, R.layout.item_spinner, spins);
+        //String[] spins = storage.getStringArray(spinner_arr);
+        //ArrayAdapter<String> spinner_adapter = new ArrayAdapter<>(this, R.layout.item_spinner, spins);
+        //DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spins);
+        DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spinner_arr);
         spinner_adapter.setDropDownViewResource(R.layout.item_spinner);
         spinner.setAdapter(spinner_adapter);
 
-        RecyclerView mRecyclerView = findViewById(R.id.my_recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        String[] cards = storage.getStringArray(card_arr);
-        mRecyclerView.setAdapter(new CardAdapter(cards, this, btn_text));
-
         ListView listView = findViewById(R.id.list);
         listView.setOnItemClickListener(this);
-        String[] lists = storage.getStringArray(list_arr);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lists);
-        listView.setAdapter(adapter);
+        //String[] lists = storage.getStringArray(list_arr);
+        //ArrayAdapter<String> list_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lists);
+        //DataAdapter list_adapter = new DataAdapter (this, android.R.layout.simple_list_item_1, lists);
+        DataAdapter list_adapter = new DataAdapter (this, android.R.layout.simple_list_item_1, list_arr);
+        listView.setAdapter(list_adapter);
+
+        RecyclerView mRecyclerView = findViewById(R.id.my_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //String[] cards = storage.getStringArray(card_arr);
+        //CardAdapter card_adapter = new CardAdapter(cards, this, btn_text);
+        CardAdapter card_adapter = new CardAdapter(card_arr, this, btn_text);
+        mRecyclerView.setAdapter(card_adapter);
+
+        //myCursor.registerContentObserver(new ContentObserver() {
+        //getContentResolver().notifyChange(uri, null);
+
+        spinner_adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                //list1.setSelection(adp.getCount()-1);
+                Log.e(TAG, "===onChanged");
+            }
+        });
 
         init();
     }
@@ -173,6 +193,13 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "onItemSelected");
         bundle.putString(FirebaseAnalytics.Param.VALUE, ""+position);
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+        IDataAdapter adapter = (IDataAdapter) ((ListView) findViewById(R.id.list)).getAdapter();
+        adapter.update();
+
+        RecyclerView rw = findViewById(R.id.my_recycler_view);
+        IDataAdapter radapter = (IDataAdapter) rw.getAdapter();
+        radapter.update();
     }
 
     @Override

@@ -8,11 +8,13 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 public class Activity_5_YN extends AppCompatActivity implements View.OnClickListener {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yesno);
 
+        ((TextView) findViewById(R.id.textView)).setText(getIntent().getStringExtra("message"));
         findViewById(R.id.Yes).setOnClickListener(this);
         findViewById(R.id.No).setOnClickListener(this);
     }

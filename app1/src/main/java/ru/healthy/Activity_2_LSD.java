@@ -47,7 +47,6 @@ public class Activity_2_LSD extends ActivityBase {
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        super.onItemSelected(parent,view,position,id);
         Storage.store(this, "currentSpec", String.valueOf(position));
         Storage.store(this, "currentSpec_str", ((TextView) view).getText().toString());
 
@@ -55,8 +54,8 @@ public class Activity_2_LSD extends ActivityBase {
         Spinner sp = findViewById(R.id.spinner);
         SpinnerAdapter adapter = sp.getAdapter();
         Object item = adapter.getItem(position);
-        spec_id = "1";
 
+        super.onItemSelected(parent,view,position,id);
     }
 
     @Override
