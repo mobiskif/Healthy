@@ -13,10 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,26 +26,27 @@ import java.util.concurrent.TimeUnit;
 
 
 public class DataAdapter extends BaseAdapter implements IDataAdapter, android.app.LoaderManager.LoaderCallbacks<Cursor> {
-    Activity context;
+    ActivityBase context;
     int resource;
     String action;
     String[] arr;
+    AdapterView adapterView;
 
-    public DataAdapter(Activity con, int res, String act) {
-        //super(con, res, (new Storage(con).getStringArray(act)));
-        //arr = new Storage(con).getStringArray(act);
-        context = con;
-        resource = res;
-        action = act;
-        arr = new Storage(context).getStringArray("place_avator");
-        Log.d("jop","initiate ====== place_avator");
-        con.getLoaderManager().initLoader(resource, null, this);
-        //update();
+    public DataAdapter(ActivityBase c, int r, String a) {
+        //super(c, res, (new Storage(c).getStringArray(a)));
+        context = c;
+        resource = r;
+        action = a;
+        //arr = new Storage(context).getStringArray("def_arr");
+        arr = context.getResources().getStringArray(R.array.def_arr);
+        //Log.d("jop","initiate ====== def_arr");
+
+        context.getLoaderManager().initLoader(resource, null, this);
     }
 
     @Override
     public void update() {
-        Log.d("jop","update start ====== "+action);
+        //Log.d("jop","update start ====== "+action);
         //context.getLoaderManager().getLoader(resource).forceLoad();
         context.getLoaderManager().initLoader(resource, null, this);
 
@@ -77,15 +80,21 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        context.loaded=false;
         return new MyCursorLoader(context, action);
-        //return null;
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         //scAdapter.swapCursor(cursor);
         arr = toArr(data);
+        context.loaded=true;
+        context.init();
         //arr = new Storage(context).getStringArray(action);
+        //adapterView.setAdapter(this);
+        //spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+
         Log.d("jop","load finished ====== "+action);
         notifyDataSetChanged();
     }
@@ -123,17 +132,18 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
             Cursor cur=null;
 
             switch (action) {
-                case "lpu": cur=hs.GetLPUList("GetLPUList"); break;
-                case "area": cur=hs.GetDistrictList("GetDistrictList"); break;
+                case "GetLPUList": cur=hs.GetLPUList("GetLPUList"); break;
+                case "GetDistrictList": cur=hs.GetDistrictList("GetDistrictList"); break;
                 case "CheckPatient": cur=hs.CheckPatient("CheckPatient"); break;
-                case "hist": cur=hs.GetPatientHistory("GetPatientHistory"); break;
-                case "spec": cur=hs.GetSpesialityList("GetSpesialityList"); break;
-                case "doc": cur=hs.GetDoctorList("GetDoctorList"); break;
-                case "talons": cur=hs.GetAvaibleAppointments("GetAvaibleAppointments"); break;
+                case "GetPatientHistory": cur=hs.GetPatientHistory("GetPatientHistory"); break;
+                case "GetSpesialityList": cur=hs.GetSpesialityList("GetSpesialityList"); break;
+                case "GetDoctorList": cur=hs.GetDoctorList("GetDoctorList"); break;
+                case "GetAvaibleAppointments": cur=hs.GetAvaibleAppointments("GetAvaibleAppointments"); break;
                 case "GetWorkingTime": cur=hs.GetWorkingTime("GetWorkingTime"); break;
                 case "SetAppointment": cur=hs.SetAppointment("SetAppointment"); break;
                 case "CreateClaimForRefusal": cur=hs.CreateClaimForRefusal("CreateClaimForRefusal"); break;
                 case "SearchTop10Patient": cur=hs.SearchTop10Patient("SearchTop10Patient"); break;
+                default: cur=hs.defaultList();
             }
 
             return cur;

@@ -42,10 +42,10 @@ public class Storage {
         String currentUser = getCurrentUser(c);
         SharedPreferences settings = c.getSharedPreferences(currentUser, 0);
         String value = settings.getString(key, "0");
-        return String.valueOf(value);
+        return value;
     }
 
-    public String[] getStringArray(String action) {
+    public String[] getStringArrayy(String action) {
         if (action.equals("area")) return  context.getResources().getStringArray(R.array.area);
         else if (action.equals("lpu")) return  context.getResources().getStringArray(R.array.lpu);
         else if (action.equals("spec")) return  context.getResources().getStringArray(R.array.spec);

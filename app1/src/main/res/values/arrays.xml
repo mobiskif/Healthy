@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="def_arr">
+        <item>11</item>
+        <item>22</item>
+    </string-array>
+
     <array name="place_avator">
         <item>@drawable/a_avator</item>
         <item>@drawable/b_avator</item>

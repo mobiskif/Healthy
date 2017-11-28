@@ -21,8 +21,6 @@ import java.util.Observable;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import static android.preference.PreferenceManager.getDefaultSharedPreferences;
-
 class HubService extends Observable {
     SharedPreferences settings;
     String TAG;
@@ -90,7 +88,7 @@ class HubService extends Observable {
                 event = myParser.next();
             }
         } catch (Exception e) {
-            Log.d("jop","Ошибка парсинга SOAP " + e.toString());
+            Log.e("jop","Ошибка парсинга SOAP " + e.toString());
             return defaultList();
         }
         return mc;
@@ -167,7 +165,7 @@ class HubService extends Observable {
                     event = myParser.next();
                 }
             } catch (Exception e) {
-                Log.d("jop","Ошибка парсинга SOAP " + e.toString());
+                Log.e("jop","Ошибка парсинга SOAP " + e.toString());
                 return defaultList();
             }
             return mc;
@@ -175,7 +173,7 @@ class HubService extends Observable {
     }
 
     Cursor GetLPUList(String action) {
-        Log.d("jop", "========="+action);
+        //Log.d("jop", "========="+action);
         //SharedPreferences settings = context.getDefaultSharedPreferences(this);
         String districtID = settings.getString("area", "5");
         String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n" +
@@ -243,7 +241,7 @@ class HubService extends Observable {
                     event = myParser.next();
                 }
             } catch (Exception e) {
-                Log.d("jop","Ошибка парсинга SOAP " + e.toString());
+                Log.e("jop","Ошибка парсинга SOAP " + e.toString());
                 return defaultList();
             }
             return mc;
@@ -306,7 +304,7 @@ class HubService extends Observable {
                 event = myParser.next();
             }
         } catch (Exception e) {
-            Log.d("jop","Ошибка парсинга SOAP " + e.toString());
+            Log.e("jop","Ошибка парсинга SOAP " + e.toString());
             return defaultList();
         }
         return mc;
@@ -373,7 +371,7 @@ class HubService extends Observable {
                 event = myParser.next();
             }
         } catch (Exception e) {
-            Log.d("jop","Ошибка парсинга SOAP " + e.toString());
+            Log.e("jop","Ошибка парсинга SOAP " + e.toString());
             return defaultList();
         }
         return mc;
@@ -445,7 +443,7 @@ class HubService extends Observable {
                 event = myParser.next();
             }
         } catch (Exception e) {
-            Log.d("jop","Ошибка парсинга SOAP " + e.toString());
+            Log.e("jop","Ошибка парсинга SOAP " + e.toString());
             return defaultList();
         }
         return mc;
@@ -513,7 +511,7 @@ class HubService extends Observable {
                 event = myParser.next();
             }
         } catch (Exception e) {
-            Log.d("jop","Ошибка парсинга SOAP " + e.toString());
+            Log.e("jop","Ошибка парсинга SOAP " + e.toString());
             return defaultList();
         }
         return mc;
@@ -581,7 +579,7 @@ class HubService extends Observable {
                 event = myParser.next();
             }
         } catch (Exception e) {
-            Log.d("jop","Ошибка парсинга SOAP " + e.toString());
+            Log.e("jop","Ошибка парсинга SOAP " + e.toString());
             return defaultList();
         }
         return mc;
@@ -683,7 +681,7 @@ class HubService extends Observable {
                 event = myParser.next();
             }
         } catch (Exception e) {
-            Log.d("jop","Ошибка парсинга SOAP " + e.toString());
+            Log.e("jop","Ошибка парсинга SOAP " + e.toString());
             return defaultList();
         }
         return mc;
@@ -697,7 +695,7 @@ class HubService extends Observable {
         //String idPat = settings.getString("SearchTop10Patient", "4326");
         //String idPat = settings.getString("idPat", "4326");
         String idPat = settings.getString("CheckPatient", "9999");
-        Log.d(TAG, Thread.currentThread().getStackTrace()[2].getMethodName() + " история пациента " + idPat + " в поликлинике " + orgID);
+        //Log.d(TAG, Thread.currentThread().getStackTrace()[2].getMethodName() + " история пациента " + idPat + " в поликлинике " + orgID);
 
         String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">" +
                 "   <soapenv:Header/>" +
@@ -872,8 +870,7 @@ class HubService extends Observable {
             outputStream.write(body);
             outputStream.flush();
             outputStream.close();
-            Log.e("jop","Запрос= " + body.getBytes().length + " bytes, " + body);
-            //Log.e("jop","SOAP запрос " + action);
+            //Log.e("jop","Запрос= " + body.getBytes().length + " bytes, " + body);
 
             //чтение ответа
             conn.connect();
@@ -884,7 +881,7 @@ class HubService extends Observable {
             while ((line = reader.readLine()) != null) sb.append(line);
             isr.close();
             reader.close();
-            Log.e("jop","Ответ= " + sb.length() + " bytes, " + sb);
+            //Log.e("jop","Ответ= " + sb.length() + " bytes, " + sb);
 
             //препарсинг
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -901,8 +898,10 @@ class HubService extends Observable {
     public Cursor defaultList() {
         String[] from = {"_ID", "1", "2", "3"};
         MatrixCursor mc = new MatrixCursor(from);
-        Object[] from1 = {4, "4", "175", "3333"};
+        Object[] from1 = {11, "4", "175", "3333"};
+        Object[] from2 = {22, "4", "175", "3333"};
         mc.addRow(from1);
+        mc.addRow(from2);
         return mc;
     }
 

@@ -29,19 +29,24 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     String list_arr;
     String TAG = "jop";
     Storage storage;
+    boolean loaded = false;
 
     public ActivityBase() {
         super();
         storage = new Storage(this);
         id_content = R.layout.activity_base;
-        spinner_arr = "place_avator";
-        card_arr = "place_avator";
-        list_arr = "place_avator";
+        spinner_arr = "def_arr";
+        card_arr = "def_arr";
+        list_arr = "def_arr";
     }
 
     void init() {
-        top_text = "bla-bla";
-        btn_text = "bla";
+        top_text = "**";
+        btn_text = "**";
+        //spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+
+
         // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
@@ -75,6 +80,7 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         spinner.setOnItemSelectedListener(this);
         //String[] spins = getResources().getStringArray(spinner_arr);
         //ArrayAdapter<String> spinner_adapter = new ArrayAdapter<>(this, R.layout.item_spinner, spins);
+        //DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spinner_arr);
         DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spinner_arr);
         //spinner_adapter.setDropDownViewResource(R.layout.item_spinner);
         spinner.setAdapter(spinner_adapter);

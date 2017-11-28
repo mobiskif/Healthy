@@ -10,9 +10,9 @@ public class Activity_0_UA extends ActivityBase {
 
     public Activity_0_UA() {
         super();
-        spinner_arr = "area";
-        card_arr = "lpu";
-        list_arr = "lpu";
+        spinner_arr = "GetDistrictList";
+        card_arr = "GetLPUList";
+        list_arr = "GetLPUList";
     }
 
     @Override
@@ -38,26 +38,21 @@ public class Activity_0_UA extends ActivityBase {
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
 
         findViewById(R.id.tv).setOnClickListener(this);
-
-        spinner_id = Integer.valueOf(Storage.restore(this, "currentArea"));
-        if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
-
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        String value;
         if (v.getId() == R.id.button) {
+
+            String value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
+            Storage.store(this, spinner_arr+"_pos", value);
+
+            value = (String) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
+            Storage.store(this, spinner_arr+"_str", value);
 
             value = ((TextView) findViewById(R.id.text)).getText().toString();
             Storage.store(this, "FIO", value);
-
-            value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
-            Storage.store(this, "currentArea", value);
-
-            value = (String) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
-            Storage.store(this, "currentArea_str", value);
 
             startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
             finish();

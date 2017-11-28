@@ -15,12 +15,12 @@ import android.widget.TextView;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> implements IDataAdapter{
     private String[] mDataset;
     private  String tag;
-    Activity activity;
+    Activity context;
     String action;
 
-    public CardAdapter(String card_arr, Activity context, String t) {
+    public CardAdapter(String card_arr, Activity c, String t) {
         //mDataset = new Storage(context).getStringArray(card_arr);
-        activity = context;
+        context = c;
         //btn_text = ((ActivityBase)a).btn_text;
         tag = t;
         action = card_arr;
@@ -32,7 +32,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> im
         //Log.d("jop","======"+action);
         //((BaseAdapter) ((ListView) findViewById(R.id.list)).getAdapter()).notifyDataSetChanged();
         //Log.e("jop", "==========");
-        mDataset = new Storage(activity).getStringArray(action);
+        //mDataset = new Storage(activity).getStringArray(action);
+        mDataset = context.getResources().getStringArray(R.array.def_arr);
+
         notifyDataSetChanged();
         //Log.d("jop","===Load Fin==="+action);
     }
@@ -53,7 +55,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> im
     // Provide a suitable constructor (depends on the kind of dataset)
     public CardAdapter(String[] myDataset, Activity a, String t) {
         mDataset = myDataset;
-        activity = a;
+        context = a;
         //btn_text = ((ActivityBase)a).btn_text;
         tag = t;
     }
@@ -72,7 +74,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> im
                 Intent intent = new Intent(context, Activity_5_YN.class);
                 //intent.putExtra(ActivityBase.EXTRA_POSITION, getAdapterPosition());
                 intent.putExtra("message", context.getString(R.string.confirm_text));
-                activity.startActivityForResult(intent, 1);
+                ((Activity)context).startActivityForResult(intent, 1);
 
             }
         });

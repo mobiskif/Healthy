@@ -21,15 +21,15 @@ public class Activity_1_ULH extends ActivityBase {
     public Activity_1_ULH() {
         super();
         id_content = R.layout.activity_1_ulh;
-        spinner_arr = "lpu";
-        card_arr = "hist";
-        list_arr = "hist";
+        spinner_arr = "GetLPUList";
+        card_arr = "GetPatientHistory";
+        list_arr = "GetPatientHistory";
         btn_text = "Отменить";
     }
 
     @Override
     void init() {
-        super.init();
+        //super.init();
         //fetchWelcome();
 
         if (getSupportActionBar() != null) {
@@ -50,6 +50,7 @@ public class Activity_1_ULH extends ActivityBase {
                     }
                 });
 
+        ((TextView) findViewById(R.id.label1)).setText(Storage.restore(this, "GetDistrictList_str"));
         //findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
@@ -66,9 +67,8 @@ public class Activity_1_ULH extends ActivityBase {
         findViewById(R.id.button).setVisibility(View.VISIBLE);
         findViewById(R.id.tv).setVisibility(View.GONE);
 
-        spinner_id = Integer.valueOf(Storage.restore(this, "currentLPU"));
-        if (((Spinner) findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id)
-            ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
     }
 
     @Override
@@ -132,11 +132,11 @@ public class Activity_1_ULH extends ActivityBase {
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
-        Storage.store(this, "currentLPU", value);
-
-        value = (String) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
-        Storage.store(this, "currentLPU_str", value);
+        if (loaded) {
+            Storage.store(this, spinner_arr + "_pos", String.valueOf(position));
+            String s = ((TextView) view).getText().toString();
+            Storage.store(this, spinner_arr + "_str", ((TextView) view).getText().toString());
+        }
 
         super.onItemSelected(parent, view, position, id);
     }
