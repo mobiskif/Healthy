@@ -45,13 +45,14 @@ public class Storage {
         return String.valueOf(value);
     }
 
-    public String[] getStringArray(String arr_name) {
-        if (arr_name.equals("area")) return  context.getResources().getStringArray(R.array.area);
-        else if (arr_name.equals("lpu")) return  context.getResources().getStringArray(R.array.lpu);
-        else if (arr_name.equals("spec")) return  context.getResources().getStringArray(R.array.spec);
-        else if (arr_name.equals("doc")) return  context.getResources().getStringArray(R.array.doc);
-        else if (arr_name.equals("dates")) return  context.getResources().getStringArray(R.array.dates);
-        else if (arr_name.equals("talons")) return  context.getResources().getStringArray(R.array.talons);
-        else return context.getResources().getStringArray(R.array.hist);
+    public String[] getStringArray(String action) {
+        if (action.equals("area")) return  context.getResources().getStringArray(R.array.area);
+        else if (action.equals("lpu")) return  context.getResources().getStringArray(R.array.lpu);
+        else if (action.equals("spec")) return  context.getResources().getStringArray(R.array.spec);
+        else if (action.equals("doc")) return  context.getResources().getStringArray(R.array.doc);
+        else if (action.equals("dates")) return  context.getResources().getStringArray(R.array.dates);
+        else if (action.equals("talons")) return  context.getResources().getStringArray(R.array.talons);
+        else if (action.equals("hist")) return  context.getResources().getStringArray(R.array.hist);
+        else return context.getResources().getStringArray(R.array.place_avator);
     }
 }

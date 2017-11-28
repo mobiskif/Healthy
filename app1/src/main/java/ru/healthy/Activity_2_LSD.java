@@ -32,7 +32,7 @@ public class Activity_2_LSD extends ActivityBase {
         ((Button) findViewById(R.id.button)).setText(R.string.button);
         ((TextView)findViewById(R.id.tv)).setText(getString(R.string.menu3));
 
-        findViewById(R.id.my_recycler_view).setVisibility(View.GONE);
+        findViewById(R.id.recycler).setVisibility(View.GONE);
         findViewById(R.id.list).setVisibility(View.VISIBLE);
         findViewById(R.id.text).setVisibility(View.GONE);
         findViewById(R.id.textview).setVisibility(View.VISIBLE);

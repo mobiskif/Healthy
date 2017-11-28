@@ -16,19 +16,25 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> im
     private String[] mDataset;
     private  String tag;
     Activity activity;
+    String action;
 
     public CardAdapter(String card_arr, Activity context, String t) {
-        mDataset = new Storage(context).getStringArray(card_arr);
+        //mDataset = new Storage(context).getStringArray(card_arr);
         activity = context;
         //btn_text = ((ActivityBase)a).btn_text;
         tag = t;
+        action = card_arr;
+        update();
     }
 
     @Override
     public void update() {
+        //Log.d("jop","======"+action);
         //((BaseAdapter) ((ListView) findViewById(R.id.list)).getAdapter()).notifyDataSetChanged();
         //Log.e("jop", "==========");
+        mDataset = new Storage(activity).getStringArray(action);
         notifyDataSetChanged();
+        //Log.d("jop","===Load Fin==="+action);
     }
 
     // Provide a reference to the views for each data item

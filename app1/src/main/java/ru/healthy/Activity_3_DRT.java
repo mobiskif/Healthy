@@ -8,8 +8,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.crash.FirebaseCrash;
-
 public class Activity_3_DRT extends ActivityBase {
 
     public Activity_3_DRT() {
@@ -34,8 +32,8 @@ public class Activity_3_DRT extends ActivityBase {
         ((Button) findViewById(R.id.button)).setText(R.string.button);
         ((TextView)findViewById(R.id.tv)).setText(getString(R.string.button));
 
-        findViewById(R.id.my_recycler_view).setVisibility(View.VISIBLE);
-        findViewById(R.id.list).setVisibility(View.GONE);
+        findViewById(R.id.recycler).setVisibility(View.GONE);
+        findViewById(R.id.list).setVisibility(View.VISIBLE);
         findViewById(R.id.text).setVisibility(View.GONE);
         findViewById(R.id.textview).setVisibility(View.VISIBLE);
         findViewById(R.id.button).setVisibility(View.GONE);
@@ -53,7 +51,7 @@ public class Activity_3_DRT extends ActivityBase {
         if (resultCode==RESULT_OK) {
             Toast.makeText(this, getString(R.string.success) + " " + data.getStringExtra("result"), Toast.LENGTH_SHORT).show();
 
-            FirebaseCrash.log("onActivityResult="+data.getDataString());
+            //FirebaseCrash.log("onActivityResult="+data.getDataString());
             //FirebaseCrash.report(data.getDataString());
 
             startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
@@ -68,5 +66,13 @@ public class Activity_3_DRT extends ActivityBase {
 
         super.onItemSelected(parent,view,position,id);
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this, Activity_5_YN.class);
+        intent.putExtra("message", getString(R.string.confirm_talon));
+        startActivityForResult(intent, 1);
+    }
+
 
 }

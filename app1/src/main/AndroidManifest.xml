@@ -62,10 +62,6 @@
             android:name=".Activity_5_YN"
             android:theme="@style/Theme.AppCompat.Dialog"
             android:label="@string/menu5" />
-        <activity
-            android:name=".ActivityBase"
-            android:label="@string/menu6"
-            />
 
     </application>
 
