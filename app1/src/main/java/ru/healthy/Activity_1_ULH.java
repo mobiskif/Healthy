@@ -30,7 +30,8 @@ public class Activity_1_ULH extends ActivityBase {
     @Override
     void init() {
         super.init();
-        //fetchWelcome();
+        findViewById(R.id.label1).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.label1)).setText(Storage.restore(this, "GetDistrictList_str"));
 
         if (getSupportActionBar() != null) {
             VectorDrawableCompat indicator = VectorDrawableCompat.create(getResources(), R.drawable.ic_menu, getTheme());
@@ -49,35 +50,13 @@ public class Activity_1_ULH extends ActivityBase {
                         return true;
                     }
                 });
-
-        ((TextView) findViewById(R.id.label1)).setText(Storage.restore(this, "GetDistrictList_str"));
-        //findViewById(R.id.label1).setVisibility(View.GONE);
-        findViewById(R.id.label2).setVisibility(View.GONE);
-        findViewById(R.id.label3).setVisibility(View.GONE);
-
-        top_text = Storage.restore(this, "FIO");
-        ((TextView) findViewById(R.id.text)).setText(top_text);
-        ((TextView) findViewById(R.id.textview)).setText(top_text);
-        ((Button) findViewById(R.id.button)).setText(R.string.button);
-
-        findViewById(R.id.recycler).setVisibility(View.GONE);
-        findViewById(R.id.list).setVisibility(View.VISIBLE);
-        findViewById(R.id.text).setVisibility(View.GONE);
-        findViewById(R.id.textview).setVisibility(View.VISIBLE);
-        findViewById(R.id.button).setVisibility(View.VISIBLE);
-        findViewById(R.id.tv).setVisibility(View.GONE);
-
-        //spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
-        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        if (v.getId() == R.id.textview)
-            startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
-        else if (v.getId() == R.id.button)
-            startActivity(new Intent(getApplicationContext(), Activity_2_LSD.class));
+        if (v.getId() == R.id.textview) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
+        else if (v.getId() == R.id.button) startActivity(new Intent(getApplicationContext(), Activity_2_LSD.class));
     }
 
     @Override
@@ -106,26 +85,16 @@ public class Activity_1_ULH extends ActivityBase {
     public void doItem(MenuItem menuItem) {
         //menuItem.setChecked(true);
         String s = menuItem.getTitle().toString();
-        if (s.equals(getString(R.string.menu0)))
-            startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
-        else if (s.equals(getString(R.string.menu1)))
-            startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
-        else if (s.equals(getString(R.string.menu2)))
-            startActivity(new Intent(getApplicationContext(), Activity_2_LSD.class));
-        else if (s.equals(getString(R.string.menu3)))
-            startActivity(new Intent(getApplicationContext(), Activity_3_DRT.class));
-        else if (s.equals(getString(R.string.menu4)))
-            startActivity(new Intent(getApplicationContext(), Activity_4_MAP.class));
-        else if (s.equals(getString(R.string.menu5)))
-            startActivity(new Intent(getApplicationContext(), Activity_5_YN.class));
-        else if (s.equals(getString(R.string.menu6)))
-            startActivity(new Intent(getApplicationContext(), ActivityBase.class));
-        else if (s.equals(getString(R.string.umenu0)))
-            Storage.setCurrentUser(this, "0");
-        else if (s.equals(getString(R.string.umenu1)))
-            Storage.setCurrentUser(this, "1");
-        else if (s.equals(getString(R.string.umenu2)))
-            Storage.setCurrentUser(this, "2");
+        if (s.equals(getString(R.string.menu0))) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
+        else if (s.equals(getString(R.string.menu1))) startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
+        else if (s.equals(getString(R.string.menu2))) startActivity(new Intent(getApplicationContext(), Activity_2_LSD.class));
+        else if (s.equals(getString(R.string.menu3))) startActivity(new Intent(getApplicationContext(), Activity_3_DRT.class));
+        else if (s.equals(getString(R.string.menu4))) startActivity(new Intent(getApplicationContext(), Activity_4_MAP.class));
+        else if (s.equals(getString(R.string.menu5))) startActivity(new Intent(getApplicationContext(), Activity_5_YN.class));
+        else if (s.equals(getString(R.string.menu6))) startActivity(new Intent(getApplicationContext(), ActivityBase.class));
+        else if (s.equals(getString(R.string.umenu0))) Storage.setCurrentUser(this, "0");
+        else if (s.equals(getString(R.string.umenu1))) Storage.setCurrentUser(this, "1");
+        else if (s.equals(getString(R.string.umenu2))) Storage.setCurrentUser(this, "2");
         mDrawerLayout.closeDrawers();
         init();
     }

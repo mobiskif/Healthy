@@ -23,38 +23,40 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     int id_content;
     int spinner_id;
     String top_text;
+    String key_top_text;
     String btn_text;
     String spinner_arr;
     String card_arr;
     String list_arr;
-    String TAG = "jop";
+    String TAG;
     Storage storage;
-    //boolean loaded = false;
 
     public ActivityBase() {
         super();
-        storage = new Storage(this);
         id_content = R.layout.activity_base;
+        spinner_id = 0;
+        top_text = "*";
+        key_top_text = "FIO";
+        btn_text = "*";
         spinner_arr = "def_arr";
         card_arr = "def_arr";
         list_arr = "def_arr";
+        TAG=this.getClass().getSimpleName()+" jop";
+        storage = new Storage(this);
     }
 
     void init() {
-        top_text = "**";
-        btn_text = "**";
-        //spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
-        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        top_text = Storage.restore(this, key_top_text);
+        ((Button) findViewById(R.id.button)).setText(R.string.button);
+        ((TextView) findViewById(R.id.text)).setText(top_text);
+        ((TextView) findViewById(R.id.textview)).setText(top_text);
 
-
-        // ATTENTION: This was auto-generated to handle app links.
-        Intent appLinkIntent = getIntent();
-        String appLinkAction = appLinkIntent.getAction();
-        Uri appLinkData = appLinkIntent.getData();
-
-        spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
-        if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
-
+        findViewById(R.id.label1).setVisibility(View.GONE);
+        findViewById(R.id.label2).setVisibility(View.GONE);
+        findViewById(R.id.label3).setVisibility(View.GONE);
+        findViewById(R.id.text).setVisibility(View.GONE);
+        findViewById(R.id.recycler).setVisibility(View.GONE);
+        findViewById(R.id.tv).setVisibility(View.GONE);
     }
 
     @Override
@@ -74,29 +76,44 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        init();
+
         TextView textView = findViewById(R.id.textview);
         textView.setOnClickListener(this);
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(this);
 
-        Spinner spinner = findViewById(R.id.spinner);
+        final Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spinner_arr);
         //spinner_adapter.setDropDownViewResource(R.layout.item_spinner);
         spinner.setAdapter(spinner_adapter);
 
+        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        spinner_adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                spinner.setSelection(spinner_id);
+                //Log.d(TAG,"Spinner априслал сообщение DataSetObserver-у: onChanged()");
+            }
+        });
+
         ListView listView = findViewById(R.id.list);
-        listView.setOnItemClickListener(this);
-        DataAdapter list_adapter = new DataAdapter (this, android.R.layout.simple_list_item_1, list_arr);
-        listView.setAdapter(list_adapter);
+        if (listView.getVisibility()==View.VISIBLE) {
+            listView.setOnItemClickListener(this);
+            DataAdapter list_adapter = new DataAdapter(this, android.R.layout.simple_list_item_1, list_arr);
+            listView.setAdapter(list_adapter);
+        }
 
         RecyclerView mRecyclerView = findViewById(R.id.recycler);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //CardAdapter card_adapter = new CardAdapter(card_arr, this, btn_text);
-        //mRecyclerView.setAdapter(card_adapter);
-
-        init();
+        if (mRecyclerView.getVisibility()==View.VISIBLE) {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            CardAdapter card_adapter = new CardAdapter(card_arr, this, btn_text);
+            mRecyclerView.setAdapter(card_adapter);
+        }
     }
 
 
@@ -121,13 +138,26 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
                 Storage.store(this, spinner_arr + "_str", s);
             }
 
-            IDataAdapter ladapter = (IDataAdapter) ((ListView) findViewById(R.id.list)).getAdapter();
-            ladapter.update();
+            if (spinner_arr.equals("GetLPUList")) {
+                DataAdapter da = new DataAdapter(this, 666,"CheckPatient");
+            }
+
+            ListView listView = findViewById(R.id.list);
+            if (listView.getVisibility()==View.VISIBLE) {
+                IDataAdapter ladapter = (IDataAdapter) listView.getAdapter();
+                //ladapter.update();
+            }
+
+            RecyclerView mRecyclerView = findViewById(R.id.recycler);
+            if (mRecyclerView.getVisibility()==View.VISIBLE) {
+                IDataAdapter radapter = (IDataAdapter) mRecyclerView.getAdapter();
+                //radapter.update();
+            }
+
+
         }
 
 
-        //IDataAdapter radapter = (IDataAdapter) ((RecyclerView) findViewById(R.id.recycler)).getAdapter();
-        //radapter.update();
     }
 
     @Override

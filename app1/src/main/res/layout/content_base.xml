@@ -36,7 +36,8 @@
             android:enabled="true"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/format"
-            android:text="@string/user" />
+            android:text="@string/user"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <TextView

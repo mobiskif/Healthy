@@ -14,13 +14,14 @@ public class Activity_2_LSD extends ActivityBase {
         super();
         spinner_arr = "GetSpesialityList";
         card_arr = "GetDoctorList";
-        list_arr = "GetDistrictList";
+        list_arr = "GetDoctorList";
     }
 
     @Override
     void init() {
         super.init();
 
+        /*
         ((TextView) findViewById(R.id.label1)).setText(Storage.restore(this, "GetDistrictList_str"));
         //findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);
@@ -41,7 +42,7 @@ public class Activity_2_LSD extends ActivityBase {
 
         //spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
         //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
-
+*/
     }
 
     @Override

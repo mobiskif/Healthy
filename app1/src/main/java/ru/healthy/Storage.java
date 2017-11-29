@@ -53,6 +53,6 @@ public class Storage {
         else if (action.equals("dates")) return  context.getResources().getStringArray(R.array.dates);
         else if (action.equals("talons")) return  context.getResources().getStringArray(R.array.talons);
         else if (action.equals("hist")) return  context.getResources().getStringArray(R.array.hist);
-        else return context.getResources().getStringArray(R.array.place_avator);
+        else return context.getResources().getStringArray(R.array.def_arr);
     }
 }

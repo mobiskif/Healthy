@@ -21,36 +21,34 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.common.data.DataBufferObserver;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 
 public class DataAdapter extends BaseAdapter implements IDataAdapter, android.app.LoaderManager.LoaderCallbacks<Cursor> {
-    ActivityBase context;
+    Activity context;
     int resource;
     String action;
     String[] arr;
-    AdapterView adapterView;
     boolean loaded;
+    String TAG;
 
-    public DataAdapter(ActivityBase c, int r, String a) {
-        //super(c, res, (new Storage(c).getStringArray(a)));
+    public DataAdapter(Activity c, int r, String a) {
         context = c;
         resource = r;
         action = a;
-        //arr = new Storage(context).getStringArray("def_arr");
         arr = context.getResources().getStringArray(R.array.def_arr);
-        //Log.d("jop","initiate ====== def_arr");
+        loaded=false;
+        TAG=this.getClass().getSimpleName()+" jop";
 
         context.getLoaderManager().initLoader(resource, null, this);
     }
 
     @Override
     public void update() {
-        //Log.d("jop","update start ====== "+action);
-        //context.getLoaderManager().getLoader(resource).forceLoad();
         context.getLoaderManager().initLoader(resource, null, this);
-
     }
 
     @Override
@@ -87,17 +85,15 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        //scAdapter.swapCursor(cursor);
         arr = toArr(data);
         loaded=true;
-        context.init();
-        //arr = new Storage(context).getStringArray(action);
-        //adapterView.setAdapter(this);
-        //spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
-        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
-
-        Log.d("jop","load finished ====== "+action);
+        Log.d(TAG,"load "+action+" finished");
         notifyDataSetChanged();
+
+        if (action.equals("CheckPatient")) {
+            Storage.store(context, "idPat", "53469");
+            Log.d(TAG,"CheckPatient = "+arr.toString());
+        }
     }
 
     private String[] toArr(Cursor data) {
@@ -110,8 +106,6 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
         }
         data.close();
         return names.toArray(new String[names.size()]);
-
-
     }
 
     @Override

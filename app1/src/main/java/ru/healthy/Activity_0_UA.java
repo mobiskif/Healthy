@@ -19,23 +19,12 @@ public class Activity_0_UA extends ActivityBase {
     void init() {
         super.init();
 
-        findViewById(R.id.label1).setVisibility(View.GONE);
-        findViewById(R.id.label2).setVisibility(View.GONE);
-        findViewById(R.id.label3).setVisibility(View.GONE);
-
-        top_text = Storage.restore(this, "FIO");
-        ((TextView) findViewById(R.id.text)).setText(top_text);
-
-        ((TextView) findViewById(R.id.textview)).setText(top_text);
-        ((Button) findViewById(R.id.button)).setText(R.string.save);
-        ((TextView) findViewById(R.id.tv)).setText(R.string.menu4);
-
-        findViewById(R.id.recycler).setVisibility(View.GONE);
-        findViewById(R.id.list).setVisibility(View.GONE);
         findViewById(R.id.text).setVisibility(View.VISIBLE);
         findViewById(R.id.textview).setVisibility(View.GONE);
-        findViewById(R.id.button).setVisibility(View.VISIBLE);
+        ((Button) findViewById(R.id.button)).setText(R.string.save);
+        findViewById(R.id.list).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.tv)).setText(R.string.menu4);
 
         findViewById(R.id.tv).setOnClickListener(this);
     }
@@ -56,8 +45,8 @@ public class Activity_0_UA extends ActivityBase {
 
             startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
             finish();
-        } else if (v.getId() == R.id.tv)
-            startActivity(new Intent(getApplicationContext(), Activity_4_MAP.class));
+        }
+        else if (v.getId() == R.id.tv) startActivity(new Intent(getApplicationContext(), Activity_4_MAP.class));
     }
 
 }
