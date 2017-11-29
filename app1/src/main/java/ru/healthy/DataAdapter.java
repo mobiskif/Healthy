@@ -31,6 +31,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
     String action;
     String[] arr;
     AdapterView adapterView;
+    boolean loaded;
 
     public DataAdapter(ActivityBase c, int r, String a) {
         //super(c, res, (new Storage(c).getStringArray(a)));
@@ -80,7 +81,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        context.loaded=false;
+        loaded=false;
         return new MyCursorLoader(context, action);
     }
 
@@ -88,7 +89,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         //scAdapter.swapCursor(cursor);
         arr = toArr(data);
-        context.loaded=true;
+        loaded=true;
         context.init();
         //arr = new Storage(context).getStringArray(action);
         //adapterView.setAdapter(this);

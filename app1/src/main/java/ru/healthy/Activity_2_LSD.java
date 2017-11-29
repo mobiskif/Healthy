@@ -14,7 +14,7 @@ public class Activity_2_LSD extends ActivityBase {
         super();
         spinner_arr = "GetSpesialityList";
         card_arr = "GetDoctorList";
-        list_arr = "GetDoctorList";
+        list_arr = "GetDistrictList";
     }
 
     @Override
@@ -38,17 +38,10 @@ public class Activity_2_LSD extends ActivityBase {
         findViewById(R.id.textview).setVisibility(View.VISIBLE);
         findViewById(R.id.button).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
-    }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (loaded) {
-            Storage.store(this, spinner_arr + "_pos", String.valueOf(position));
-            String s = ((TextView) view).getText().toString();
-            Storage.store(this, spinner_arr + "_str", ((TextView) view).getText().toString());
-        }
+        //spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
 
-        super.onItemSelected(parent,view,position,id);
     }
 
     @Override

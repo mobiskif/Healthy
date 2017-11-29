@@ -8,6 +8,7 @@
     <string name="success">Успешно</string>
     <string name="cancel_talon">Отменить талон?</string>
     <string name="confirm_talon">Взять талон?</string>
+    <string name="unknown">Нажмите Сюда Для Настройки</string>
 
     <string name="user">Кузьмин Владимир Сергеевич</string>
     <string name="date">1997-09-24</string>

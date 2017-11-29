@@ -39,8 +39,8 @@ public class Activity_3_DRT extends ActivityBase {
         findViewById(R.id.button).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
 
-        spinner_id = Integer.valueOf(Storage.restore(this, "currentDate"));
-        if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        //spinner_id = Integer.valueOf(Storage.restore(this, "currentDate"));
+        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
 
     }
 
@@ -57,14 +57,6 @@ public class Activity_3_DRT extends ActivityBase {
             startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
             finish();
         }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
-        Storage.store(this, "currentDate", value);
-
-        super.onItemSelected(parent,view,position,id);
     }
 
     @Override

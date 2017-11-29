@@ -23,13 +23,13 @@ public class Activity_1_ULH extends ActivityBase {
         id_content = R.layout.activity_1_ulh;
         spinner_arr = "GetLPUList";
         card_arr = "GetPatientHistory";
-        list_arr = "GetPatientHistory";
+        list_arr = "GetDistrictList";
         btn_text = "Отменить";
     }
 
     @Override
     void init() {
-        //super.init();
+        super.init();
         //fetchWelcome();
 
         if (getSupportActionBar() != null) {
@@ -67,8 +67,8 @@ public class Activity_1_ULH extends ActivityBase {
         findViewById(R.id.button).setVisibility(View.VISIBLE);
         findViewById(R.id.tv).setVisibility(View.GONE);
 
-        spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
-        if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        //spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
     }
 
     @Override
@@ -128,17 +128,6 @@ public class Activity_1_ULH extends ActivityBase {
             Storage.setCurrentUser(this, "2");
         mDrawerLayout.closeDrawers();
         init();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (loaded) {
-            Storage.store(this, spinner_arr + "_pos", String.valueOf(position));
-            String s = ((TextView) view).getText().toString();
-            Storage.store(this, spinner_arr + "_str", ((TextView) view).getText().toString());
-        }
-
-        super.onItemSelected(parent, view, position, id);
     }
 
     @Override

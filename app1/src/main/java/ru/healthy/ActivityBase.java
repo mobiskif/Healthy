@@ -29,7 +29,7 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     String list_arr;
     String TAG = "jop";
     Storage storage;
-    boolean loaded = false;
+    //boolean loaded = false;
 
     public ActivityBase() {
         super();
@@ -51,6 +51,10 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
+
+        spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+
     }
 
     @Override
@@ -78,9 +82,6 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
 
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
-        //String[] spins = getResources().getStringArray(spinner_arr);
-        //ArrayAdapter<String> spinner_adapter = new ArrayAdapter<>(this, R.layout.item_spinner, spins);
-        //DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spinner_arr);
         DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spinner_arr);
         //spinner_adapter.setDropDownViewResource(R.layout.item_spinner);
         spinner.setAdapter(spinner_adapter);
@@ -113,8 +114,17 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         //Toast.makeText(getApplicationContext(), "onItemSelected", Toast.LENGTH_LONG).show();
-        IDataAdapter ladapter = (IDataAdapter) ((ListView) findViewById(R.id.list)).getAdapter();
-        ladapter.update();
+        if (((DataAdapter) parent.getAdapter()).loaded) {
+            Storage.store(this, spinner_arr + "_pos", String.valueOf(position));
+            if (view!=null) {
+                String s = ((TextView) view).getText().toString();
+                Storage.store(this, spinner_arr + "_str", s);
+            }
+
+            IDataAdapter ladapter = (IDataAdapter) ((ListView) findViewById(R.id.list)).getAdapter();
+            ladapter.update();
+        }
+
 
         //IDataAdapter radapter = (IDataAdapter) ((RecyclerView) findViewById(R.id.recycler)).getAdapter();
         //radapter.update();
