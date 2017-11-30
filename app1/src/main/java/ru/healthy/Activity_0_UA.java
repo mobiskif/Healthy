@@ -16,16 +16,19 @@ public class Activity_0_UA extends ActivityBase {
     }
 
     @Override
-    void init() {
-        super.init();
-
+    void init_Visiblity() {
+        super.init_Visiblity();
         findViewById(R.id.text).setVisibility(View.VISIBLE);
         findViewById(R.id.textview).setVisibility(View.GONE);
-        ((Button) findViewById(R.id.button)).setText(R.string.save);
         findViewById(R.id.list).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
-        ((TextView) findViewById(R.id.tv)).setText(R.string.menu4);
+    }
 
+    @Override
+    void init_Values() {
+        super.init_Values();
+        ((Button) findViewById(R.id.button)).setText(R.string.save);
+        ((TextView) findViewById(R.id.tv)).setText(R.string.menu4);
         findViewById(R.id.tv).setOnClickListener(this);
     }
 
@@ -39,9 +42,10 @@ public class Activity_0_UA extends ActivityBase {
 
             value = (String) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
             Storage.store(this, spinner_arr+"_str", value);
+            Storage.store(this, "top_text_value", value);
 
             value = ((TextView) findViewById(R.id.text)).getText().toString();
-            Storage.store(this, "FIO", value);
+            Storage.store(this, "FIO_value", value);
 
             startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
             finish();

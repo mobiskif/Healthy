@@ -13,10 +13,10 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class Activity_1_ULH extends ActivityBase {
+public class Activity_1_ULH_old extends ActivityBase {
     private DrawerLayout mDrawerLayout;
 
-    public Activity_1_ULH() {
+    public Activity_1_ULH_old() {
         super();
         id_content = R.layout.activity_1_ulh;
         spinner_arr = "GetLPUList";
@@ -26,8 +26,11 @@ public class Activity_1_ULH extends ActivityBase {
     }
 
     @Override
-    void config_ToolbarAndMenu() {
-        super.config_ToolbarAndMenu();
+    void init_Visiblity() {
+        super.init_Visiblity();
+        findViewById(R.id.label1).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.label1)).setText(Storage.restore(this, "GetDistrictList_str"));
+
         if (getSupportActionBar() != null) {
             VectorDrawableCompat indicator = VectorDrawableCompat.create(getResources(), R.drawable.ic_menu, getTheme());
             indicator.setTint(ResourcesCompat.getColor(getResources(), R.color.white, getTheme()));
@@ -36,7 +39,7 @@ public class Activity_1_ULH extends ActivityBase {
 
         mDrawerLayout = findViewById(R.id.drawer);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        //prepareDrawerMenu(navigationView.getMenu());
+        prepareDrawerMenu(navigationView.getMenu());
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -48,24 +51,6 @@ public class Activity_1_ULH extends ActivityBase {
     }
 
     @Override
-    void init_Visiblity() {
-        super.init_Visiblity();
-        findViewById(R.id.label1).setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    void init_Values() {
-        super.init_Values();
-        ((TextView) findViewById(R.id.textview)).setText(FIO_value);
-    }
-
-    @Override
-    void restore_Values() {
-        super.restore_Values();
-        ((TextView) findViewById(R.id.label1)).setText(Storage.restore(this, "GetDistrictList_str"));
-    }
-
-    @Override
     public void onClick(View v) {
         super.onClick(v);
         if (v.getId() == R.id.textview) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
@@ -74,14 +59,8 @@ public class Activity_1_ULH extends ActivityBase {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
         getMenuInflater().inflate(R.menu.menu_drawer, menu);
-        /*
-        String currentUser = Storage.getCurrentUser(this);
-        int id = Integer.valueOf(currentUser);
-        MenuItem item = menu.getItem(id);
-        item.setChecked(true);
-        item.setIcon(R.drawable.redcross_small);
-        */
         return true;
     }
 
@@ -92,6 +71,15 @@ public class Activity_1_ULH extends ActivityBase {
         return super.onOptionsItemSelected(item);
     }
 
+    public void prepareDrawerMenu(Menu menu) {
+        onCreateOptionsMenu(menu);
+
+        String currentUser = Storage.getCurrentUser(this);
+        int id = Integer.valueOf(currentUser);
+        MenuItem item = menu.getItem(id);
+        item.setIcon(R.drawable.redcross_small);
+    }
+
     public void doItem(MenuItem menuItem) {
         //menuItem.setChecked(true);
         String s = menuItem.getTitle().toString();
@@ -100,9 +88,7 @@ public class Activity_1_ULH extends ActivityBase {
         else if (s.equals(getString(R.string.umenu1))) Storage.setCurrentUser(this, "1");
         else if (s.equals(getString(R.string.umenu2))) Storage.setCurrentUser(this, "2");
         mDrawerLayout.closeDrawers();
-
-        restore_Values();
-        init_Values();
+        updateSpinner();
     }
 
     @Override
@@ -111,4 +97,12 @@ public class Activity_1_ULH extends ActivityBase {
         intent.putExtra("message", getString(R.string.cancel_talon));
         startActivityForResult(intent, 1);
     }
+
+    void updateSpinner() {
+        spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        Spinner spinner = findViewById(R.id.spinner);
+        spinner.setSelection(spinner_id);
+    }
+
+
 }

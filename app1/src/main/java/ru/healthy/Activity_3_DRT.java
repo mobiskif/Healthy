@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,16 +18,16 @@ public class Activity_3_DRT extends ActivityBase {
     }
 
     @Override
-    void init() {
-        super.init();
+    void init_Visiblity() {
+        super.init_Visiblity();
 
         findViewById(R.id.label1).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
 
-        top_text = Storage.restore(this, "currentSpec_str") + "\n"+ Storage.restore(this, "currentDoctor_str");
-        ((TextView)findViewById(R.id.text)).setText(top_text);
-        ((TextView)findViewById(R.id.textview)).setText(top_text);
+        top_text_value = Storage.restore(this, "currentSpec_str") + "\n"+ Storage.restore(this, "currentDoctor_str");
+        ((TextView)findViewById(R.id.text)).setText(top_text_value);
+        ((TextView)findViewById(R.id.textview)).setText(top_text_value);
         ((Button) findViewById(R.id.button)).setText(R.string.button);
         ((TextView)findViewById(R.id.tv)).setText(getString(R.string.button));
 

@@ -1,6 +1,7 @@
 package ru.healthy;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,18 +18,51 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActivityBase extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
-    int id_content = R.layout.activity_base;
-    int spinner_id = 0;
-    String top_text_value = "*";
-    String FIO_value = "*";
-    String btn_text = "*";
-    String spinner_arr = "def_arr";
-    String card_arr = "def_arr";
-    String list_arr = "def_arr";
-    String TAG=getClass().getSimpleName()+" jop";
+public class ActivityBase_old extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
+    int id_content;
+    int spinner_id;
+    String top_text;
+    String key_top_text;
+    String btn_text;
+    String spinner_arr;
+    String card_arr;
+    String list_arr;
+    String TAG;
+    Storage storage;
 
-    void config_ToolbarAndMenu() {
+    public ActivityBase_old() {
+        super();
+        id_content = R.layout.activity_base;
+        spinner_id = 0;
+        top_text = "*";
+        key_top_text = "FIO";
+        btn_text = "*";
+        spinner_arr = "def_arr";
+        card_arr = "def_arr";
+        list_arr = "def_arr";
+        TAG=this.getClass().getSimpleName()+" jop";
+        storage = new Storage(this);
+    }
+
+    void init() {
+        top_text = Storage.restore(this, key_top_text);
+        ((Button) findViewById(R.id.button)).setText(R.string.button);
+        ((TextView) findViewById(R.id.text)).setText(top_text);
+        ((TextView) findViewById(R.id.textview)).setText(top_text);
+
+        findViewById(R.id.label1).setVisibility(View.GONE);
+        findViewById(R.id.label2).setVisibility(View.GONE);
+        findViewById(R.id.label3).setVisibility(View.GONE);
+        findViewById(R.id.text).setVisibility(View.GONE);
+        findViewById(R.id.recycler).setVisibility(View.GONE);
+        findViewById(R.id.tv).setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(id_content);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -40,26 +75,33 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        findViewById(R.id.textview).setOnClickListener(this);
-        findViewById(R.id.button).setOnClickListener(this);
-    }
+        init();
 
-    void init_Visiblity() {
-        findViewById(R.id.label1).setVisibility(View.GONE);
-        findViewById(R.id.label2).setVisibility(View.GONE);
-        findViewById(R.id.label3).setVisibility(View.GONE);
-        findViewById(R.id.text).setVisibility(View.GONE);
-        findViewById(R.id.recycler).setVisibility(View.GONE);
-        findViewById(R.id.tv).setVisibility(View.GONE);
-    }
+        spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
 
-    void attach_Adapters() {
-        Spinner spinner = findViewById(R.id.spinner);
-        if (spinner.getVisibility()==View.VISIBLE) {
-            spinner.setOnItemSelectedListener(this);
-            DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spinner_arr);
-            spinner.setAdapter(spinner_adapter);
-        }
+        TextView textView = findViewById(R.id.textview);
+        textView.setOnClickListener(this);
+
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(this);
+
+        final Spinner spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+
+        DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spinner_arr);
+        //spinner_adapter.setDropDownViewResource(R.layout.item_spinner);
+
+        spinner_adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                //spinner.setSelection(spinner_id);
+                Log.d(TAG,"Spinner априслал сообщение DataSetObserver-у: onChanged()");
+            }
+        });
+        spinner.setAdapter(spinner_adapter);
+
+        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
 
         ListView listView = findViewById(R.id.list);
         if (listView.getVisibility()==View.VISIBLE) {
@@ -74,34 +116,9 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
             CardAdapter card_adapter = new CardAdapter(card_arr, this, btn_text);
             mRecyclerView.setAdapter(card_adapter);
         }
-
     }
 
-    void restore_Values() {
-        top_text_value = Storage.restore(this, "top_text_value");
-        FIO_value = Storage.restore(this, "FIO_value");
-        spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
-        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
-        ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
-    }
 
-    void init_Values() {
-        ((Button) findViewById(R.id.button)).setText(R.string.button);
-        ((TextView) findViewById(R.id.text)).setText(FIO_value);
-        ((TextView) findViewById(R.id.textview)).setText(top_text_value);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(id_content);
-        config_ToolbarAndMenu();
-
-        init_Visiblity();
-        attach_Adapters();
-        restore_Values();
-        init_Values();
-    }
 
     @Override
     public void onClick(View v) {
@@ -121,11 +138,10 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
             if (view!=null) {
                 String s = ((TextView) view).getText().toString();
                 Storage.store(this, spinner_arr + "_str", s);
-                Storage.store(this, "top_text_value", s);
             }
 
             if (spinner_arr.equals("GetLPUList")) {
-                //DataAdapter da = new DataAdapter(this, 666,"CheckPatient");
+                DataAdapter da = new DataAdapter(this, 666,"CheckPatient");
             }
 
             ListView listView = findViewById(R.id.list);

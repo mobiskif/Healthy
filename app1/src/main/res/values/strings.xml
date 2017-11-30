@@ -20,7 +20,7 @@
     <string name="format">Фиамилия Имя Отчество 1977-11-23</string>
     <string name="address">183038, г. Санкт-Петербург, пр-т Ленинский, 88</string>
 
-    <string name="menu0">ФИО и район</string>
+    <string name="menu0">Настройки</string>
     <string name="menu1">Пациент</string>
     <string name="menu2">Поликлиника</string>
     <string name="menu3">Доктор</string>
