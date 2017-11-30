@@ -25,9 +25,9 @@ public class Activity_3_DRT extends ActivityBase {
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
 
-        top_text_value = Storage.restore(this, "currentSpec_str") + "\n"+ Storage.restore(this, "currentDoctor_str");
-        ((TextView)findViewById(R.id.text)).setText(top_text_value);
-        ((TextView)findViewById(R.id.textview)).setText(top_text_value);
+        textview_text = Storage.restore(this, "currentSpec_str") + "\n"+ Storage.restore(this, "currentDoctor_str");
+        ((TextView)findViewById(R.id.text)).setText(textview_text);
+        ((TextView)findViewById(R.id.textview)).setText(textview_text);
         ((Button) findViewById(R.id.button)).setText(R.string.button);
         ((TextView)findViewById(R.id.tv)).setText(getString(R.string.button));
 
@@ -38,8 +38,8 @@ public class Activity_3_DRT extends ActivityBase {
         findViewById(R.id.button).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
 
-        //spinner_id = Integer.valueOf(Storage.restore(this, "currentDate"));
-        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        //spinner_pos = Integer.valueOf(Storage.restore(this, "currentDate"));
+        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_pos) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_pos);
 
     }
 

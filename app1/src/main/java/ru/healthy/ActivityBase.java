@@ -17,10 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityBase extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
-    int id_content = R.layout.activity_base;
-    int spinner_id = 0;
-    String top_text_value = "*";
-    String FIO_value = "*";
+    int content_view = R.layout.activity_base;
+    int spinner_pos = 0;
+    String label1_text = "*";
+    String textview_text = "*";
+    String text_text = "*";
     String btn_text = "*";
     String spinner_arr = "def_arr";
     String card_arr = "def_arr";
@@ -40,17 +41,18 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        findViewById(R.id.textview).setOnClickListener(this);
-        findViewById(R.id.button).setOnClickListener(this);
     }
 
     void init_Visiblity() {
-        findViewById(R.id.label1).setVisibility(View.GONE);
+        findViewById(R.id.label1).setVisibility(View.VISIBLE);
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
         findViewById(R.id.text).setVisibility(View.GONE);
         findViewById(R.id.recycler).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.GONE);
+
+        findViewById(R.id.textview).setOnClickListener(this);
+        findViewById(R.id.button).setOnClickListener(this);
     }
 
     void attach_Adapters() {
@@ -78,23 +80,26 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     }
 
     void restore_Values() {
-        top_text_value = Storage.restore(this, "top_text_value");
-        FIO_value = Storage.restore(this, "FIO_value");
-        spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
-        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
-        ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        spinner_pos = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        label1_text = Storage.restore(this, spinner_arr+"_str");
+        textview_text = Storage.restore(this, spinner_arr+"_str");
+        text_text = Storage.restore(this, "FIO");
+        btn_text = getString(R.string.button);
+        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_pos) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_pos);
+        ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_pos);
     }
 
     void init_Values() {
-        ((Button) findViewById(R.id.button)).setText(R.string.button);
-        ((TextView) findViewById(R.id.text)).setText(FIO_value);
-        ((TextView) findViewById(R.id.textview)).setText(top_text_value);
+        ((TextView) findViewById(R.id.label1)).setText(label1_text);
+        ((TextView) findViewById(R.id.text)).setText(text_text);
+        ((TextView) findViewById(R.id.textview)).setText(textview_text);
+        ((Button) findViewById(R.id.button)).setText(btn_text);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(id_content);
+        setContentView(content_view);
         config_ToolbarAndMenu();
 
         init_Visiblity();
@@ -121,7 +126,6 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
             if (view!=null) {
                 String s = ((TextView) view).getText().toString();
                 Storage.store(this, spinner_arr + "_str", s);
-                Storage.store(this, "top_text_value", s);
             }
 
             if (spinner_arr.equals("GetLPUList")) {
@@ -139,24 +143,17 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
                 IDataAdapter radapter = (IDataAdapter) mRecyclerView.getAdapter();
                 //radapter.update();
             }
-
-
         }
-
-
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+    public void onNothingSelected(AdapterView<?> parent) {  }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             Toast.makeText(this, data.getStringExtra("result"), Toast.LENGTH_SHORT).show();
         }
-
     }
 
 }

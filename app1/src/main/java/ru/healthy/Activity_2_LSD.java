@@ -15,31 +15,10 @@ public class Activity_2_LSD extends ActivityBase {
     }
 
     @Override
-    void init_Visiblity() {
-        super.init_Visiblity();
-
-        /*
-        ((TextView) findViewById(R.id.label1)).setText(Storage.restore(this, "GetDistrictList_str"));
-        //findViewById(R.id.label1).setVisibility(View.GONE);
-        findViewById(R.id.label2).setVisibility(View.GONE);
-        findViewById(R.id.label3).setVisibility(View.GONE);
-
-        top_text_value = Storage.restore(this, "GetLPUList_str");
-        ((TextView)findViewById(R.id.textview)).setText(top_text_value);
-        ((TextView)findViewById(R.id.text)).setText(top_text_value);
-        ((Button) findViewById(R.id.button)).setText(R.string.button);
-        ((TextView)findViewById(R.id.tv)).setText(getString(R.string.menu3));
-
-        findViewById(R.id.recycler).setVisibility(View.GONE);
-        findViewById(R.id.list).setVisibility(View.VISIBLE);
-        findViewById(R.id.text).setVisibility(View.GONE);
-        findViewById(R.id.textview).setVisibility(View.VISIBLE);
-        findViewById(R.id.button).setVisibility(View.GONE);
-        findViewById(R.id.tv).setVisibility(View.VISIBLE);
-
-        //spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
-        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
-*/
+    void restore_Values() {
+        super.restore_Values();
+        label1_text = Storage.restore(this, "GetDistrictList_str");
+        textview_text = Storage.restore(this, "GetLPUList_str");
     }
 
     @Override

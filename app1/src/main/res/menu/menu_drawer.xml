@@ -3,7 +3,7 @@
     <group
         android:id="@+id/gr2"
         android:visible="true"
-        android:checkableBehavior="single">
+        android:checkableBehavior="none">
     <item
         android:id="@+id/u0"
         android:title="@string/umenu0" />

@@ -95,13 +95,13 @@ public class ActivityBase_old extends AppCompatActivity implements AdapterView.O
             @Override
             public void onChanged() {
                 super.onChanged();
-                //spinner.setSelection(spinner_id);
+                //spinner.setSelection(spinner_pos);
                 Log.d(TAG,"Spinner априслал сообщение DataSetObserver-у: onChanged()");
             }
         });
         spinner.setAdapter(spinner_adapter);
 
-        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_id) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_id);
+        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_pos) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_pos);
 
         ListView listView = findViewById(R.id.list);
         if (listView.getVisibility()==View.VISIBLE) {

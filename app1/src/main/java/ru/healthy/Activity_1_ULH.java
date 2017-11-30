@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Activity_1_ULH extends ActivityBase {
@@ -18,7 +17,7 @@ public class Activity_1_ULH extends ActivityBase {
 
     public Activity_1_ULH() {
         super();
-        id_content = R.layout.activity_1_ulh;
+        content_view = R.layout.activity_1_ulh;
         spinner_arr = "GetLPUList";
         card_arr = "GetPatientHistory";
         list_arr = "GetDistrictList";
@@ -36,7 +35,7 @@ public class Activity_1_ULH extends ActivityBase {
 
         mDrawerLayout = findViewById(R.id.drawer);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        //prepareDrawerMenu(navigationView.getMenu());
+        onCreateOptionsMenu(navigationView.getMenu());
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -54,15 +53,10 @@ public class Activity_1_ULH extends ActivityBase {
     }
 
     @Override
-    void init_Values() {
-        super.init_Values();
-        ((TextView) findViewById(R.id.textview)).setText(FIO_value);
-    }
-
-    @Override
     void restore_Values() {
         super.restore_Values();
-        ((TextView) findViewById(R.id.label1)).setText(Storage.restore(this, "GetDistrictList_str"));
+        label1_text = Storage.restore(this, "GetDistrictList_str");
+        textview_text = Storage.restore(this, "FIO");
     }
 
     @Override
@@ -74,14 +68,14 @@ public class Activity_1_ULH extends ActivityBase {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
         getMenuInflater().inflate(R.menu.menu_drawer, menu);
-        /*
+
         String currentUser = Storage.getCurrentUser(this);
         int id = Integer.valueOf(currentUser);
         MenuItem item = menu.getItem(id);
-        item.setChecked(true);
         item.setIcon(R.drawable.redcross_small);
-        */
+        /**/
         return true;
     }
 
@@ -90,6 +84,13 @@ public class Activity_1_ULH extends ActivityBase {
         if (item.getItemId() == android.R.id.home) mDrawerLayout.openDrawer(GravityCompat.START);
         else doItem(item);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this, Activity_5_YN.class);
+        intent.putExtra("message", getString(R.string.cancel_talon));
+        startActivityForResult(intent, 1);
     }
 
     public void doItem(MenuItem menuItem) {
@@ -103,12 +104,9 @@ public class Activity_1_ULH extends ActivityBase {
 
         restore_Values();
         init_Values();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        onCreateOptionsMenu(navigationView.getMenu());
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(this, Activity_5_YN.class);
-        intent.putExtra("message", getString(R.string.cancel_talon));
-        startActivityForResult(intent, 1);
-    }
 }

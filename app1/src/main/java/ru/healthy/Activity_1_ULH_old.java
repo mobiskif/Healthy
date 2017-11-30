@@ -18,7 +18,7 @@ public class Activity_1_ULH_old extends ActivityBase {
 
     public Activity_1_ULH_old() {
         super();
-        id_content = R.layout.activity_1_ulh;
+        content_view = R.layout.activity_1_ulh;
         spinner_arr = "GetLPUList";
         card_arr = "GetPatientHistory";
         list_arr = "GetDistrictList";
@@ -99,9 +99,9 @@ public class Activity_1_ULH_old extends ActivityBase {
     }
 
     void updateSpinner() {
-        spinner_id = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        spinner_pos = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
         Spinner spinner = findViewById(R.id.spinner);
-        spinner.setSelection(spinner_id);
+        spinner.setSelection(spinner_pos);
     }
 
 
