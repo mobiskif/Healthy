@@ -11,36 +11,23 @@ public class Activity_3_DRT extends ActivityBase {
 
     public Activity_3_DRT() {
         super();
-        spinner_arr = "dates";
-        card_arr = "talons";
-        list_arr = "talons";
+        spinner_arr = "GetWorkingTime";
+        card_arr = "GetAvaibleAppointments";
+        list_arr = "GetAvaibleAppointments";
         btn_text = "Взять";
     }
 
     @Override
     void init_Visiblity() {
         super.init_Visiblity();
-
-        findViewById(R.id.label1).setVisibility(View.GONE);
-        findViewById(R.id.label2).setVisibility(View.GONE);
-        findViewById(R.id.label3).setVisibility(View.GONE);
-
-        textview_text = Storage.restore(this, "currentSpec_str") + "\n"+ Storage.restore(this, "currentDoctor_str");
-        ((TextView)findViewById(R.id.text)).setText(textview_text);
-        ((TextView)findViewById(R.id.textview)).setText(textview_text);
-        ((Button) findViewById(R.id.button)).setText(R.string.button);
-        ((TextView)findViewById(R.id.tv)).setText(getString(R.string.button));
-
-        findViewById(R.id.recycler).setVisibility(View.GONE);
-        findViewById(R.id.list).setVisibility(View.VISIBLE);
-        findViewById(R.id.text).setVisibility(View.GONE);
-        findViewById(R.id.textview).setVisibility(View.VISIBLE);
         findViewById(R.id.button).setVisibility(View.GONE);
-        findViewById(R.id.tv).setVisibility(View.VISIBLE);
+    }
 
-        //spinner_pos = Integer.valueOf(Storage.restore(this, "currentDate"));
-        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_pos) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_pos);
-
+    @Override
+    void restore_Values() {
+        super.restore_Values();
+        label1_text = Storage.restore(this, "GetSpesialityList_str");
+        textview_text = Storage.restore(this, "GetDoctorList_str");
     }
 
     @Override

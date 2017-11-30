@@ -250,8 +250,8 @@ class HubService extends Observable {
 
     Cursor GetSpesialityList(String action) {
         //SharedPreferences settings = context.getDefaultSharedPreferences(this);
-        String orgID = settings.getString("GetLPUList", "1");
-        String idPat = settings.getString("CheckPatient", "7777");
+        String orgID = settings.getString("GetLPUList", "27");
+        String idPat = settings.getString("CheckPatient", "452528");
 
         String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n" +
                 "   <soapenv:Header/>\n" +
@@ -312,9 +312,9 @@ class HubService extends Observable {
 
     Cursor GetDoctorList(String action) {
         //SharedPreferences settings = context.getDefaultSharedPreferences(this);
-        String specID = settings.getString("GetSpesialityList", "0");
-        String orgID = settings.getString("GetLPUList", "0");
-        String idPat = settings.getString("CheckPatient", "8888");
+        String specID = settings.getString("GetSpesialityList", "19");
+        String orgID = settings.getString("GetLPUList", "27");
+        String idPat = settings.getString("CheckPatient", "452528");
 
         String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n" +
                 "   <soapenv:Header/>\n" +
@@ -380,9 +380,9 @@ class HubService extends Observable {
     Cursor GetAvaibleAppointments(String action) {
         //SharedPreferences settings = context.getDefaultSharedPreferences(this);
         //String specID = settings.getString("GetSpesialityList", "0");
-        String orgID = settings.getString("GetLPUList", "0");
-        String idPat = settings.getString("CheckPatient", "3333");
-        String idDoc = settings.getString("GetDoctorList", "2");
+        String orgID = settings.getString("GetLPUList", "27");
+        String idPat = settings.getString("CheckPatient", "452528");
+        String idDoc = settings.getString("GetDoctorList", "9");
         String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n" +
                 "   <soapenv:Header/>\n" +
                 "   <soapenv:Body>\n" +
@@ -773,16 +773,15 @@ class HubService extends Observable {
     Cursor GetWorkingTime(String action) {
         //SharedPreferences settings = context.getDefaultSharedPreferences(this);
         //String specID = settings.getString("GetSpesialityList", "0");
-        String orgID = settings.getString("GetLPUList", "0");
-        String idPat = settings.getString("CheckPatient", "3333");
-        String idDoc = settings.getString("GetDoctorList", "2");
+        String orgID = settings.getString("GetLPUList", "19");
+        String idDoc = settings.getString("GetDoctorList", "10");
         String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n" +
                 "   <soapenv:Header/>\n" +
                 "   <soapenv:Body>\n" +
                 "      <tem:GetWorkingTime>\n" +
                 "         <tem:idDoc>"+idDoc+"</tem:idDoc>\n" +
                 "         <tem:idLpu>"+orgID+"</tem:idLpu>\n" +
-                "         <tem:visitStart>2017-10-29</tem:visitStart>\n" +
+                "         <tem:visitStart>2017-12-01</tem:visitStart>\n" +
                 "         <tem:visitEnd>2017-12-31</tem:visitEnd>\n" +
                 "         <tem:guid>6b2158a1-56e0-4c09-b70b-139b14ffee14</tem:guid>\n" +
                 "      </tem:GetWorkingTime>\n" +

@@ -3,6 +3,8 @@
     <string-array name="def_arr">
         <item>11</item>
         <item>22</item>
+        <item>33</item>
+        <item>44</item>
     </string-array>
 
     <array name="place_avator">
