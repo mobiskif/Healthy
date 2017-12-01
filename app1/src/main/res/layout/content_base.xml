@@ -84,6 +84,7 @@
         android:padding="8dp"
         android:text="@string/menu4"
         android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+        android:gravity="right"
         android:visibility="visible" />
 
     <Space

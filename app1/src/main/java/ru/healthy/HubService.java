@@ -691,10 +691,10 @@ class HubService extends Observable {
         //SharedPreferences settings = context.getDefaultSharedPreferences(this);
         String sss = defpat;
 
-        String orgID = settings.getString("GetLPUList", "1");
+        String orgID = settings.getString("GetLPUList", "175");
         //String idPat = settings.getString("SearchTop10Patient", "4326");
         //String idPat = settings.getString("idPat", "4326");
-        String idPat = settings.getString("CheckPatient", "9999");
+        String idPat = settings.getString("CheckPatient", "554568");
         //Log.d(TAG, Thread.currentThread().getStackTrace()[2].getMethodName() + " история пациента " + idPat + " в поликлинике " + orgID);
 
         String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">" +
@@ -905,13 +905,13 @@ class HubService extends Observable {
     }
 
     public Cursor CheckPatient(String action) {
-        Log.d("jop", "==========Это CheckPatient! =========");
+        Log.d(TAG, "==========Это CheckPatient! =========");
         String idpat = "Указанный пациент не обнаружен в базе регистратуры. Проверьте правильность, или посетите регистратуру лично.";
-        String birst = settings.getString("Birstdate", "1969-07-03");
+        String birst = settings.getString("Birstdate", "1966-09-03");
         String lpu = settings.getString("GetLPUList", "175");
-        String nam = settings.getString("Name", "Ivan");
-        String sur = settings.getString("Surname", "Ivanov");
-        String second = settings.getString("Secondname", "");
+        String nam = settings.getString("Name", "Дмитрий");
+        String sur = settings.getString("Surname", "Пархимович");
+        String second = settings.getString("Secondname", "Леонидович");
         String query="<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\" xmlns:hub=\"http://schemas.datacontract.org/2004/07/HubService2\">\n" +
                 "   <soapenv:Header/>\n" +
                 "   <soapenv:Body>\n" +

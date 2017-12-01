@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
 
 public class Activity_1_ULH extends ActivityBase {
     private DrawerLayout mDrawerLayout;
@@ -20,8 +19,8 @@ public class Activity_1_ULH extends ActivityBase {
         content_view = R.layout.activity_1_ulh;
         spinner_arr = "GetLPUList";
         card_arr = "GetPatientHistory";
-        list_arr = "GetDistrictList";
-        btn_text = "Отменить";
+        list_arr = "GetPatientHistory";
+        button_text = "Отменить";
     }
 
     @Override
@@ -47,8 +46,8 @@ public class Activity_1_ULH extends ActivityBase {
     }
 
     @Override
-    void init_Visiblity() {
-        super.init_Visiblity();
+    void set_Visiblity() {
+        super.set_Visiblity();
         findViewById(R.id.label1).setVisibility(View.VISIBLE);
     }
 
@@ -57,6 +56,7 @@ public class Activity_1_ULH extends ActivityBase {
         super.restore_Values();
         label1_text = Storage.restore(this, "GetDistrictList_str");
         textview_text = Storage.restore(this, "FIO");
+        button_text = "Талоны и расписание";
     }
 
     @Override
@@ -103,7 +103,7 @@ public class Activity_1_ULH extends ActivityBase {
         mDrawerLayout.closeDrawers();
 
         restore_Values();
-        init_Values();
+        show_Values();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         onCreateOptionsMenu(navigationView.getMenu());

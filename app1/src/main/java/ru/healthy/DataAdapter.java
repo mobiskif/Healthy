@@ -91,8 +91,11 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
         notifyDataSetChanged();
 
         if (action.equals("CheckPatient")) {
-            Storage.store(context, "idPat", "53469");
-            Log.d(TAG,"CheckPatient = "+arr.toString());
+            data.moveToFirst();
+            String idPat=data.getString(3);
+            Storage.store(context, "idPat", idPat);
+            String s = toStr(data);
+            Log.d(TAG,"CheckPatient = "+s);
         }
     }
 
@@ -106,6 +109,20 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
         }
         data.close();
         return names.toArray(new String[names.size()]);
+    }
+
+    private String toStr(Cursor data) {
+        String r="";
+        data.moveToFirst();
+        while(!data.isAfterLast()) {
+            r+=data.getString(0)+ " ";
+            r+=data.getString(1)+ " ";
+            r+=data.getString(2)+ " ";
+            r+=data.getString(3);
+            data.moveToNext();
+        }
+        data.close();
+        return r;
     }
 
     @Override

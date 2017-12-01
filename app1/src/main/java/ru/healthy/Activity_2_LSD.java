@@ -15,8 +15,8 @@ public class Activity_2_LSD extends ActivityBase {
         list_arr = "GetDoctorList";
     }
     @Override
-    void init_Visiblity() {
-        super.init_Visiblity();
+    void set_Visiblity() {
+        super.set_Visiblity();
         findViewById(R.id.button).setVisibility(View.GONE);
     }
     @Override

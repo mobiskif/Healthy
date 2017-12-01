@@ -22,10 +22,11 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     String label1_text = "*";
     String textview_text = "*";
     String text_text = "*";
-    String btn_text = "*";
+    String button_text = "*";
     String spinner_arr = "def_arr";
     String card_arr = "def_arr";
     String list_arr = "def_arr";
+    boolean error=false;
     String TAG=getClass().getSimpleName()+" jop";
 
     void config_ToolbarAndMenu() {
@@ -43,7 +44,7 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    void init_Visiblity() {
+    void set_Visiblity() {
         findViewById(R.id.label1).setVisibility(View.VISIBLE);
         findViewById(R.id.label2).setVisibility(View.GONE);
         findViewById(R.id.label3).setVisibility(View.GONE);
@@ -73,7 +74,7 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         RecyclerView mRecyclerView = findViewById(R.id.recycler);
         if (mRecyclerView.getVisibility()==View.VISIBLE) {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            CardAdapter card_adapter = new CardAdapter(card_arr, this, btn_text);
+            CardAdapter card_adapter = new CardAdapter(card_arr, this, button_text);
             mRecyclerView.setAdapter(card_adapter);
         }
 
@@ -84,16 +85,16 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         label1_text = Storage.restore(this, spinner_arr+"_str");
         textview_text = Storage.restore(this, spinner_arr+"_str");
         text_text = Storage.restore(this, "FIO");
-        btn_text = getString(R.string.button);
+        button_text = getString(R.string.button);
         //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_pos) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_pos);
         ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_pos);
     }
 
-    void init_Values() {
+    void show_Values() {
         ((TextView) findViewById(R.id.label1)).setText(label1_text);
         ((TextView) findViewById(R.id.text)).setText(text_text);
         ((TextView) findViewById(R.id.textview)).setText(textview_text);
-        ((Button) findViewById(R.id.button)).setText(btn_text);
+        ((Button) findViewById(R.id.button)).setText(button_text);
     }
 
     @Override
@@ -102,10 +103,10 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
         setContentView(content_view);
         config_ToolbarAndMenu();
 
-        init_Visiblity();
+        set_Visiblity();
         attach_Adapters();
         restore_Values();
-        init_Values();
+        show_Values();
     }
 
     @Override
@@ -128,21 +129,13 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
                 Storage.store(this, spinner_arr + "_str", s);
             }
 
-            if (spinner_arr.equals("GetLPUList")) {
-                //DataAdapter da = new DataAdapter(this, 666,"CheckPatient");
-            }
+            if (spinner_arr.equals("GetLPUList")) new DataAdapter(this, 666,"CheckPatient");
 
             ListView listView = findViewById(R.id.list);
-            if (listView.getVisibility()==View.VISIBLE) {
-                IDataAdapter ladapter = (IDataAdapter) listView.getAdapter();
-                //ladapter.update();
-            }
+            //if (listView.getVisibility()==View.VISIBLE) ((IDataAdapter) listView.getAdapter()).update();
 
             RecyclerView mRecyclerView = findViewById(R.id.recycler);
-            if (mRecyclerView.getVisibility()==View.VISIBLE) {
-                IDataAdapter radapter = (IDataAdapter) mRecyclerView.getAdapter();
-                //radapter.update();
-            }
+            //if (mRecyclerView.getVisibility()==View.VISIBLE) ((IDataAdapter) mRecyclerView.getAdapter()).update();
         }
     }
 

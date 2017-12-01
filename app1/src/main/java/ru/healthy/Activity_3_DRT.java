@@ -3,8 +3,6 @@ package ru.healthy;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class Activity_3_DRT extends ActivityBase {
@@ -14,12 +12,12 @@ public class Activity_3_DRT extends ActivityBase {
         spinner_arr = "GetWorkingTime";
         card_arr = "GetAvaibleAppointments";
         list_arr = "GetAvaibleAppointments";
-        btn_text = "Взять";
+        button_text = "Взять";
     }
 
     @Override
-    void init_Visiblity() {
-        super.init_Visiblity();
+    void set_Visiblity() {
+        super.set_Visiblity();
         findViewById(R.id.button).setVisibility(View.GONE);
     }
 

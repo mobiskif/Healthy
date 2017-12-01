@@ -22,12 +22,12 @@ public class Activity_1_ULH_old extends ActivityBase {
         spinner_arr = "GetLPUList";
         card_arr = "GetPatientHistory";
         list_arr = "GetDistrictList";
-        btn_text = "Отменить";
+        button_text = "Отменить";
     }
 
     @Override
-    void init_Visiblity() {
-        super.init_Visiblity();
+    void set_Visiblity() {
+        super.set_Visiblity();
         findViewById(R.id.label1).setVisibility(View.VISIBLE);
         ((TextView) findViewById(R.id.label1)).setText(Storage.restore(this, "GetDistrictList_str"));
 

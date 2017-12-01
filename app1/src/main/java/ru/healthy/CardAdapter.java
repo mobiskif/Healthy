@@ -21,7 +21,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> im
     public CardAdapter(String card_arr, Activity c, String t) {
         //mDataset = new Storage(context).getStringArray(card_arr);
         context = c;
-        //btn_text = ((ActivityBase)a).btn_text;
+        //button_text = ((ActivityBase)a).button_text;
         tag = t;
         action = card_arr;
         update();
@@ -56,7 +56,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> im
     public CardAdapter(String[] myDataset, Activity a, String t) {
         mDataset = myDataset;
         context = a;
-        //btn_text = ((ActivityBase)a).btn_text;
+        //button_text = ((ActivityBase)a).button_text;
         tag = t;
     }
 
