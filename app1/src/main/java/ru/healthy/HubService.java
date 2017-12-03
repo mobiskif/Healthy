@@ -832,7 +832,7 @@ class HubService extends Observable {
                                 row[0] = date;
                                 row[3] = time;
                                 dat = date;
-                                t0=time;
+                                t11=time;
                                 break;
                             case "VisitStart":
                                 int loc1 = text.indexOf("T");
@@ -842,7 +842,7 @@ class HubService extends Observable {
                                 time1=time1.substring(0,loc1);
                                 row[2] = time1;
                                 //if (row[1].toString().length()==0)
-                                t11=time1;
+                                t0=time1;
 
                                 row[0]=dat;
                                 row[1]=dat;

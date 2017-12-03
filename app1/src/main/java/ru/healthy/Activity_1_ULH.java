@@ -56,8 +56,10 @@ public class Activity_1_ULH extends ActivityBase {
     void restore_Values() {
         super.restore_Values();
         label1_text = Storage.restore(this, "GetDistrictList_str") + " (" + Storage.restore(this, "CheckPatient") +")";
+        if (label1_text.length()<5) label1_text="Нахмите сюда, заполните ФИО и район";
         //label1_text = Storage.restore(this, "CheckPatient");
         textview_text = Storage.restore(this, "FIO");
+        if (textview_text.length()<5) textview_text="Нахмите сюда, заполните ФИО и район";
     }
 
     @Override
@@ -105,8 +107,11 @@ public class Activity_1_ULH extends ActivityBase {
         else if (s.equals(getString(R.string.umenu2))) Storage.setCurrentUser(this, "2");
         mDrawerLayout.closeDrawers();
 
+        Spinner spinner = findViewById(R.id.spinner);
+        ((DataAdapter) spinner.getAdapter()).update();
         restore_Values();
         show_Values();
+        spinner.setSelection(spinner_pos);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         onCreateOptionsMenu(navigationView.getMenu());
