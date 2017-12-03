@@ -1,6 +1,8 @@
 package ru.healthy;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -16,16 +20,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActivityBase extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
+import static ru.healthy.Storage.getCurrentUser;
+
+public class ActivityBase extends AppCompatActivity implements  AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
     int content_view = R.layout.activity_base;
     int spinner_pos = 0;
     String label1_text = "*";
+    String label2_text = "*";
     String textview_text = "*";
     String text_text = "*";
     String button_text = "*";
-    String spinner_arr = "def_arr";
-    String card_arr = "def_arr";
-    String list_arr = "def_arr";
+    String spinner_arr = "GetLPUList";//"GetDistrictList";
+    //String spinner_arr = "GetDistrictList";
+    String card_arr = "ca";
+    String list_arr = "GetSpesialityList";
     boolean error=false;
     String TAG=getClass().getSimpleName()+" jop";
 
@@ -57,18 +65,37 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     }
 
     void attach_Adapters() {
-        Spinner spinner = findViewById(R.id.spinner);
+        final Spinner spinner = findViewById(R.id.spinner);
         if (spinner.getVisibility()==View.VISIBLE) {
             spinner.setOnItemSelectedListener(this);
             DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spinner_arr);
             spinner.setAdapter(spinner_adapter);
+
+            spinner_adapter.registerDataSetObserver(new DataSetObserver() {
+                @Override
+                public void onChanged() {
+                    super.onChanged();
+                    Log.d(TAG,"адаптер спинера (" + spinner_arr+") прислал сообщение наблюдателю, можно делать Restore");
+                    spinner.setSelection(spinner_pos);
+                }
+            });
         }
 
-        ListView listView = findViewById(R.id.list);
+        final ListView listView = findViewById(R.id.list);
         if (listView.getVisibility()==View.VISIBLE) {
             listView.setOnItemClickListener(this);
-            DataAdapter list_adapter = new DataAdapter(this, android.R.layout.simple_list_item_1, list_arr);
+            final DataAdapter list_adapter = new DataAdapter(this, android.R.layout.simple_list_item_1, list_arr);
             listView.setAdapter(list_adapter);
+
+            list_adapter.registerDataSetObserver(new DataSetObserver() {
+                @Override
+                public void onChanged() {
+                    super.onChanged();
+                    Log.d(TAG,"адаптер списка (" + list_arr+") прислал сообщение наблюдателю, можно делать Restore");
+                    //spinner.setSelection(spinner_pos);
+                    listView.invalidateViews();
+                }
+            });
         }
 
         RecyclerView mRecyclerView = findViewById(R.id.recycler);
@@ -77,21 +104,19 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
             CardAdapter card_adapter = new CardAdapter(card_arr, this, button_text);
             mRecyclerView.setAdapter(card_adapter);
         }
-
     }
 
     void restore_Values() {
-        spinner_pos = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
+        label2_text = Storage.restore(this, "CheckPatient");
         label1_text = Storage.restore(this, spinner_arr+"_str");
         textview_text = Storage.restore(this, spinner_arr+"_str");
         text_text = Storage.restore(this, "FIO");
-        button_text = getString(R.string.button);
-        //if (((Spinner)findViewById(R.id.spinner)).getAdapter().getCount() >= spinner_pos) ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_pos);
-        ((Spinner) findViewById(R.id.spinner)).setSelection(spinner_pos);
+        spinner_pos = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
     }
 
     void show_Values() {
         ((TextView) findViewById(R.id.label1)).setText(label1_text);
+        ((TextView) findViewById(R.id.label2)).setText(label2_text);
         ((TextView) findViewById(R.id.text)).setText(text_text);
         ((TextView) findViewById(R.id.textview)).setText(textview_text);
         ((Button) findViewById(R.id.button)).setText(button_text);
@@ -117,25 +142,56 @@ public class ActivityBase extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //Toast.makeText(getApplicationContext(), "onItemClick", Toast.LENGTH_LONG).show();
+        DataAdapter adapter = (DataAdapter) parent.getAdapter();
+        if (adapter.loaded) {
+            String[] row = (String[]) adapter.getItem(position);
+
+            Storage.store(this, list_arr, row[0]);
+            Storage.store(this, list_arr + "_str", row[1]);
+            Storage.store(this, list_arr + "_pos", String.valueOf(position));
+            Log.d(TAG, "onItemClick() сохранено в SharedPref: " + row[0] + " " + row[1] + " " + row[2] + " ");
+        }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //Toast.makeText(getApplicationContext(), "onItemSelected", Toast.LENGTH_LONG).show();
-        if (((DataAdapter) parent.getAdapter()).loaded) {
+        DataAdapter adapter = (DataAdapter) parent.getAdapter();
+        if (adapter.loaded) {
+            String [] row = (String[]) adapter.getItem(position);
+
+            Storage.store(this, spinner_arr, row[0]);
+            Storage.store(this, spinner_arr+"_str", row[1]);
             Storage.store(this, spinner_arr + "_pos", String.valueOf(position));
-            if (view!=null) {
-                String s = ((TextView) view).getText().toString();
-                Storage.store(this, spinner_arr + "_str", s);
+            Log.d(TAG, "onItemSelected() сохранено в SharedPref: "+row[0] +" "+row[1] +" "+row[2] +" ");
+
+            /*** обновить checkPatient ****/
+            if (spinner_arr.equals("GetLPUList")) {
+                final DataAdapter adapter1 = new DataAdapter(this, position,"CheckPatient");
+                adapter1.registerDataSetObserver(new DataSetObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        String[] s = (String[]) adapter1.getItem(0);
+                        Log.d(TAG, "курсор CheckPatient: "+s[0]+" "+s[1]+ " " +s[2]+ " " +s[3]);
+                        restore_Values();
+                        show_Values();
+                    }
+                });
             }
 
-            if (spinner_arr.equals("GetLPUList")) new DataAdapter(this, 666,"CheckPatient");
-
+            /*** обновить list ***/
             ListView listView = findViewById(R.id.list);
-            //if (listView.getVisibility()==View.VISIBLE) ((IDataAdapter) listView.getAdapter()).update();
+            if (listView.getVisibility()==View.VISIBLE) {
+                final DataAdapter adapter2 = (DataAdapter) ((ListView) findViewById(R.id.list)).getAdapter();
+                adapter2.update();
+            }
+            //RecyclerView mRecyclerView = findViewById(R.id.recycler); if (mRecyclerView.getVisibility()==View.VISIBLE) updateObserver((AdapterView) mRecyclerView);
 
-            RecyclerView mRecyclerView = findViewById(R.id.recycler);
-            //if (mRecyclerView.getVisibility()==View.VISIBLE) ((IDataAdapter) mRecyclerView.getAdapter()).update();
+            restore_Values();
+            show_Values();
+        }
+        else {
+            Log.d(TAG,"onItemSelected, но адаптер спинера еще не обновился");
         }
     }
 

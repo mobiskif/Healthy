@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Spinner;
 
 public class Activity_1_ULH extends ActivityBase {
     private DrawerLayout mDrawerLayout;
@@ -20,7 +21,7 @@ public class Activity_1_ULH extends ActivityBase {
         spinner_arr = "GetLPUList";
         card_arr = "GetPatientHistory";
         list_arr = "GetPatientHistory";
-        button_text = "Отменить";
+        button_text = "Талоны и расписание";
     }
 
     @Override
@@ -54,14 +55,15 @@ public class Activity_1_ULH extends ActivityBase {
     @Override
     void restore_Values() {
         super.restore_Values();
-        label1_text = Storage.restore(this, "GetDistrictList_str");
+        label1_text = Storage.restore(this, "GetDistrictList_str") + " (" + Storage.restore(this, "CheckPatient") +")";
+        //label1_text = Storage.restore(this, "CheckPatient");
         textview_text = Storage.restore(this, "FIO");
-        button_text = "Талоны и расписание";
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
+
         if (v.getId() == R.id.textview) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
         else if (v.getId() == R.id.button) startActivity(new Intent(getApplicationContext(), Activity_2_LSD.class));
     }
@@ -88,6 +90,7 @@ public class Activity_1_ULH extends ActivityBase {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemClick(parent,view,position,id);
         Intent intent = new Intent(this, Activity_5_YN.class);
         intent.putExtra("message", getString(R.string.cancel_talon));
         startActivityForResult(intent, 1);

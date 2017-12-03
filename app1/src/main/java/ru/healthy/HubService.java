@@ -175,7 +175,7 @@ class HubService extends Observable {
     Cursor GetLPUList(String action) {
         //Log.d("jop", "========="+action);
         //SharedPreferences settings = context.getDefaultSharedPreferences(this);
-        String districtID = settings.getString("area", "5");
+        String districtID = settings.getString("GetDistrictList", "17");
         String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n" +
                 "   <soapenv:Header/>\n" +
                 "   <soapenv:Body>\n" +
@@ -185,6 +185,7 @@ class HubService extends Observable {
                 "      </tem:GetLPUList>\n" +
                 "   </soapenv:Body>\n" +
                 "</soapenv:Envelope>";
+        //Log.d(TAG,query);
 
         XmlPullParser myParser = readSOAP(query, action);
         if (myParser==null) return defaultList();
@@ -798,6 +799,8 @@ class HubService extends Observable {
         MatrixCursor mc = new MatrixCursor(from);
         Object[] row = new Object[from.length];
         try {
+            String dat="", t0="", t11="", msg="";
+            Boolean recday=false;
             event = myParser.getEventType();
             int i=0;
             while (event != XmlPullParser.END_DOCUMENT) {
@@ -814,9 +817,11 @@ class HubService extends Observable {
                         switch (name) {
                             case "DenyCause":
                                 row[1] = text;
+                                msg = text;
                                 break;
                             case "RecordableDay":
                                 row[0] = text;
+                                recday=Boolean.valueOf(text);
                                 break;
                             case "VisitEnd":
                                 int loc = text.indexOf("T");
@@ -826,6 +831,8 @@ class HubService extends Observable {
                                 time=time.substring(0,loc);
                                 row[0] = date;
                                 row[3] = time;
+                                dat = date;
+                                t0=time;
                                 break;
                             case "VisitStart":
                                 int loc1 = text.indexOf("T");
@@ -835,6 +842,13 @@ class HubService extends Observable {
                                 time1=time1.substring(0,loc1);
                                 row[2] = time1;
                                 //if (row[1].toString().length()==0)
+                                t11=time1;
+
+                                row[0]=dat;
+                                row[1]=dat;
+                                if (recday) row[2]=t0+".."+t11;
+                                else row[2]=msg;
+                                row[3]=msg;
                                 mc.addRow(row);
                                 break;
                             default:
@@ -880,7 +894,7 @@ class HubService extends Observable {
             while ((line = reader.readLine()) != null) sb.append(line);
             isr.close();
             reader.close();
-            //Log.e("jop","Ответ= " + sb.length() + " bytes, " + sb);
+            Log.e("jop","Ответ= " + sb.length() + " bytes, " + sb);
 
             //препарсинг
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -897,10 +911,12 @@ class HubService extends Observable {
     public Cursor defaultList() {
         String[] from = {"_ID", "1", "2", "3"};
         MatrixCursor mc = new MatrixCursor(from);
-        Object[] from1 = {11, "4", "175", "3333"};
-        Object[] from2 = {22, "4", "175", "3333"};
+        Object[] from1 = {11, "11", "111", "1111"};
+        Object[] from2 = {22, "22", "222", "2222"};
+        Object[] from3 = {33, "33", "333", "3333"};
         mc.addRow(from1);
         mc.addRow(from2);
+        mc.addRow(from3);
         return mc;
     }
 
@@ -908,7 +924,7 @@ class HubService extends Observable {
         Log.d(TAG, "==========Это CheckPatient! =========");
         String idpat = "Указанный пациент не обнаружен в базе регистратуры. Проверьте правильность, или посетите регистратуру лично.";
         String birst = settings.getString("Birstdate", "1966-09-03");
-        String lpu = settings.getString("GetLPUList", "175");
+        String lpu = settings.getString("GetLPUList", "17");
         String nam = settings.getString("Name", "Дмитрий");
         String sur = settings.getString("Surname", "Пархимович");
         String second = settings.getString("Secondname", "Леонидович");
@@ -927,6 +943,9 @@ class HubService extends Observable {
                 "     </tem:CheckPatient>\n" +
                 "   </soapenv:Body>\n" +
                 "</soapenv:Envelope>";
+
+        Log.d(TAG, query);
+
         XmlPullParser myParser = readSOAP(query, "CheckPatient");
 
         String[] from = {"_ID", "column1", "column2", "column3"};

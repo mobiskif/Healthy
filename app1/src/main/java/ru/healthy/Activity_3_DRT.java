@@ -45,6 +45,7 @@ public class Activity_3_DRT extends ActivityBase {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemClick(parent,view,position,id);
         Intent intent = new Intent(this, Activity_5_YN.class);
         intent.putExtra("message", getString(R.string.confirm_talon));
         startActivityForResult(intent, 1);

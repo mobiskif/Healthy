@@ -22,17 +22,15 @@ public class Activity_2_LSD extends ActivityBase {
     @Override
     void restore_Values() {
         super.restore_Values();
-        label1_text = Storage.restore(this, "GetDistrictList_str");
+        label1_text = Storage.restore(this, "GetDistrictList_str") + " (" + Storage.restore(this, "CheckPatient") +")";
         textview_text = Storage.restore(this, "GetLPUList_str");
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String value = (String) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
-        Storage.store(this, spinner_arr+"_str", value);
-
-        Storage.store(this, list_arr+"_str", ((TextView) view).getText().toString());
-        startActivity(new Intent(getApplicationContext(), Activity_3_DRT.class));
+        super.onItemClick(parent,view,position,id);
+        Intent intent = new Intent(this, Activity_3_DRT.class);
+        startActivityForResult(intent, 1);
     }
 
 }

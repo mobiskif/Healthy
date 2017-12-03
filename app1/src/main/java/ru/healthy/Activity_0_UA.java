@@ -24,6 +24,7 @@ public class Activity_0_UA extends ActivityBase {
         findViewById(R.id.textview).setVisibility(View.GONE);
         findViewById(R.id.list).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
+        findViewById(R.id.spinner).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -40,7 +41,6 @@ public class Activity_0_UA extends ActivityBase {
             Storage.store(this, "Name", ar[1]);
             Storage.store(this, "Secondname", ar[2]);
             Storage.store(this, "Birstdate", ar[3]);
-            Storage.store(this, "GetLPUList", "175");
             error=false;
         }
         else {
@@ -48,7 +48,6 @@ public class Activity_0_UA extends ActivityBase {
             Storage.store(this, "Name", "Имя");
             Storage.store(this, "Secondname", "Отчество");
             Storage.store(this, "Birstdate", "2001-11-23");
-            Storage.store(this, "GetLPUList", "175");
             error=true;
         }
     }
@@ -56,17 +55,23 @@ public class Activity_0_UA extends ActivityBase {
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        if (v.getId() == R.id.button) {
 
+        if (v.getId() == R.id.button) {
+/*
             String value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
             Storage.store(this, spinner_arr+"_pos", value);
 
-            value = (String) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
-            Storage.store(this, spinner_arr+"_str", value);
+            String[] svalue = (String[]) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
+            Storage.store(this, spinner_arr+"_str", svalue[1]);
 
-            value = ((TextView) findViewById(R.id.text)).getText().toString();
-            Storage.store(this, "FIO", value);
-            parseFIO(value);
+            Spinner spinner = findViewById(R.id.spinner);
+            DataAdapter adapter = (DataAdapter) spinner.getAdapter();
+            String [] row = (String[]) adapter.getItem(spinner.getSelectedItemPosition());
+            Storage.store(this, spinner_arr, row[0]);
+*/
+            String tvalue = ((TextView) findViewById(R.id.text)).getText().toString();
+            Storage.store(this, "FIO", tvalue);
+            parseFIO(tvalue);
 
             if (error) Toast.makeText(this, "Заполните ФИО и дату точно, как в примере", Toast.LENGTH_LONG).show();
             else {
