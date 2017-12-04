@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class DataAdapter extends BaseAdapter implements IDataAdapter, android.app.LoaderManager.LoaderCallbacks<Cursor> {
     ActivityBase context;
@@ -57,9 +55,6 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
                 for (int i = 0; i < cursor.getColumnCount(); i++)
                     row[i] = cursor.getString(i);
         }
-        else {
-
-        }
         return row;
     }
 
@@ -101,22 +96,22 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
                 }
             }
             Log.d(TAG, "Обновлен адаптер: " + action + " " + id);
-            notifyDataSetChanged();
         }
         else {
             Log.d(TAG, "чужой лоадер");
         }
+        notifyDataSetChanged();
     }
 
     private String toStr(Cursor data) {
-        String r="";
+        StringBuilder r= new StringBuilder();
         data.moveToFirst();
         while(!data.isAfterLast()) {
-            for (int i=0; i<data.getCount(); i++) r+=data.getString(0)+ " ";
+            for (int i=0; i<data.getCount(); i++) r.append(data.getString(0)).append(" ");
             data.moveToNext();
         }
         data.close();
-        return r;
+        return r.toString();
     }
 
     @Override

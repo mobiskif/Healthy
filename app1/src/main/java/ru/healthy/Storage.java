@@ -1,15 +1,9 @@
 package ru.healthy;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-/**
- * Created by john on 25.11.17.
- */
 
 public class Storage {
     Context context;
@@ -41,10 +35,9 @@ public class Storage {
     public static String restore(Context c, String key) {
         String currentUser = getCurrentUser(c);
         SharedPreferences settings = c.getSharedPreferences(currentUser, 0);
-        String value = settings.getString(key, "0");
-        return value;
+        return settings.getString(key, "0");
     }
-
+/*
     public String[] getStringArrayy(String action) {
         if (action.equals("area")) return  context.getResources().getStringArray(R.array.area);
         else if (action.equals("lpu")) return  context.getResources().getStringArray(R.array.lpu);
@@ -55,4 +48,5 @@ public class Storage {
         else if (action.equals("hist")) return  context.getResources().getStringArray(R.array.hist);
         else return context.getResources().getStringArray(R.array.def_arr);
     }
+    */
 }

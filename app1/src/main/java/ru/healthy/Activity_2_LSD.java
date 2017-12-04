@@ -3,8 +3,6 @@ package ru.healthy;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 public class Activity_2_LSD extends ActivityBase {
 

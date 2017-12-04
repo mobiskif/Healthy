@@ -2,8 +2,7 @@ package ru.healthy;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +13,7 @@ public class Activity_0_UA extends ActivityBase {
         spinner_arr = "GetDistrictList";
         card_arr = "GetLPUList";
         list_arr = "GetLPUList";
+        button_text = getString(R.string.save);
     }
 
     @Override
@@ -27,14 +27,9 @@ public class Activity_0_UA extends ActivityBase {
         findViewById(R.id.spinner).setVisibility(View.VISIBLE);
     }
 
-    @Override
-    void show_Values() {
-        super.show_Values();
-        ((Button) findViewById(R.id.button)).setText(R.string.save);
-        findViewById(R.id.tv).setOnClickListener(this);
-    }
-
-    void parseFIO(String s) {
+    void storeFIO(String s) {
+        s=s.trim();
+        Storage.store(this, "FIO", s);
         String[] ar = s.split(" ");
         if (ar.length==4) {
             Storage.store(this, "Surname", ar[0]);
@@ -50,6 +45,15 @@ public class Activity_0_UA extends ActivityBase {
             Storage.store(this, "Birstdate", "2001-11-23");
             error=true;
         }
+        if (error) Toast.makeText(this, "Заполните ФИО и дату точно, как в примере", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemSelected(parent, view, position, id);
+        String fio = ((TextView) findViewById(R.id.text)).getText().toString();
+        storeFIO(fio);
     }
 
     @Override
@@ -57,24 +61,12 @@ public class Activity_0_UA extends ActivityBase {
         super.onClick(v);
 
         if (v.getId() == R.id.button) {
-/*
-            String value = String.valueOf(((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition());
-            Storage.store(this, spinner_arr+"_pos", value);
 
-            String[] svalue = (String[]) ((Spinner) findViewById(R.id.spinner)).getSelectedItem();
-            Storage.store(this, spinner_arr+"_str", svalue[1]);
-
-            Spinner spinner = findViewById(R.id.spinner);
-            DataAdapter adapter = (DataAdapter) spinner.getAdapter();
-            String [] row = (String[]) adapter.getItem(spinner.getSelectedItemPosition());
-            Storage.store(this, spinner_arr, row[0]);
-*/
             String tvalue = ((TextView) findViewById(R.id.text)).getText().toString();
             Storage.store(this, "FIO", tvalue);
-            parseFIO(tvalue);
+            storeFIO(tvalue);
 
-            if (error) Toast.makeText(this, "Заполните ФИО и дату точно, как в примере", Toast.LENGTH_LONG).show();
-            else {
+            if (!error) {
                 startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
                 finish();
             }

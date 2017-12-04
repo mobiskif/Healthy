@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 public class Activity_1_ULH extends ActivityBase {
@@ -112,6 +113,13 @@ public class Activity_1_ULH extends ActivityBase {
         restore_Values();
         show_Values();
         spinner.setSelection(spinner_pos);
+
+        ListView listView = findViewById(R.id.list);
+        if (listView.getVisibility()==View.VISIBLE) {
+            final DataAdapter adapter2 = (DataAdapter) listView.getAdapter();
+            adapter2.update();
+        }
+
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         onCreateOptionsMenu(navigationView.getMenu());

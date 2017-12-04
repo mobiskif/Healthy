@@ -7,14 +7,6 @@
         <item>44</item>
     </string-array>
 
-    <array name="place_avator">
-        <item>@drawable/a_avator</item>
-        <item>@drawable/b_avator</item>
-        <item>@drawable/c_avator</item>
-        <item>@drawable/d_avator</item>
-        <item>@drawable/e_avator</item>
-        <item>@drawable/f_avator</item>
-    </array>
     <string-array name="lpu">
         <item>СПб ГБУЗ "Врачебно-физкультурный диспансер №3"</item>
         <item>СПб ГБУЗ "Городская больница №14"</item>
