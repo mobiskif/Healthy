@@ -6,12 +6,12 @@ import android.preference.PreferenceManager;
 
 
 public class Storage {
-    Context context;
-
+    //Context context;
+/*
     public Storage(Context c) {
         context = c;
     }
-
+*/
     public static void setCurrentUser(Context c, String user) {
         SharedPreferences defsettings = PreferenceManager.getDefaultSharedPreferences(c);
         SharedPreferences.Editor eddef = defsettings.edit();

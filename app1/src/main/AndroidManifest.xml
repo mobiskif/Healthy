@@ -50,12 +50,12 @@
             android:name=".Activity_2_LSD"
             android:label="@string/menu2"
             android:parentActivityName=".Activity_1_ULH"
-            />
+            tools:targetApi="jelly_bean" />
         <activity
             android:name=".Activity_3_DRT"
             android:label="@string/menu3"
             android:parentActivityName=".Activity_2_LSD"
-            />
+            tools:targetApi="jelly_bean" />
         <activity
             android:name=".Activity_4_MAP"
             android:label="@string/menu4"
@@ -64,6 +64,8 @@
             android:name=".Activity_5_YN"
             android:theme="@style/Theme.AppCompat.Dialog"
             android:label="@string/menu5" />
+        <activity
+            android:name=".ActivityBase" />
 
     </application>
 

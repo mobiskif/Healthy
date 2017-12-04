@@ -11,5 +11,5 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/b01"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/app_name" />
 </LinearLayout>

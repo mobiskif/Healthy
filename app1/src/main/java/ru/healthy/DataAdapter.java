@@ -68,7 +68,8 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
         String[] item = (String[]) getItem(position);
         LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         TextView v = (TextView) ((convertView == null) ? inflater.inflate(android.R.layout.simple_list_item_1, parent, false) : convertView);
-        v.setText(item[1] + " (" +item[2]+ ")");
+        String s = item[1] + " (" +item[2]+ ")";
+        v.setText(s);
         return v;
     }
 
@@ -117,7 +118,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {  }
 
-    static class MyCursorLoader extends CursorLoader {
+    class MyCursorLoader extends CursorLoader {
         Context context;
         String action;
         int id;

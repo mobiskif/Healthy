@@ -26,13 +26,11 @@
             android:id="@+id/Yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/yes" />
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:minHeight="16dp"
             android:minWidth="16dp"
             android:visibility="visible" />
@@ -41,7 +39,6 @@
             android:id="@+id/No"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/no" />
     </LinearLayout>
 

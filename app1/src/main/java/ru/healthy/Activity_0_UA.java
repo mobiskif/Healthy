@@ -46,14 +46,13 @@ public class Activity_0_UA extends ActivityBase {
             error=true;
         }
         if (error) Toast.makeText(this, "Заполните ФИО и дату точно, как в примере", Toast.LENGTH_LONG).show();
-
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        super.onItemSelected(parent, view, position, id);
         String fio = ((TextView) findViewById(R.id.text)).getText().toString();
         storeFIO(fio);
+        super.onItemSelected(parent, view, position, id);
     }
 
     @Override

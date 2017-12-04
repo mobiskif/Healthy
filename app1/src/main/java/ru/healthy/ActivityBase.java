@@ -151,7 +151,6 @@ public class ActivityBase extends AppCompatActivity implements  AdapterView.OnIt
             Storage.store(this, spinner_arr + "_pos", String.valueOf(position));
             //Log.d(TAG, "onItemSelected() сохранено в SharedPref: "+row[0] +" "+row[1] +" "+row[2] +" ");
 
-            /** обновить checkPatient ****/
             if (spinner_arr.equals("GetLPUList")) {
                 final DataAdapter adapter1 = new DataAdapter(this, position,"CheckPatient");
                 adapter1.registerDataSetObserver(new DataSetObserver() {
@@ -166,7 +165,6 @@ public class ActivityBase extends AppCompatActivity implements  AdapterView.OnIt
                 });
             }
 
-            /** обновить list ***/
             ListView listView = findViewById(R.id.list);
             if (listView.getVisibility()==View.VISIBLE) {
                 final DataAdapter adapter2 = (DataAdapter) listView.getAdapter();
