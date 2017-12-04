@@ -86,17 +86,18 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
         if (((MyCursorLoader)loader).id == this.id) {
             loaded = true;
             cursor = data;
+
             if (action.equals("CheckPatient")) {
                 if (cursor != null) {
                     cursor.moveToPosition(0);
                     if (!cursor.isAfterLast()) {
                         String idPat = cursor.getString(0);
                         Storage.store(context, "CheckPatient", idPat);
-                        Log.d(TAG, "CheckPatient = " + toStr(cursor) + " idPat=" + idPat);
+                        //Log.d(TAG, "CheckPatient = " + toStr(cursor) + " idPat=" + idPat);
                     }
                 }
             }
-            Log.d(TAG, "Обновлен адаптер: " + action + " " + id);
+            Log.d(TAG, "Обновлен адаптер: " + action);// + " " + id +" "+ toStr(cursor));
         }
         else {
             Log.d(TAG, "чужой лоадер");
@@ -108,7 +109,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
         StringBuilder r= new StringBuilder();
         data.moveToFirst();
         while(!data.isAfterLast()) {
-            for (int i=0; i<data.getCount(); i++) r.append(data.getString(0)).append(" ");
+            r.append(data.getString(1)).append(" ");
             data.moveToNext();
         }
         data.close();
@@ -118,7 +119,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {  }
 
-    class MyCursorLoader extends CursorLoader {
+    static class MyCursorLoader extends CursorLoader {
         Context context;
         String action;
         int id;

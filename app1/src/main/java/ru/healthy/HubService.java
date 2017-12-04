@@ -423,7 +423,8 @@ class HubService extends Observable {
                         int i=0;
                         switch (name) {
                             case "IdAppointment":
-                                row[0] = ++i;
+                                //row[0] = ++i;
+                                row[0] = text;
                                 row[3] = text;
                                 break;
                             case "VisitStart":
@@ -735,11 +736,11 @@ class HubService extends Observable {
                                 row[1] = text;
                                 break;
                             case "IdAppointment":
-                                row[3] = text;
+                                row[0] = text;
                                 break;
                             case "NameSpesiality":
                                 //if(text!=null) row[1] = text +"\n"+ row[1];
-                                if(text!=null) row[0] = text;
+                                if(text!=null) row[1] = text + "\n"+row[1];
                                 break;
                             case "VisitStart":
                                 if (text!=null) {
@@ -944,7 +945,7 @@ class HubService extends Observable {
                 "   </soapenv:Body>\n" +
                 "</soapenv:Envelope>";
 
-        Log.d(TAG, query);
+        //Log.d(TAG, query);
 
         XmlPullParser myParser = readSOAP(query, "CheckPatient");
 

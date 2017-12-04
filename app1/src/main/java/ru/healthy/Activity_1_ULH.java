@@ -1,11 +1,13 @@
 package ru.healthy;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.support.design.widget.NavigationView;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,7 +62,7 @@ public class Activity_1_ULH extends ActivityBase {
         if (label1_text.length()<5) label1_text="Нахмите сюда, заполните ФИО и район";
         //label1_text = Storage.restore(this, "CheckPatient");
         textview_text = Storage.restore(this, "FIO");
-        if (textview_text.length()<5) textview_text="Нахмите сюда, заполните ФИО и район";
+        if (textview_text.length()<5) textview_text="Нажмите сюда, заполните ФИО и район";
     }
 
     @Override
@@ -96,7 +98,7 @@ public class Activity_1_ULH extends ActivityBase {
         super.onItemClick(parent,view,position,id);
         Intent intent = new Intent(this, Activity_5_YN.class);
         intent.putExtra("message", getString(R.string.cancel_talon));
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, position);
     }
 
     public void doItem(MenuItem menuItem) {
@@ -125,4 +127,34 @@ public class Activity_1_ULH extends ActivityBase {
         onCreateOptionsMenu(navigationView.getMenu());
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode==RESULT_OK) {
+            //FirebaseCrash.log("onActivityResult="+data.getDataString());
+            //FirebaseCrash.report(data.getDataString());
+
+            final DataAdapter adapter1 = new DataAdapter(this, requestCode, "CreateClaimForRefusal");
+            adapter1.registerDataSetObserver(new DataSetObserver() {
+                @Override
+                public void onChanged() {
+                    super.onChanged();
+                    String[] s = (String[]) adapter1.getItem(0);
+                    Log.d(TAG, "######### курсор CreateClaimForRefusal: " + s[0] + " " + s[1] + " " + s[2] + " " + s[3]);
+                    //restore_Values();
+                    //show_Values();
+                }
+            });
+
+
+            String s = "Талончик успешно отменен!\n";
+            s += Storage.restore(this, "GetPatientHistory") + " ";
+            //+ Storage.restore(this, "CheckPatient") + " "
+            //+ Storage.restore(this, "GetLPUList");
+            data.putExtra("result", s);
+            super.onActivityResult(requestCode, resultCode, data);
+
+            startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
+            finish();
+        }
+    }
 }

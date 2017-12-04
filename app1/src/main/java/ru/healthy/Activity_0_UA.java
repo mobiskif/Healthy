@@ -13,7 +13,6 @@ public class Activity_0_UA extends ActivityBase {
         spinner_arr = "GetDistrictList";
         card_arr = "GetLPUList";
         list_arr = "GetLPUList";
-        button_text = getString(R.string.save);
     }
 
     @Override
@@ -25,6 +24,7 @@ public class Activity_0_UA extends ActivityBase {
         findViewById(R.id.list).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.VISIBLE);
         findViewById(R.id.spinner).setVisibility(View.VISIBLE);
+        button_text = getString(R.string.save);
     }
 
     void storeFIO(String s) {

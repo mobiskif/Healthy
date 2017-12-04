@@ -1,6 +1,8 @@
 package ru.healthy;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -30,13 +32,29 @@ public class Activity_3_DRT extends ActivityBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode==RESULT_OK) {
-            Toast.makeText(this, getString(R.string.success) + " " + data.getStringExtra("result"), Toast.LENGTH_SHORT).show();
-
             //FirebaseCrash.log("onActivityResult="+data.getDataString());
             //FirebaseCrash.report(data.getDataString());
+
+            final DataAdapter adapter1 = new DataAdapter(this, requestCode, "SetAppointment");
+            adapter1.registerDataSetObserver(new DataSetObserver() {
+                @Override
+                public void onChanged() {
+                    super.onChanged();
+                    String[] s = (String[]) adapter1.getItem(0);
+                    Log.d(TAG, "######### курсор SetAppointment: " + s[0] + " " + s[1] + " " + s[2] + " " + s[3]);
+                    //restore_Values();
+                    //show_Values();
+                }
+            });
+
+
+            String s = "Талончик успешно отложен!\n";
+            s += Storage.restore(this, "GetAvaibleAppointments") + " ";
+            //+ Storage.restore(this, "CheckPatient") + " "
+            //+ Storage.restore(this, "GetLPUList");
+            data.putExtra("result", s);
+            super.onActivityResult(requestCode, resultCode, data);
 
             startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
             finish();
@@ -48,7 +66,7 @@ public class Activity_3_DRT extends ActivityBase {
         super.onItemClick(parent,view,position,id);
         Intent intent = new Intent(this, Activity_5_YN.class);
         intent.putExtra("message", getString(R.string.confirm_talon));
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, position);
     }
 
 
