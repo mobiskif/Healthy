@@ -30,8 +30,8 @@ public class Activity_3_DRT extends ActivityBase {
         super.restore_Values();
         label1_text = Storage.restore(this, "GetSpesialityList_str");
         textview_text = Storage.restore(this, "GetDoctorList_str");
-        label2_text = "Расписание";
-        label3_text = "Талоны";
+        label2_text = "Расписание: ";
+        label3_text = "Свободные талоны: ";
 
     }
 

@@ -74,13 +74,13 @@ public class ActivityBase extends AppCompatActivity implements  AdapterView.OnIt
             DataAdapter spinner_adapter = new DataAdapter (this, rand, spinner_arr);
             spinner.setAdapter(spinner_adapter);
 
+            //только когда собственные данные готовы (асинхронно !!!)
+            //можно восстанавливатьвить сохраненную позицию
+            //связанный список обновится далее по onItemSelection()
             spinner_adapter.registerDataSetObserver(new DataSetObserver() {
                 @Override
                 public void onChanged() {
                     super.onChanged();
-                    //только когда собственные данные будут готовы (асинхронно !!!)
-                    //можно восстанавливатьвить сохраненную позицию
-                    //связанный список обновиться далее по onItemSelection()
                     spinner.setSelection(spinner_pos);
                 }
             });

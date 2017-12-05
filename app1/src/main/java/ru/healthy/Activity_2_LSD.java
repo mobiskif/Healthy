@@ -15,12 +15,17 @@ public class Activity_2_LSD extends ActivityBase {
     @Override
     void set_Visiblity() {
         super.set_Visiblity();
+        findViewById(R.id.label1).setVisibility(View.VISIBLE);
+        findViewById(R.id.label2).setVisibility(View.VISIBLE);
+        findViewById(R.id.label3).setVisibility(View.VISIBLE);
         findViewById(R.id.button).setVisibility(View.GONE);
     }
     @Override
     void restore_Values() {
         super.restore_Values();
-        label1_text = Storage.restore(this, "GetDistrictList_str") + " (" + Storage.restore(this, "CheckPatient") +")";
+        label1_text = "Район: "+Storage.restore(this, "GetDistrictList_str");// + " (" + Storage.restore(this, "CheckPatient") +")";
+        label2_text = "Специальность (свободных талонов): ";
+        label3_text = "Врач (свободных талонов): ";
         textview_text = Storage.restore(this, "GetLPUList_str");
     }
 

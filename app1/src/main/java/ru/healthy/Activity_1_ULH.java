@@ -53,12 +53,16 @@ public class Activity_1_ULH extends ActivityBase {
     void set_Visiblity() {
         super.set_Visiblity();
         findViewById(R.id.label1).setVisibility(View.VISIBLE);
+        findViewById(R.id.label2).setVisibility(View.VISIBLE);
+        findViewById(R.id.label3).setVisibility(View.VISIBLE);
     }
 
     @Override
     void restore_Values() {
         super.restore_Values();
-        label1_text = Storage.restore(this, "GetDistrictList_str") + " (" + Storage.restore(this, "CheckPatient") +")";
+        label1_text = "Район: "+Storage.restore(this, "GetDistrictList_str");// + " (" + Storage.restore(this, "CheckPatient") +")";
+        label2_text = "№ пациента в регистратуре: "+Storage.restore(this, "CheckPatient");
+        label3_text = "Предстоящие посещения: ";
         textview_text = Storage.restore(this, "FIO");
         if (textview_text.length()<5) textview_text="Нажмите сюда, заполните ФИО и район";
     }
