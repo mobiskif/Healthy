@@ -18,11 +18,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
+import static java.lang.Math.random;
+
 public class ActivityBase extends AppCompatActivity implements  AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
     int content_view = R.layout.activity_base;
     int spinner_pos = 0;
     String label1_text = "*";
     String label2_text = "*";
+    String label3_text = "*";
     String textview_text = "*";
     String text_text = "*";
     String button_text = "*";
@@ -61,17 +66,21 @@ public class ActivityBase extends AppCompatActivity implements  AdapterView.OnIt
     }
 
     void attach_Adapters() {
+        int rand;
         final Spinner spinner = findViewById(R.id.spinner);
         if (spinner.getVisibility()==View.VISIBLE) {
             spinner.setOnItemSelectedListener(this);
-            DataAdapter spinner_adapter = new DataAdapter (this, R.layout.item_spinner, spinner_arr);
+            rand = (int) (random()*10000);
+            DataAdapter spinner_adapter = new DataAdapter (this, rand, spinner_arr);
             spinner.setAdapter(spinner_adapter);
 
             spinner_adapter.registerDataSetObserver(new DataSetObserver() {
                 @Override
                 public void onChanged() {
                     super.onChanged();
-                    //Log.d(TAG,"адаптер спинера (" + spinner_arr+") прислал сообщение наблюдателю, можно делать Restore");
+                    //только когда собственные данные будут готовы (асинхронно !!!)
+                    //можно восстанавливатьвить сохраненную позицию
+                    //связанный список обновиться далее по onItemSelection()
                     spinner.setSelection(spinner_pos);
                 }
             });
@@ -80,17 +89,9 @@ public class ActivityBase extends AppCompatActivity implements  AdapterView.OnIt
         final ListView listView = findViewById(R.id.list);
         if (listView.getVisibility()==View.VISIBLE) {
             listView.setOnItemClickListener(this);
-            final DataAdapter list_adapter = new DataAdapter(this, android.R.layout.simple_list_item_1, list_arr);
+            rand = (int) (random()*10000);
+            DataAdapter list_adapter = new DataAdapter(this, rand, list_arr);
             listView.setAdapter(list_adapter);
-
-            list_adapter.registerDataSetObserver(new DataSetObserver() {
-                @Override
-                public void onChanged() {
-                    super.onChanged();
-                    //Log.d(TAG,"адаптер списка (" + list_arr+") прислал сообщение наблюдателю, можно делать Restore");
-                    listView.invalidateViews();
-                }
-            });
         }
 
         RecyclerView mRecyclerView = findViewById(R.id.recycler);
@@ -105,13 +106,14 @@ public class ActivityBase extends AppCompatActivity implements  AdapterView.OnIt
         label2_text = Storage.restore(this, "CheckPatient");
         label1_text = Storage.restore(this, spinner_arr+"_str");
         textview_text = Storage.restore(this, spinner_arr+"_str");
-        text_text = Storage.restore(this, "FIO");
+        text_text = Storage.restore(this, "FIO"); if (text_text.length()<2) text_text="";
         spinner_pos = Integer.valueOf(Storage.restore(this, spinner_arr+"_pos"));
     }
 
     void show_Values() {
         ((TextView) findViewById(R.id.label1)).setText(label1_text);
         ((TextView) findViewById(R.id.label2)).setText(label2_text);
+        ((TextView) findViewById(R.id.label3)).setText(label3_text);
         ((TextView) findViewById(R.id.text)).setText(text_text);
         ((TextView) findViewById(R.id.textview)).setText(textview_text);
         ((Button) findViewById(R.id.button)).setText(button_text);
@@ -152,26 +154,40 @@ public class ActivityBase extends AppCompatActivity implements  AdapterView.OnIt
             //Log.d(TAG, "onItemSelected() сохранено в SharedPref: "+row[0] +" "+row[1] +" "+row[2] +" ");
 
             if (spinner_arr.equals("GetLPUList")) {
-                final DataAdapter adapter1 = new DataAdapter(this, position,"CheckPatient");
+                int i = (int) (random()*10000);
+                DataAdapter adapter1 = new DataAdapter(this, i,"CheckPatient");
                 adapter1.registerDataSetObserver(new DataSetObserver() {
                     @Override
                     public void onChanged() {
                         super.onChanged();
-                        String[] s = (String[]) adapter1.getItem(0);
-                        Log.d(TAG, "курсор CheckPatient: "+s[0]+" "+s[1]+ " " +s[2]+ " " +s[3]);
-                        restore_Values();
-                        show_Values();
+                        //String[] s = (String[]) adapter1.getItem(0);
+                        //Log.d(TAG, "готов CheckPatient: "+s[0]+" "+s[1]+ " " +s[2]+ " " +s[3]);
+                        Log.d(TAG, "готов CheckPatient: ");
+
+                        ListView listView = findViewById(R.id.list);
+                        if (listView.getVisibility() == View.VISIBLE) {
+                            DataAdapter adapter2 = (DataAdapter) listView.getAdapter();
+                            /*
+                            adapter2.registerDataSetObserver(new DataSetObserver() {
+                                @Override
+                                public void onChanged() {
+                                    super.onChanged();
+                                }
+                            });
+                            */
+                            adapter2.update();
+                        }
                     }
                 });
             }
-
-            ListView listView = findViewById(R.id.list);
-            if (listView.getVisibility()==View.VISIBLE) {
-                final DataAdapter adapter2 = (DataAdapter) listView.getAdapter();
-                adapter2.update();
+            else {
+                ListView listView = findViewById(R.id.list);
+                if (listView.getVisibility() == View.VISIBLE) {
+                    DataAdapter adapter2 = (DataAdapter) listView.getAdapter();
+                    adapter2.update();
+                }
+                //RecyclerView mRecyclerView = findViewById(R.id.recycler); if (mRecyclerView.getVisibility()==View.VISIBLE) updateObserver((AdapterView) mRecyclerView);
             }
-            //RecyclerView mRecyclerView = findViewById(R.id.recycler); if (mRecyclerView.getVisibility()==View.VISIBLE) updateObserver((AdapterView) mRecyclerView);
-
             restore_Values();
             show_Values();
         }

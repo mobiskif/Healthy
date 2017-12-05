@@ -59,8 +59,6 @@ public class Activity_1_ULH extends ActivityBase {
     void restore_Values() {
         super.restore_Values();
         label1_text = Storage.restore(this, "GetDistrictList_str") + " (" + Storage.restore(this, "CheckPatient") +")";
-        if (label1_text.length()<5) label1_text="Нахмите сюда, заполните ФИО и район";
-        //label1_text = Storage.restore(this, "CheckPatient");
         textview_text = Storage.restore(this, "FIO");
         if (textview_text.length()<5) textview_text="Нажмите сюда, заполните ФИО и район";
     }
@@ -101,32 +99,6 @@ public class Activity_1_ULH extends ActivityBase {
         startActivityForResult(intent, position);
     }
 
-    public void doItem(MenuItem menuItem) {
-        //menuItem.setChecked(true);
-        String s = menuItem.getTitle().toString();
-        if (s.equals(getString(R.string.menu0))) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
-        else if (s.equals(getString(R.string.umenu0))) Storage.setCurrentUser(this, "0");
-        else if (s.equals(getString(R.string.umenu1))) Storage.setCurrentUser(this, "1");
-        else if (s.equals(getString(R.string.umenu2))) Storage.setCurrentUser(this, "2");
-        mDrawerLayout.closeDrawers();
-
-        Spinner spinner = findViewById(R.id.spinner);
-        ((DataAdapter) spinner.getAdapter()).update();
-        restore_Values();
-        show_Values();
-        spinner.setSelection(spinner_pos);
-
-        ListView listView = findViewById(R.id.list);
-        if (listView.getVisibility()==View.VISIBLE) {
-            final DataAdapter adapter2 = (DataAdapter) listView.getAdapter();
-            adapter2.update();
-        }
-
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        onCreateOptionsMenu(navigationView.getMenu());
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode==RESULT_OK) {
@@ -156,5 +128,31 @@ public class Activity_1_ULH extends ActivityBase {
             startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
             finish();
         }
+    }
+
+    public void doItem(MenuItem menuItem) {
+        //menuItem.setChecked(true);
+        String s = menuItem.getTitle().toString();
+        if (s.equals(getString(R.string.menu0))) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
+        else if (s.equals(getString(R.string.umenu0))) Storage.setCurrentUser(this, "0");
+        else if (s.equals(getString(R.string.umenu1))) Storage.setCurrentUser(this, "1");
+        else if (s.equals(getString(R.string.umenu2))) Storage.setCurrentUser(this, "2");
+        mDrawerLayout.closeDrawers();
+
+        Spinner spinner = findViewById(R.id.spinner);
+        ((DataAdapter) spinner.getAdapter()).update();
+        restore_Values();
+        show_Values();
+        spinner.setSelection(spinner_pos);
+
+        ListView listView = findViewById(R.id.list);
+        if (listView.getVisibility()==View.VISIBLE) {
+            final DataAdapter adapter2 = (DataAdapter) listView.getAdapter();
+            adapter2.update();
+        }
+
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        onCreateOptionsMenu(navigationView.getMenu());
     }
 }

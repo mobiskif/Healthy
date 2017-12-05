@@ -21,6 +21,8 @@ public class Activity_3_DRT extends ActivityBase {
     void set_Visiblity() {
         super.set_Visiblity();
         findViewById(R.id.button).setVisibility(View.GONE);
+        findViewById(R.id.label2).setVisibility(View.VISIBLE);
+        findViewById(R.id.label3).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -28,6 +30,9 @@ public class Activity_3_DRT extends ActivityBase {
         super.restore_Values();
         label1_text = Storage.restore(this, "GetSpesialityList_str");
         textview_text = Storage.restore(this, "GetDoctorList_str");
+        label2_text = "Расписание";
+        label3_text = "Талоны";
+
     }
 
     @Override

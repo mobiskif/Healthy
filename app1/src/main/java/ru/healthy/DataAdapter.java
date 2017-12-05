@@ -28,15 +28,13 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
         action = a;
         loaded=false;
 
-        Log.d(TAG, "Создан адаптер: " + action + " " + id);
-
+        Log.d(TAG, "Заявка на создание адаптера: " + action + " " + id);
         context.getLoaderManager().initLoader(id, null, this);
     }
 
     @Override
     public void update() {
-        Log.d(TAG, "Заявка на обновление " + action + " " + id);
-        //context.getLoaderManager().initLoader(id, null, this);
+        Log.d(TAG, "Заявка на обновление адаптера: " + action + " " + id);
         context.getLoaderManager().restartLoader(id, null, this);
     }
 
@@ -75,6 +73,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        Log.d(TAG, "onCreateLoader " + id);
         loaded=false;
         MyCursorLoader loader = new MyCursorLoader(context, action);
         loader.id = id;
@@ -93,16 +92,15 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
                     if (!cursor.isAfterLast()) {
                         String idPat = cursor.getString(0);
                         Storage.store(context, "CheckPatient", idPat);
-                        //Log.d(TAG, "CheckPatient = " + toStr(cursor) + " idPat=" + idPat);
                     }
                 }
             }
-            Log.d(TAG, "Обновлен адаптер: " + action);// + " " + id +" "+ toStr(cursor));
+            Log.d(TAG, "onLoadFinished: " + action);
+            notifyDataSetChanged();
         }
         else {
             Log.d(TAG, "чужой лоадер");
         }
-        notifyDataSetChanged();
     }
 
     private String toStr(Cursor data) {
@@ -132,6 +130,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
 
         @Override
         public Cursor loadInBackground() {
+            Log.d("jop", "MyCursorLoader.loadInBackground()");
             HubService hs = new HubService(context);
             Cursor cur=null;
             String sw= action;
