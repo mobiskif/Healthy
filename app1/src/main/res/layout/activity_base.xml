@@ -53,6 +53,6 @@
         android:visibility="invisible"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@android:drawable/ic_dialog_info" />
 
 </android.support.design.widget.CoordinatorLayout>

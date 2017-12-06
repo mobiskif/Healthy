@@ -55,6 +55,7 @@ public class Activity_1_ULH extends ActivityBase {
         findViewById(R.id.label1).setVisibility(View.VISIBLE);
         findViewById(R.id.label2).setVisibility(View.VISIBLE);
         findViewById(R.id.label3).setVisibility(View.VISIBLE);
+        findViewById(R.id.fab).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -73,6 +74,8 @@ public class Activity_1_ULH extends ActivityBase {
 
         if (v.getId() == R.id.textview) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
         else if (v.getId() == R.id.button) startActivity(new Intent(getApplicationContext(), Activity_2_LSD.class));
+
+
     }
 
     @Override

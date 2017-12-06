@@ -156,7 +156,7 @@ class HubService extends Observable {
                                 case "Org_Type":
                                     hubid = text;
                                     row[3]+=" "+ hubid;
-                                    if (row[2] != null) mc.addRow(row);
+                                    if (row[2] != null && !hubid.contains("Аптеки")) mc.addRow(row);
                                     break;
                                 case "WWW":
                                     break;

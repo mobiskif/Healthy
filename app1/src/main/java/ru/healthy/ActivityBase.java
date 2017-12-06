@@ -46,7 +46,8 @@ public class ActivityBase extends AppCompatActivity implements  AdapterView.OnIt
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Нажата FloatingActionButton", Snackbar.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), Activity_0_help.class));
+                //Snackbar.make(v, "Нажата FloatingActionButton", Snackbar.LENGTH_LONG).show();
             }
         });
 

@@ -15,7 +15,7 @@
     <string name="format">Фиамилия Имя Отчество 1977-11-23</string>
 
     <string name="menu0">Настройки</string>
-    <string name="menu1">Пациент</string>
+    <string name="menu1">Описание работы</string>
     <string name="menu2">Поликлиника</string>
     <string name="menu3">Доктор</string>
     <string name="menu4">Карта</string>
@@ -29,5 +29,16 @@
     <string name="umenu0">Пациент 1</string>
     <string name="umenu1">Пациент 2</string>
     <string name="umenu2">Пациент 3</string>
+
+    <string name="help_text">
+        Для изменения текстов или параметров - просто нажмите на них (клик).
+\n\n
+        Можно вести трех членов семьи. Проведите по экрану слева направо (свайп) для выбора.
+\n\n
+        Записаться можно в те поликлиники, где Вы есть в базе (т.е. хоть один раз посетили регистратуру очно).
+\n\n
+        ФИО нужно указывать так, как записано в регистратуре.
+        Дату указывать в формате "1986-11-27"
+    </string>
 
 </resources>
