@@ -15,9 +15,9 @@ public class Activity_0_help extends ActivityBase {
     @Override
     void set_Visiblity() {
         super.set_Visiblity();
-        findViewById(R.id.label1).setVisibility(View.GONE);
+        findViewById(R.id.label1).setVisibility(View.VISIBLE);
         findViewById(R.id.text).setVisibility(View.GONE);
-        //findViewById(R.id.textview).setVisibility(View.GONE);
+        findViewById(R.id.textview).setVisibility(View.GONE);
         findViewById(R.id.list).setVisibility(View.GONE);
         findViewById(R.id.tv).setVisibility(View.GONE);
         findViewById(R.id.spinner).setVisibility(View.GONE);
@@ -29,6 +29,6 @@ public class Activity_0_help extends ActivityBase {
 
     @Override
     void restore_Values() {
-        textview_text = getString(R.string.help_text);
+        label1_text = getString(R.string.help_text);
     }
 }
