@@ -6,12 +6,7 @@ import android.preference.PreferenceManager;
 
 
 public class Storage {
-    //Context context;
-/*
-    public Storage(Context c) {
-        context = c;
-    }
-*/
+
     public static void setCurrentUser(Context c, String user) {
         SharedPreferences defsettings = PreferenceManager.getDefaultSharedPreferences(c);
         SharedPreferences.Editor eddef = defsettings.edit();
@@ -37,16 +32,4 @@ public class Storage {
         SharedPreferences settings = c.getSharedPreferences(currentUser, 0);
         return settings.getString(key, "0");
     }
-/*
-    public String[] getStringArrayy(String action) {
-        if (action.equals("area")) return  context.getResources().getStringArray(R.array.area);
-        else if (action.equals("lpu")) return  context.getResources().getStringArray(R.array.lpu);
-        else if (action.equals("spec")) return  context.getResources().getStringArray(R.array.spec);
-        else if (action.equals("doc")) return  context.getResources().getStringArray(R.array.doc);
-        else if (action.equals("dates")) return  context.getResources().getStringArray(R.array.dates);
-        else if (action.equals("talons")) return  context.getResources().getStringArray(R.array.talons);
-        else if (action.equals("hist")) return  context.getResources().getStringArray(R.array.hist);
-        else return context.getResources().getStringArray(R.array.def_arr);
-    }
-    */
 }

@@ -1,5 +1,6 @@
 package ru.healthy;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 
 public class DataAdapter extends BaseAdapter implements IDataAdapter, android.app.LoaderManager.LoaderCallbacks<Cursor> {
-    ActivityBase context;
+    Activity context;
     int id;
     String action;
     boolean loaded;
@@ -22,7 +23,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
     String TAG=getClass().getSimpleName()+" jop";
 
 
-    public DataAdapter(ActivityBase c, int r, String a) {
+    public DataAdapter(Activity c, int r, String a) {
         context = c;
         id = r;
         action = a;
@@ -137,6 +138,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
             //sw="qweqwe";
             switch (sw) {
                 case "GetLPUList": cur=hs.GetLPUList("GetLPUList"); break;
+                case "GetOrgList": cur=hs.GetOrgList("GetOrgList"); break;
                 case "GetDistrictList": cur=hs.GetDistrictList("GetDistrictList"); break;
                 case "CheckPatient": cur=hs.CheckPatient("CheckPatient"); break;
                 case "GetPatientHistory": cur=hs.GetPatientHistory("GetPatientHistory"); break;

@@ -107,6 +107,7 @@ class HubService extends Observable {
                 "      </tem:GetOrgList>\n" +
                 "   </soapenv:Body>\n" +
                 "</soapenv:Envelope>";
+        //Log.d(TAG,query);
 
         XmlPullParser myParser = readSOAP(query, action);
         if (myParser==null) return defaultList();
@@ -130,6 +131,7 @@ class HubService extends Observable {
                             break;
 
                         case XmlPullParser.END_TAG:
+                            String hubid=null;
                             switch (name) {
                                 case "Chief":
                                     row[3] = text;
@@ -142,7 +144,6 @@ class HubService extends Observable {
                                 case "EMail":
                                     break;
                                 case "Hub_ID":
-                                    //row[0] = text;
                                     break;
                                 case "ID":
                                     break;
@@ -153,6 +154,8 @@ class HubService extends Observable {
                                     row[1] = text;
                                     break;
                                 case "Org_Type":
+                                    hubid = text;
+                                    row[3]+=" "+ hubid;
                                     if (row[2] != null) mc.addRow(row);
                                     break;
                                 case "WWW":
