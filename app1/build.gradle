@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.3'
+    buildToolsVersion '27.0.2'
     flavorDimensions "default"
 
     signingConfigs {
@@ -18,8 +18,8 @@ android {
         applicationId "ru.healthy"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 40
-        versionName '40'
+        versionCode 41
+        versionName '41'
         vectorDrawables.useSupportLibrary = true
     }
 
