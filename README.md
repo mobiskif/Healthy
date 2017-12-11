@@ -12,8 +12,9 @@ This sample app demonstrates app using Android Design Support Library.
 blog](http://android-developers.blogspot.se/2015/05/android-design-support-library.html).
 
 ### Screenshots
-<img src="1.png">
+<img src="1.png" width="25%">
 
+<img src="5.png" width="25%">
 
 ### Getting Started
 
