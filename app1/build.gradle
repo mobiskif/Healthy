@@ -9,7 +9,7 @@ android {
         signRelease {
             keyAlias 'key0'
             keyPassword 'router1966'
-            storeFile file('/home/john/AndroidStudioProjects/keystore.jks')
+            storeFile file('C:/Users/user/StudioProjects/keystore.jks')
             storePassword 'router1966'
         }
     }
