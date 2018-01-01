@@ -9,7 +9,7 @@ android {
         signRelease {
             keyAlias 'key0'
             keyPassword 'router1966'
-            storeFile file('C:/Users/user/StudioProjects/keystore.jks')
+            storeFile file('/home/john/AndroidStudioProjects/keystore.jks')
             storePassword 'router1966'
         }
     }
@@ -18,8 +18,8 @@ android {
         applicationId "ru.healthy"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 41
-        versionName '41'
+        versionCode 42
+        versionName '42'
         vectorDrawables.useSupportLibrary = true
     }
 

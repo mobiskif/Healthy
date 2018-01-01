@@ -394,7 +394,7 @@ class HubService extends Observable {
                 "         <tem:idDoc>"+idDoc+"</tem:idDoc>\n" +
                 "         <tem:idLpu>"+orgID+"</tem:idLpu>\n" +
                 "         <tem:idPat>"+idPat+"</tem:idPat>\n" +
-                "         <tem:visitStart>2017-12-01</tem:visitStart>\n" +
+                "         <tem:visitStart>2018-01-01</tem:visitStart>\n" +
                 "         <tem:visitEnd>2018-12-31</tem:visitEnd>\n" +
                 "         <tem:guid>6b2158a1-56e0-4c09-b70b-139b14ffee14</tem:guid>\n" +
                 "      </tem:GetAvaibleAppointments>\n" +
@@ -786,7 +786,7 @@ class HubService extends Observable {
                 "      <tem:GetWorkingTime>\n" +
                 "         <tem:idDoc>"+idDoc+"</tem:idDoc>\n" +
                 "         <tem:idLpu>"+orgID+"</tem:idLpu>\n" +
-                "         <tem:visitStart>2017-12-01</tem:visitStart>\n" +
+                "         <tem:visitStart>2018-01-01</tem:visitStart>\n" +
                 "         <tem:visitEnd>2018-12-31</tem:visitEnd>\n" +
                 "         <tem:guid>6b2158a1-56e0-4c09-b70b-139b14ffee14</tem:guid>\n" +
                 "      </tem:GetWorkingTime>\n" +
