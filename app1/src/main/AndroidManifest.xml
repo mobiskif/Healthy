@@ -26,7 +26,7 @@
             android:label="@string/menu0"
             android:parentActivityName=".Activity_1_ULH"/>
         <activity
-            android:name=".Activity_0_help"
+            android:name=".Activity_6_help"
             android:label="@string/menu1"
             android:parentActivityName=".Activity_1_ULH"/>
         <activity

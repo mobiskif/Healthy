@@ -6,12 +6,14 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.TwoLineListItem;
 
 
 public class DataAdapter extends BaseAdapter implements IDataAdapter, android.app.LoaderManager.LoaderCallbacks<Cursor> {
@@ -66,7 +68,9 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
     public View getView(int position, View convertView, ViewGroup parent) {
         String[] item = (String[]) getItem(position);
         LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        TextView v = (TextView) ((convertView == null) ? inflater.inflate(android.R.layout.simple_list_item_1, parent, false) : convertView);
+        //TwoLineListItem view = (TwoLineListItem) inflater.inflate(android.R.layout.simple_list_item_2, parent, false); TextView v = view.getText1();
+        TextView v2 = (TextView) ((convertView == null) ? inflater.inflate(android.R.layout.simple_list_item_1, parent, false) : convertView);
+        TextView v = (TextView) ((convertView == null) ? inflater.inflate(R.layout.item_spinner, parent, false) : convertView);
         String s = item[1] + " (" +item[2]+ ")";
         v.setText(s);
         return v;

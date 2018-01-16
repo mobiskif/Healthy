@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,8 +16,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Random;
 
 import static java.lang.Math.random;
 
@@ -46,7 +43,7 @@ public class ActivityBase extends AppCompatActivity implements  AdapterView.OnIt
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Activity_0_help.class));
+                startActivity(new Intent(getApplicationContext(), Activity_6_help.class));
                 //Snackbar.make(v, "Нажата FloatingActionButton", Snackbar.LENGTH_LONG).show();
             }
         });

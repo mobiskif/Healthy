@@ -6,8 +6,8 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Activity_0_help extends ActivityBase {
-    public Activity_0_help() {
+public class Activity_6_help extends ActivityBase {
+    public Activity_6_help() {
         super();
         //content_view = R.layout.activity_base;
     }
