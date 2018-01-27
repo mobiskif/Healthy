@@ -1,6 +1,7 @@
 package ru.healthy;
 
 import android.content.Intent;
+import android.support.design.widget.AppBarLayout;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -19,6 +20,7 @@ public class Activity_2_LSD extends ActivityBase {
         findViewById(R.id.label2).setVisibility(View.VISIBLE);
         findViewById(R.id.label3).setVisibility(View.VISIBLE);
         findViewById(R.id.button).setVisibility(View.GONE);
+        ((AppBarLayout) findViewById(R.id.appbar)).setExpanded(false);
     }
     @Override
     void restore_Values() {
@@ -33,7 +35,16 @@ public class Activity_2_LSD extends ActivityBase {
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         super.onItemClick(parent,view,position,id);
         Intent intent = new Intent(this, Activity_3_DRT.class);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, REQUEST_CODE_DRT);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==REQUEST_CODE_DRT) {
+            if (resultCode == RESULT_OK) {
+                setResult(RESULT_OK);
+                finish();
+            }
+        }
+    }
 }

@@ -179,14 +179,14 @@ class HubService extends Observable {
         //Log.d("jop", "========="+action);
         //SharedPreferences settings = context.getDefaultSharedPreferences(this);
         String districtID = settings.getString("GetDistrictList", "17");
-        String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n" +
-                "   <soapenv:Header/>\n" +
-                "   <soapenv:Body>\n" +
-                "      <tem:GetLPUList>\n" +
-                "         <tem:IdDistrict>" + districtID + "</tem:IdDistrict>\n" +
-                "         <tem:guid>6b2158a1-56e0-4c09-b70b-139b14ffee14</tem:guid>\n" +
-                "      </tem:GetLPUList>\n" +
-                "   </soapenv:Body>\n" +
+        String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">" +
+                "   <soapenv:Header/>" +
+                "   <soapenv:Body>" +
+                "      <tem:GetLPUList>" +
+                "         <tem:IdDistrict>" + districtID + "</tem:IdDistrict>" +
+                "         <tem:guid>6b2158a1-56e0-4c09-b70b-139b14ffee14</tem:guid>" +
+                "      </tem:GetLPUList>" +
+                "   </soapenv:Body>" +
                 "</soapenv:Envelope>";
         //Log.d(TAG,query);
 
@@ -699,7 +699,7 @@ class HubService extends Observable {
         String orgID = settings.getString("GetLPUList", "175");
         //String idPat = settings.getString("SearchTop10Patient", "4326");
         //String idPat = settings.getString("idPat", "4326");
-        String idPat = settings.getString("CheckPatient", "554568");
+        String idPat = settings.getString("CheckPatient", "22");
         //Log.d(TAG, Thread.currentThread().getStackTrace()[2].getMethodName() + " история пациента " + idPat + " в поликлинике " + orgID);
 
         String query = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">" +
@@ -916,7 +916,7 @@ class HubService extends Observable {
         String[] from = {"_ID", "1", "2", "3"};
         MatrixCursor mc = new MatrixCursor(from);
         Object[] from1 = {11, "11", "111", "1111"};
-        Object[] from2 = {22, "22", "222", "2222"};
+        Object[] from2 = {22, "qqq 2222222222222 2222222222 444444444 22222222222 www", "222", "2222"};
         Object[] from3 = {33, "33", "333", "3333"};
         mc.addRow(from1);
         mc.addRow(from2);
@@ -932,20 +932,20 @@ class HubService extends Observable {
         String nam = settings.getString("Name", "Дмитрий");
         String sur = settings.getString("Surname", "Пархимович");
         String second = settings.getString("Secondname", "Леонидович");
-        String query="<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\" xmlns:hub=\"http://schemas.datacontract.org/2004/07/HubService2\">\n" +
-                "   <soapenv:Header/>\n" +
-                "   <soapenv:Body>\n" +
-                "      <tem:CheckPatient>\n" +
-                "         <tem:pat>\n" +
-                "           <hub:Birthday>"+birst+"</hub:Birthday>\n" +
-                "            <hub:Name>"+nam+"</hub:Name>\n" +
-                "            <hub:SecondName>"+second+"</hub:SecondName>\n" +
-                "            <hub:Surname>"+sur+"</hub:Surname>\n" +
-                "         </tem:pat>\n" +
-                "         <tem:idLpu>"+lpu+"</tem:idLpu>\n" +
-                "         <tem:guid>6b2158a1-56e0-4c09-b70b-139b14ffee14</tem:guid>\n" +
-                "     </tem:CheckPatient>\n" +
-                "   </soapenv:Body>\n" +
+        String query="<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\" xmlns:hub=\"http://schemas.datacontract.org/2004/07/HubService2\">" +
+                "   <soapenv:Header/>" +
+                "   <soapenv:Body>" +
+                "      <tem:CheckPatient>" +
+                "         <tem:pat>" +
+                "           <hub:Birthday>"+birst+"</hub:Birthday>" +
+                "            <hub:Name>"+nam+"</hub:Name>" +
+                "            <hub:SecondName>"+second+"</hub:SecondName>" +
+                "            <hub:Surname>"+sur+"</hub:Surname>" +
+                "         </tem:pat>" +
+                "         <tem:idLpu>"+lpu+"</tem:idLpu>" +
+                "         <tem:guid>6b2158a1-56e0-4c09-b70b-139b14ffee14</tem:guid>" +
+                "     </tem:CheckPatient>" +
+                "   </soapenv:Body>" +
                 "</soapenv:Envelope>";
 
         //Log.d(TAG, query);

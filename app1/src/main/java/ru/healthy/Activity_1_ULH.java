@@ -1,7 +1,9 @@
 package ru.healthy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.res.ResourcesCompat;
@@ -10,13 +12,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.Toast;
+
+import static java.lang.Math.random;
 
 public class Activity_1_ULH extends ActivityBase {
     private DrawerLayout mDrawerLayout;
+
 
     public Activity_1_ULH() {
         super();
@@ -56,6 +65,9 @@ public class Activity_1_ULH extends ActivityBase {
         findViewById(R.id.label2).setVisibility(View.VISIBLE);
         findViewById(R.id.label3).setVisibility(View.VISIBLE);
         findViewById(R.id.fab).setVisibility(View.VISIBLE);
+
+
+
     }
 
     @Override
@@ -71,11 +83,10 @@ public class Activity_1_ULH extends ActivityBase {
     @Override
     public void onClick(View v) {
         super.onClick(v);
-
-        if (v.getId() == R.id.textview) startActivity(new Intent(getApplicationContext(), Activity_0_UA.class));
-        else if (v.getId() == R.id.button) startActivity(new Intent(getApplicationContext(), Activity_2_LSD.class));
-
-
+        if (v.getId() == R.id.textview)
+            startActivityForResult(new Intent(getApplicationContext(), Activity_0_UA.class), REQUEST_CODE_UA);
+        else if (v.getId() == R.id.button)
+            startActivityForResult(new Intent(getApplicationContext(), Activity_2_LSD.class), REQUEST_CODE_LSD);
     }
 
     @Override
@@ -101,39 +112,45 @@ public class Activity_1_ULH extends ActivityBase {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         super.onItemClick(parent,view,position,id);
-        Intent intent = new Intent(this, Activity_5_YN.class);
-        intent.putExtra("message", getString(R.string.cancel_talon));
-        startActivityForResult(intent, position);
+            Intent intent = new Intent(this, Activity_5_YN.class);
+            intent.putExtra("message", getString(R.string.cancel_talon));
+            startActivityForResult(intent, REQUEST_CODE_YN);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode==RESULT_OK) {
-            //FirebaseCrash.log("onActivityResult="+data.getDataString());
-            //FirebaseCrash.report(data.getDataString());
-
-            final DataAdapter adapter1 = new DataAdapter(this, requestCode, "CreateClaimForRefusal");
-            adapter1.registerDataSetObserver(new DataSetObserver() {
-                @Override
-                public void onChanged() {
-                    super.onChanged();
-                    String[] s = (String[]) adapter1.getItem(0);
-                    Log.d(TAG, "######### курсор CreateClaimForRefusal: " + s[0] + " " + s[1] + " " + s[2] + " " + s[3]);
-                    //restore_Values();
-                    //show_Values();
-                }
-            });
-
-
-            String s = "Талончик успешно отменен!\n";
-            s += Storage.restore(this, "GetPatientHistory") + " ";
-            //+ Storage.restore(this, "CheckPatient") + " "
-            //+ Storage.restore(this, "GetLPUList");
-            data.putExtra("result", s);
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        final Context th = this;
+        //FirebaseCrash.log("onActivityResult="+data.getDataString());
+        //FirebaseCrash.report(data.getDataString());
+        if (requestCode==REQUEST_CODE_YN) {
+            if (resultCode == RESULT_OK) {
+                DataAdapter adapter = new DataAdapter(this, (int) (random() * 10000), "CreateClaimForRefusal");
+                adapter.registerDataSetObserver(new DataSetObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        String s = "Талончик отменен!\n" + Storage.restore(th, "GetPatientHistory") + " ";
+                        Toast.makeText(th, s, Toast.LENGTH_SHORT).show();
+                        refresh();
+                    }
+                });
+            }
+        }
+        else if (requestCode==REQUEST_CODE_UA) {
+            if (resultCode == RESULT_OK) {
+                refresh();
+            }
+        }
+        else if (requestCode==REQUEST_CODE_LSD) {
+            if (resultCode == RESULT_OK) {
+                String s = "Талончик отложен!\n" + Storage.restore(th, "GetAvaibleAppointments") + " ";
+                Toast.makeText(th, s, Toast.LENGTH_SHORT).show();
+                refresh();
+            }
+        }
+        else {
+            data.putExtra("result", "Неизвестный код возврата!");
             super.onActivityResult(requestCode, resultCode, data);
-
-            startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
-            finish();
         }
     }
 
@@ -146,20 +163,11 @@ public class Activity_1_ULH extends ActivityBase {
         else if (s.equals(getString(R.string.umenu2))) Storage.setCurrentUser(this, "2");
         mDrawerLayout.closeDrawers();
 
-        Spinner spinner = findViewById(R.id.spinner);
-        ((DataAdapter) spinner.getAdapter()).update();
-        restore_Values();
-        show_Values();
-        spinner.setSelection(spinner_pos);
-
-        ListView listView = findViewById(R.id.list);
-        if (listView.getVisibility()==View.VISIBLE) {
-            final DataAdapter adapter2 = (DataAdapter) listView.getAdapter();
-            adapter2.update();
-        }
-
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         onCreateOptionsMenu(navigationView.getMenu());
+
+        refresh();
     }
+
+
 }

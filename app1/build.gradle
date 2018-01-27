@@ -1,8 +1,14 @@
 apply plugin: 'com.android.application'
 
+allprojects {
+    repositories {
+        maven { url "https://maven.google.com" }
+    }
+}
+
 android {
     compileSdkVersion 26
-    buildToolsVersion '27.0.2'
+    buildToolsVersion '27.0.3'
     flavorDimensions "default"
 
     signingConfigs {
@@ -18,8 +24,8 @@ android {
         applicationId "ru.healthy"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 42
-        versionName '42'
+        versionCode 43
+        versionName '43'
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -45,11 +51,14 @@ dependencies {
     //implementation 'com.google.firebase:firebase-messaging:11.0.4'
     //implementation 'com.google.firebase:firebase-config:11.0.4'
     //implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.google.android.gms:play-services-maps:11.0.4'
+    //implementation 'com.google.android.gms:play-services-maps:11.0.4'
+    compile 'com.google.android.gms:play-services-maps:7.5.0'
+    //compile 'com.google.android.gms:play-services-maps:9.0.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:design:26.1.0'
     compile 'com.android.support:cardview-v7:26.1.0'
     compile 'com.android.support:recyclerview-v7:26.1.0'
 }
 
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
+

@@ -1,7 +1,9 @@
 package ru.healthy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.support.design.widget.AppBarLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +25,8 @@ public class Activity_3_DRT extends ActivityBase {
         findViewById(R.id.button).setVisibility(View.GONE);
         findViewById(R.id.label2).setVisibility(View.VISIBLE);
         findViewById(R.id.label3).setVisibility(View.VISIBLE);
+        ((AppBarLayout) findViewById(R.id.appbar)).setExpanded(false);
+
     }
 
     @Override
@@ -37,32 +41,19 @@ public class Activity_3_DRT extends ActivityBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode==RESULT_OK) {
-            //FirebaseCrash.log("onActivityResult="+data.getDataString());
-            //FirebaseCrash.report(data.getDataString());
+        if (requestCode==REQUEST_CODE_YN) {
+            if (resultCode == RESULT_OK) {
+                DataAdapter adapter = new DataAdapter(this, requestCode, "SetAppointment");
+                adapter.registerDataSetObserver(new DataSetObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                });
 
-            final DataAdapter adapter1 = new DataAdapter(this, requestCode, "SetAppointment");
-            adapter1.registerDataSetObserver(new DataSetObserver() {
-                @Override
-                public void onChanged() {
-                    super.onChanged();
-                    String[] s = (String[]) adapter1.getItem(0);
-                    Log.d(TAG, "######### курсор SetAppointment: " + s[0] + " " + s[1] + " " + s[2] + " " + s[3]);
-                    //restore_Values();
-                    //show_Values();
-                }
-            });
-
-
-            String s = "Талончик успешно отложен!\n";
-            s += Storage.restore(this, "GetAvaibleAppointments") + " ";
-            //+ Storage.restore(this, "CheckPatient") + " "
-            //+ Storage.restore(this, "GetLPUList");
-            data.putExtra("result", s);
-            super.onActivityResult(requestCode, resultCode, data);
-
-            startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
-            finish();
+            }
         }
     }
 
@@ -71,7 +62,7 @@ public class Activity_3_DRT extends ActivityBase {
         super.onItemClick(parent,view,position,id);
         Intent intent = new Intent(this, Activity_5_YN.class);
         intent.putExtra("message", getString(R.string.confirm_talon));
-        startActivityForResult(intent, position);
+        startActivityForResult(intent, REQUEST_CODE_YN);
     }
 
 

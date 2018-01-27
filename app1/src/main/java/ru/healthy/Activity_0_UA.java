@@ -30,6 +30,7 @@ public class Activity_0_UA extends ActivityBase {
     void storeFIO(String s) {
         s=s.trim();
         Storage.store(this, "FIO", s);
+        Storage.store(this, "CheckPatient", "нет такого");
         String[] ar = s.split(" ");
         if (ar.length==4) {
             Storage.store(this, "Surname", ar[0]);
@@ -57,16 +58,10 @@ public class Activity_0_UA extends ActivityBase {
 
     @Override
     public void onClick(View v) {
-        super.onClick(v);
-
         if (v.getId() == R.id.button) {
-
-            String tvalue = ((TextView) findViewById(R.id.text)).getText().toString();
-            Storage.store(this, "FIO", tvalue);
-            storeFIO(tvalue);
-
+            storeFIO(((TextView) findViewById(R.id.text)).getText().toString());
             if (!error) {
-                startActivity(new Intent(getApplicationContext(), Activity_1_ULH.class));
+                setResult(RESULT_OK);
                 finish();
             }
         }

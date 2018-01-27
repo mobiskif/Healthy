@@ -7,6 +7,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Layout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.TwoLineListItem;
+
+import java.util.Random;
+
+import static java.lang.Math.random;
 
 
 public class DataAdapter extends BaseAdapter implements IDataAdapter, android.app.LoaderManager.LoaderCallbacks<Cursor> {
@@ -27,7 +32,7 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
 
     public DataAdapter(Activity c, int r, String a) {
         context = c;
-        id = r;
+        id = (int) (1000*random());
         action = a;
         loaded=false;
 
@@ -66,14 +71,26 @@ public class DataAdapter extends BaseAdapter implements IDataAdapter, android.ap
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         String[] item = (String[]) getItem(position);
         LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //TwoLineListItem view = (TwoLineListItem) inflater.inflate(android.R.layout.simple_list_item_2, parent, false); TextView v = view.getText1();
-        TextView v2 = (TextView) ((convertView == null) ? inflater.inflate(android.R.layout.simple_list_item_1, parent, false) : convertView);
-        TextView v = (TextView) ((convertView == null) ? inflater.inflate(R.layout.item_spinner, parent, false) : convertView);
-        String s = item[1] + " (" +item[2]+ ")";
-        v.setText(s);
-        return v;
+        int variant=1;
+        if (variant==0) {
+            TwoLineListItem view = (TwoLineListItem) inflater.inflate(android.R.layout.simple_list_item_2, parent, false);
+            TextView v1 = view.getText1();
+            v1.setText(item[1] + " (" +item[2]+ ")");
+            return view;
+        }
+        else if (variant==1) {
+            TextView view = (TextView) ((convertView == null) ? inflater.inflate(android.R.layout.simple_list_item_1, parent, false) : convertView);
+            view.setEllipsize(TextUtils.TruncateAt.MIDDLE);
+            //if (action.contains("GetLPUList")) view.setText(item[2]); else
+                view.setText(item[1] + " (" +item[2]+ ")");
+            return view;
+        }
+        else  {
+            return null;
+        }
     }
 
     @Override
