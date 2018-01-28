@@ -38,7 +38,7 @@ public class ActivityBase extends AppCompatActivity implements  AdapterView.OnIt
     int REQUEST_CODE_YN = 555;
     int REQUEST_CODE_HELP = 666;
     int REQUEST_CODE_LSD = 222;
-    int REQUEST_CODE_UA = 000;
+    int REQUEST_CODE_UA = 0;
     int REQUEST_CODE_DRT = 333;
 
     void config_ToolbarAndMenu() {

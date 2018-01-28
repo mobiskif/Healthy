@@ -5,7 +5,6 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="confirm_text">Вы подтверждаете действие?</string>
-    <string name="success">Успешно</string>
     <string name="cancel_talon">Отменить талон?</string>
     <string name="confirm_talon">Взять талон?</string>
     <string name="refuse">Отменить</string>
