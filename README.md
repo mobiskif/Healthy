@@ -1,4 +1,4 @@
-# Material Design with Android Design Support Library
+# Запись к врачу по ОМС в Санкт-Петербурге (Android)
 
 Android Design Support library has been released and samples are coming up all over the place.
 This sample is bringing Material Design implementation using Android Design Support Library.
